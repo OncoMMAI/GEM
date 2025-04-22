@@ -1,0 +1,65 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+MR CERVICAL SPINE WITH AND WITHOUT CONTRAST,"MR CERVICAL SPINE WITH AND WITHOUT CONTRAST:  7/14/2023 9:15 AM
+INDICATION (as provided by referring clinician): Cervical ependymoma follow-up post-surgical intervention. Assess for any residual or recurrent disease.
+ADDITIONAL HISTORY: Surgical resection of cervical ependymoma 3/2019
+COMPARISON: MRI cervical spine 6/15/2022
+TECHNIQUE: 1.5T MR imaging of the cervical spine without and with intravenous contrast
+MEDICATIONS:
+Gadobutrol - 10 mL - Intravenous
+FINDINGS:
+Prior surgical findings/hardware: Postsurgical changes with laminectomy from C3 to C6. Mild enhancement within the surgical bed likely related to scarring.
+Vertebral bodies: Normal height and alignment. No pathological fractures.
+Bone marrow: Normal signal characteristics and homogeneous enhancement.
+Intervertebral discs: Mild disc degeneration at C4-C5 and C5-C6 with posterior disc protrusions.
+Spinal cord: No evidence of abnormal signal intensity in the cervical cord. No contrast-enhancing lesions.
+Canal stenosis: Mild cervical canal narrowing secondary to disc protrusions, but no significant stenosis.
+Other: No abnormal post-gadolinium enhancement noted.
+
+IMPRESSION: 
+1. No evidence of residual or recurrent cervical ependymoma.
+2. Mild degenerative changes in the cervical spine.
+Report dictated by: Emily Tran, MD, signed by: Raj Patel, MD
+Department of Radiology",Outpatient,Female,52,54321
+MR THORACIC SPINE WITH AND WITHOUT CONTRAST,"MR THORACIC SPINE WITH AND WITHOUT CONTRAST:  5/29/2023 3:45 PM
+INDICATION (as provided by referring clinician): Evaluation for thoracic spinal ependymoma. Persistent back pain.
+ADDITIONAL HISTORY: Previously diagnosed thoracic ependymoma, treated with radiation therapy in 2008.
+COMPARISON: MRI thoracic spine 5/12/2022
+TECHNIQUE: 1.5T MR imaging of the thoracic spine without and with intravenous contrast
+MEDICATIONS:
+Gadoterate meglumine - 12 mL - Intravenous
+FINDINGS:
+Prior surgical findings/hardware: No surgical intervention noted in thoracic region.
+Vertebral bodies: Normal morphology and alignment throughout thoracic spine.
+Bone marrow: Age-appropriate signal intensity without abnormal enhancement.
+Intervertebral discs: Mild degenerative changes noted, particularly at T8-T9.
+Spinal cord: No intramedullary signal abnormalities. No enhancing lesions observed.
+Canal stenosis: No significant stenosis identified.
+Other: No abnormal post-gadolinium enhancement detected.
+
+IMPRESSION: 
+1. No evidence of thoracic ependymoma recurrence.
+2. Mild thoracic spine degenerative changes.
+Report dictated by: Sarah Lee, MD, signed by: Daniel Kim, MD
+Department of Radiology",Outpatient,Male,65,67890
+MR LUMBAR SPINE WITH AND WITHOUT CONTRAST,"MR LUMBAR SPINE WITH AND WITHOUT CONTRAST:  8/23/2023 11:30 AM
+INDICATION (as provided by referring clinician): Lumbar ependymoma follow-up. Assess for recurrence.
+ADDITIONAL HISTORY: History of lumbar ependymoma, treated with surgical excision in 2/2015
+COMPARISON: MRI lumbar spine 8/1/2022
+TECHNIQUE: 1.5T MR imaging of the lumbar spine without and with intravenous contrast
+MEDICATIONS:
+Gadopentetate dimeglumine - 15 mL - Intravenous
+FINDINGS:
+Anatomy: Five distinct lumbar-type vertebral bodies identified. L5-S1 noted for reference.
+Prior surgical findings/hardware: L4-L5 laminectomy with stable postoperative changes.
+Vertebral bodies: Normal height and alignment. No suspicious lesions.
+Bone marrow: Normal signal characteristics without abnormal enhancement.
+Intervertebral discs: Degenerative disc disease noted at L4-L5 and L5-S1 with associated disc bulges.
+Spinal cord: Conus medullaris appears normal, no signal abnormalities or enhancing lesions.
+Canal stenosis: No significant stenosis identified.
+Other: No abnormal post-gadolinium enhancement seen.
+
+IMPRESSION: 
+1. No evidence of residual or recurrent lumbar ependymoma.
+2. Degenerative changes at L4-L5 and L5-S1.
+Report dictated by: John Doe, MD, signed by: Jane Smith, MD
+Department of Radiology",Outpatient,Female,39,87654

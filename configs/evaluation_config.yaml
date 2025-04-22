@@ -1,0 +1,42 @@
+# Configuration for model evaluation
+
+global:
+  seed: 7 # Random seed for reproducibility
+
+model:
+  # Baseline and fine-tuned model paths
+  base_model: 'jinaai/jina-embeddings-v3'
+  finetuned_model: 'models/mnrl_full_data/final'
+  trust_remote_code: true
+
+embedding:
+  # Directory containing generated embeddings for each task
+  directory: 'embeddings'
+
+  # Embedding generation parameters (used only if embeddings need to be generated)
+  batch_size: 32
+  max_length: 2048
+  task: 'text-matching'
+
+data:
+  # Paths to evaluation datasets
+  type_path: 'data/eval/tumor_type_eval.csv'
+  mgmt_path: 'data/eval/mgmt_eval.csv' # Contains both MGMT and survival data
+  os_path: 'data/eval/os_eval.csv' # Contains overall survival data
+
+  # Column names for identification and labels
+  text_column: 'report' # Column containing text to be embedded
+  id_column: 'mrn' # Column containing patient identifier
+
+evaluation:
+  # Random Forest classifier parameters
+  n_splits: 5 # Number of cross-validation folds
+  random_state: 7 # Random seed for validation splits
+  n_estimators: 1000 # Number of trees in random forest
+
+  # Model to use as baseline for significance testing
+  baseline_model: 'jina_base_text_match'
+
+output:
+  # Directory to save evaluation results
+  results_dir: 'results'

@@ -1,0 +1,40 @@
+# Configuration for embedding generation
+
+model:
+  jina:
+    name: 'jinaai/jina-embeddings-v3'
+    checkpoint_path: 'models/mnrl_full_data/final/model.safetensors' # Path to fine-tuned model
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 2048
+    task: 'text-matching' # Task type influences the embedding properties
+    # Setting task to 'text-matching' aligns with notebook settings
+
+  nvidia:
+    name: 'nvidia/NV-Embed-v2'
+    trust_remote_code: true
+    batch_size: 16
+    max_length: 32768
+    instruction: 'none' # Can be 'none' or 'medical'
+    device_ids: [0, 1, 2, 3] # GPU device IDs for multi-GPU support
+
+  gatortron:
+    name: 'UFNLP/gatortron-large'
+    checkpoint_path: null # Set to the path if using a fine-tuned version
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 512
+
+data:
+  # Paths to evaluation datasets
+  tumor_type_path: 'data/eval/tumor_type_eval.csv'
+  mgmt_path: 'data/eval/mgmt_eval.csv'
+  survival_path: 'data/eval/os_eval.csv'
+  os_path: 'data/eval/os_eval.csv'  # Added to match notebook naming
+
+  # Column name containing the text to embed
+  text_column: 'report'
+
+output:
+  # Directory for saving embeddings
+  output_dir: 'embeddings'

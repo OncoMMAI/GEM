@@ -1,0 +1,49 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+MR BRAIN WITH AND WITHOUT CONTRAST,"INDICATION:
+ MR BRAIN WITH AND WITHOUT CONTRAST   11/14/2023 10:15 AM
+CLINICAL HISTORY: Diagnosed xanthoastrocytoma with surgical resection in January 2023. Complaints of episodic headaches.
+COMPARISON: Brain MRI August 12, 2023.
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
+CONTRAST MEDIA: Intravenous gadolinium-based contrast was administered.
+FINDINGS:
+There are postsurgical changes from resection in the left frontal lobe with evidence of craniotomy. Mild linear enhancement near the resection cavity, consistent with postoperative changes, without evidence of nodular enhancement to suggest recurrence.
+Scattered punctate areas of susceptibility artifact likely representing post-surgical changes and possible microhemorrhages.
+No acute infarct, significant mass effect, or midline shift is evident. Ventricular system and basal cisterns are within normal limits.
+No abnormal parenchymal enhancement or new T2 hyperintensities.
+
+IMPRESSION:
+1. No radiological evidence of recurrent xanthoastrocytoma.
+2. Postoperative changes in the left frontal region. 
+3. Benign post-surgical artifacts noted. 
+END OF IMPRESSION",Outpatient,Male,27,732451
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  2/15/2023 2:00 PM
+INDICATION (as provided by referring clinician): pleomorphic xanthoastrocytoma
+ADDITIONAL HISTORY: Left temporal pleomorphic xanthoastrocytoma status post partial resection March 2020, followed for stability.
+COMPARISON: MRI brain 11/15/2022.
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
+MEDICATIONS:
+Gadovist - 10 mL - Intravenous
+FINDINGS:
+Postsurgical changes are noted at the left temporal lobe with craniotomy. Stable appearance of the resection cavity with no new abnormal enhancement or nodularity. Persistent FLAIR hyperintensity along the superior margin of the cavity, unchanged from prior study.
+No evidence of reduced diffusion or abnormal vascularity. No new lesions or abnormal parenchymal enhancements detected.
+Ventricles and sulci are appropriate for age. No evidence of hydrocephalus or significant extra-axial fluid collection.
+
+IMPRESSION: 
+No radiological evidence of progression of xanthoastrocytoma since the last examination. 
+Report dictated by: Sarah L. Henson, MD, signed by: Michael T. Ryan, MD
+Department of Neuroradiology",Inpatient,Female,35,891234
+MR BRAIN WITH AND WITHOUT CONTRAST,"INDICATION:
+ MR BRAIN WITH AND WITHOUT CONTRAST   3/10/2023 3:45 PM
+CLINICAL HISTORY: Recurrent pleomorphic xanthoastrocytoma post multiple resections, latest in June 2022. Recent onset of visual disturbances.
+COMPARISON: Brain MRI December 15, 2022.
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
+CONTRAST MEDIA: Intravenous gadobutrol was administered for enhanced imaging.
+FINDINGS:
+Post-surgical alterations noted in the right occipital lobe, with evidence of prior craniotomy. There is subtle enhancement along the resection margin, likely post-therapeutic in nature, with no suspicious nodularity.
+Small foci of susceptibility artifact in the region of resection, likely due to post-surgical changes, with no acute bleeding noted.
+No significant mass effect, hydrocephalus, or new infarct. The ventricular system appears within normal size limits.
+
+IMPRESSION:
+1. Stability of known post-surgical changes without evidence of recurrent tumor.
+2. Right occipital lobe resection changes noted without concerning enhancement.
+END OF IMPRESSION",Outpatient,Female,40,461892

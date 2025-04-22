@@ -1,0 +1,63 @@
+# Configuration for dataset creation
+
+# Data sources
+data:
+  # Directory containing raw data files
+  input_dir: "data/raw"
+  
+  # Subdirectories for different modalities
+  mri_dir: "data/raw/mri"
+  pathology_dir: "data/raw/pathology"
+  
+  # Report columns
+  text_column: "Report Text"
+  mrn_column: "Patient MRN"
+  
+  # Report filtering options
+  min_report_length: 50
+  max_report_length: 5000
+
+# Training data creation
+training:
+  # Train/validation split ratio
+  train_split: 0.8
+  
+  # Options for data balancing
+  balance_classes: true
+  
+  # MNRL training parameters
+  mnrl:
+    enable: true
+    negative_samples: 5
+
+# Output settings
+output:
+  # Directory for processed datasets
+  output_dir: "data/training"
+  
+  # Path for matched reports
+  matches_path: "data/training/matches.csv"
+  
+  # MNRL training data paths
+  mnrl_train_path: "data/training/mnrl/train.csv"
+  mnrl_eval_path: "data/training/mnrl/eval.csv"
+  
+  # Evaluation dataset paths
+  tumor_type_eval_path: "data/eval/tumor_type_eval.csv"
+  mgmt_eval_path: "data/eval/mgmt_eval.csv"
+  os_eval_path: "data/eval/os_eval.csv"
+  
+  # Directory for figures
+  figures_dir: "figures"
+  
+  # Output file formats
+  save_format: "csv"
+  
+  # Report processing
+  clean_text: true
+  lowercase: true
+  
+# Logging
+logging:
+  level: "INFO"
+  save_demographics: true

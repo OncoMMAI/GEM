@@ -1,0 +1,76 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site:Tumor- FS
+Clinical Diagnosis/History:
+The patient is a 42-year-old man with a history of oligoastrocytoma
+WHO II diagnosed two years ago, now presenting with a recurrence in the right parietal lobe.
+Gross Description:
+Part A is received fresh from OR6 labeled with the patient's name, medical
+record number, and ""tumor - FS."" It consists of three unoriented, irregularly shaped, soft,
+pale gray fragments of brain tissue measuring 1.0 x 0.8 x 0.5 cm,
+0.9 x 0.6 x 0.5 cm, and 0.6 x 0.5 x 0.4 cm. A portion of each fragment is
+submitted for cytologic preparation, with the remaining tissue submitted in
+cassette A1 for permanent section.
+Diagnosis Comments:
+Immunohistochemical studies reveal negative IDH1-R132H mutation, suggesting
+wild-type IDH status. MIB-1 labeling index is elevated, consistent with a high proliferative index.
+The tumor shows mixed oligodendroglial and astrocytic components with evidence
+of focal microvascular proliferation. No necrosis is identified.
+The final diagnosis was communicated to Dr. Elman by phone on 8/15/23.
+Interoperative Diagnosis:
+FS1 (A) Brain, right parietal lobe, biopsy: Oligoastrocytoma WHO grade II with
+features of progression. No definitive necrosis observed.
+Defer to permanent section. (Dr. Andrea M. Russo)
+Final Diagnosis:
+Brain, right parietal lobe, biopsy: Anaplastic oligoastrocytoma with astrocytic
+predominance, WHO grade III; see comment.
+++++++++++Addendum++++++++++
+RESULTED BY 41258 Russo, Andrea
+Addendum Comment:
+The IDH1-R132H negative status was confirmed with a second immunohistochemical
+stain, corroborating the initial findings. The clinical significance of this wild-type status should be considered in treatment planning.",Inpatient,Male,42,58239
+SURGICAL PATHOLOGY,"Anatomic Site: Tumor- FS
+Clinical Diagnosis/History:
+The patient is a 29-year-old woman with a newly diagnosed left temporal lobe tumor.
+Initial imaging suggested a low-grade glioma.
+Gross Description:
+Part A consists of two unoriented, soft, tan-gray fragments of brain tissue
+measuring 0.9 x 0.7 x 0.4 cm and 0.8 x 0.5 x 0.3 cm.
+Tissue is submitted in cassette A1 for permanent section.
+Diagnosis Comments:
+Histologic sections reveal a biphasic tumor with both oligodendroglial and astrocytic features.
+The tumor shows a low MIB-1 proliferative index and is GFAP positive, indicating
+astrocytic differentiation. No microvascular proliferation or necrosis is observed.
+These findings were discussed with Dr. Lin via email on 10/11/23.
+Interoperative Diagnosis:
+FS1 (A) Brain, left temporal lobe, biopsy: Oligodendroglioma with astrocytic
+components, WHO grade II. No high-grade features.
+Final Diagnosis:
+Brain, left temporal lobe, biopsy: Oligoastrocytoma, WHO grade II; see comment.
+++++++++++Addendum++++++++++
+RESULTED BY 39217 Lin, Emily
+Addendum Comment:
+Additional staining confirmed the absence of 1p/19q codeletion, supporting the mixed oligoastrocytic nature of the tumor.",Outpatient,Female,29,17384
+SURGICAL PATHOLOGY,"Anatomic Site:NP Consult with blocks; Stanford runs add'l stains
+Clinical Diagnosis/History:
+The patient is a 55-year-old woman with a history of a right occipital brain tumor,
+originally diagnosed as an oligoastrocytoma WHO grade II. Recent MRI suggests progression.
+Gross Description:
+Received are the following materials from outside:
+Slides: Six glass slides labeled 'RS-03-22654 H&amp;E SMITH,ANNE Stanford, CA.'
+Individual slides bear labels 'C1-1,' 'C2-1,' 'C3-1,' 'C4-1,' 'D1-1,' 'D2-1.'
+Blocks: Four paraffin blocks labeled 'RS-03-22654.' Individual blocks bear
+labels 'C1,' 'C2,' 'C3,' 'D1.'
+Tissue: None.
+Hospital or lab: Stanford Medical Center, Stanford, CA.
+Pathology report dated: 09/18/2023. This report bears both the patient's name
+and 'RS-03-22654.'
+Prepared by: Sarah Young, M.D.
+Diagnosis Comments:
+Sections reveal a recurrent oligoastrocytoma with increased cellularity and
+mitotic activity. Foci of microvascular proliferation are noted, consistent with
+anaplastic transformation. No necrosis is observed.
+Previous FISH analysis reported no 1p/19q codeletion.
+The findings were relayed to Dr. Young on 9/25/23.
+Final Diagnosis:
+Review of outside slides from Stanford Medical Center, Stanford, CA (RS-03-22654):
+Brain, biopsy: Anaplastic oligoastrocytoma (WHO Grade III); see comment.",Inpatient,Female,55,43928

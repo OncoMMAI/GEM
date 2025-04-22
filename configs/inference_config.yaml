@@ -1,0 +1,74 @@
+# Configuration for model inference with BioMistral and other LLMs
+# Matches setup in notebooks/02_gatatron_inference.ipynb
+
+model:
+  # LLM API connection details
+  name: 'BioMistral-7B' # Alternative: 'medllama3-v20'
+  base_url: 'http://localhost:8000/v1' # Local server URL for Gatortron
+  api_key: 'token-abc123' # Local token that doesn't require authentication
+
+inference:
+  # Inference parameters
+  batch_size: 10 # Process 10 examples at a time
+  max_tokens: 50 # Short responses are sufficient for classification
+  temperature: 0.0 # Use deterministic sampling
+  num_threads: 4 # Process 4 batches in parallel
+  max_retries: 3 # Retry failed requests up to 3 times
+
+prompts:
+  # Prompt templates for different tasks
+  tumor_type: >
+    You are an expert neuro-radiologist. Based on the following clinical notes, 
+    classify the brain tumor type into one of these categories: glioblastoma, 
+    astrocytoma, oligodendroglioma, or oligoastrocytoma.
+
+    Clinical Notes:
+    {text}
+
+    Provide your classification in the following format:
+    CLASSIFICATION: [tumor type]
+
+    Only output one of the four specified categories.
+
+  survival: >
+    You are an expert neuro-oncologist. Based on the following clinical notes, 
+    predict whether the patient will survive beyond 1 year from diagnosis.
+
+    Clinical Notes:
+    {text}
+
+    Provide your prediction in the following format:
+    PREDICTION: [SURVIVE/NOT_SURVIVE]
+
+  mgmt: >
+    You are an expert molecular pathologist. Based on the following clinical notes, 
+    predict whether the patient's tumor has MGMT promoter methylation (positive) or not (negative).
+
+    Clinical Notes:
+    {text}
+
+    Provide your prediction in the following format:
+    MGMT_STATUS: [POSITIVE/NEGATIVE]
+
+data:
+  # Paths to evaluation datasets
+  type_path: 'data/eval/tumor_type_eval.csv' # 'report' column used for text
+  mgmt_path: 'data/eval/mgmt_eval.csv' # 'report' column used for text
+  os_path: 'data/eval/os_eval.csv' # 'report' column used for text
+  text_column: 'report' # Default column name for text
+
+evaluation:
+  # Evaluation parameters - based on notebook using 10-fold validation
+  n_splits: 10 # Perform 10-fold cross-validation
+  random_state: 42 # Ensure reproducibility
+  metrics: # Metrics to calculate
+    - accuracy
+    - precision
+    - recall
+    - f1_macro
+    - aucroc
+
+output:
+  # Directory to save results - use model name as subdirectory
+  results_dir: 'results/BioMistral-7B'
+  save_predictions: true

@@ -1,0 +1,51 @@
+# Configuration for embedding visualization
+
+embedding:
+  models:
+    - name: 'jina_base'
+      path: 'embeddings/tumor_type/jina_base.npy'
+      label: 'JINA Base'
+
+    - name: 'jina_text_match'
+      path: 'embeddings/tumor_type/jina_base_text_match.npy'
+      label: 'JINA Base (w text match)'
+
+    - name: 'jina_finetuned'
+      path: 'embeddings/tumor_type/mnrl_higher_lr.npy'
+      label: 'JINA finetuned'
+
+    - name: 'gatortron_large'
+      path: 'embeddings/tumor_type/gatortron_large.npy'
+      label: 'Gatortron Large'
+
+    - name: 'nv_embed'
+      path: 'embeddings/tumor_type/nv_embed_tumor_type.npy'
+      label: 'NV Embed v2'
+
+data:
+  # Path to data with labels
+  type_path: 'data/eval/tumor_type_eval.csv'
+  label_column: 'class_label'
+
+visualization:
+  # t-SNE parameters (matching notebook)
+  tsne:
+    # perplexity is dynamically adjusted based on sample size in both code and notebook
+    # but we'll set this as a default that matches the notebook approach
+    perplexity: 50 # Notebook uses min(n_samples // 3, 50)
+    n_iter: 2500
+    random_state: 42
+    metric: 'cosine'
+
+  # Colors for different tumor types
+  colors:
+    - '#E64B35' # Red - glioblastoma
+    - '#4DBBD5' # Blue - astrocytoma
+    - '#00A087' # Green - oligodendroglioma
+    - '#3C5488' # Purple - oligoastrocytoma
+
+output:
+  # Output configuration
+  output_dir: 'figures'
+  dpi: 600
+  format: 'png'

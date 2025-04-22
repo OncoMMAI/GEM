@@ -1,0 +1,17 @@
+Organization,Point of Care,Source System,Accession Number,Modality,Exam Code,Exam Description,CPT Code,Report Text,Is Stat,Patient Status,Patient Sex,Patient Age,Patient MRN,Patient First Name,Patient Last Name,Ordered By,Ordered Date,Scheduled By,Scheduled Date,Patient Arrived By,Patient Arrived Date,Exam Started By,Exam Started Date,Exam Completed By,Exam Completed Date,Report Created By,Report Created Date,Preliminary Report By,Preliminary Report Date,Report Finalized By,Report Finalized Date,Report Addendum By,Report Addendum Date,Ordered to Scheduled (minutes),Ordered to Exam Started (minutes),Ordered to Exam Completed (minutes),Ordered to Report Created (minutes),Ordered to Preliminary Report (minutes),Ordered to Report Finalized (minutes),Ordered to Report Addendum (minutes),Scheduled to Exam Started (minutes),Scheduled to Exam Completed (minutes),Scheduled to Report Created (minutes),Scheduled to Preliminary Report (minutes),Scheduled to Report Finalized (minutes),Scheduled to Report Addendum (minutes),Exam Started to Exam Completed (minutes),Exam Started to Report Created (minutes),Exam Started to Preliminary Report (minutes),Exam Started to Report Finalized (minutes),Exam Started to Report Addendum (minutes),Exam Completed to Report Created (minutes),Exam Completed to Preliminary Report (minutes),Exam Completed to Report Finalized (minutes),Exam Completed to Report Addendum (minutes),Report Created to Preliminary Report (minutes),Report Created to Report Finalized (minutes),Report Created to Report Addendum (minutes),Preliminary Report to Report Finalized (minutes),Preliminary Report to Report Addendum (minutes),Report Finalized to Report Addendum (minutes),Work (RVU),PE (RVU),MP (RVU),Work (Professional) (RVU),PE (Professional) (RVU),MP (Professional) (RVU),Work (Technical) (RVU),PE (Technical) (RVU),MP (Technical) (RVU),Total (RVU),Total (Professional) (RVU),Total (Technical) (RVU)
+MBMR1,RAD MR MB,EPIC,20031798852,MRI,MBRUE,MR BRAIN WITH AND WITHOUT CONTRAST,70553,"MR BRAIN WITH AND WITHOUT CONTRAST:  5/15/2023 10:15 AM
+INDICATION (as provided by referring clinician): Glioblastoma
+ADDITIONAL HISTORY: Status post resection of glioblastoma on 8/3/2022.
+COMPARISON: Brain MRI dated March 12, 2023.
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
+MEDICATIONS:
+Dotarem - 4 mL - Intravenous
+FINDINGS:
+Postsurgical changes related to left frontal craniotomy for resection of left frontal glioblastoma. Unchanged mild hemosiderin staining at the resection cavity. No surrounding parenchymal enhancement, reduced diffusion, or abnormal FLAIR signal. Unchanged pars intermedia cyst.
+Similar ventricular size and morphology. Unchanged mild periventricular white matter hyperintensities. Left frontal ventriculostomy tract. 
+Expected interval progression of myelination. 
+
+IMPRESSION: 
+Compared to March 12, 2023, no evidence of residual or recurrent glioblastoma.  
+Report dictated by: John Doe, MD, signed by: Jane Smith, MD PhD
+Department of Radiology and Biomedical Imaging",False,Outpatient,Male,45,87421256,Alexander,Johnson,"MUELLER, SABINE",2023-05-15 09:00:00,,2023-05-15 10:45:00,,2023-05-15 09:00:14,,2023-05-15 09:31:00,,2023-05-15 10:15:00,,2023-02-28,"DOE, JOHN",2023-05-15 14:25:00,"SMITH, JANE",2023-05-15 18:45:00,,,105,30,85,-124180,350,575,,-78,-22,-124290,240,465,,50,-124210,320,545,,-124265,265,490,,124530,124755,,225,,,2.29,9.96,0.16,2.29,3.24,0.12,0,6.72,0.04,12.41,5.65,6.76

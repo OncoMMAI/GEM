@@ -1,0 +1,62 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site: Right temporal lobe lesion
+Clinical Diagnosis/History:
+The patient is a 27-year-old woman presenting with a right temporal lobe lesion and recurrent seizures.
+She underwent a craniotomy for excision of the lesion.
+Gross Description:
+The specimen is received fresh, labeled with the patient's name and medical record number.
+Part A, labeled 'right temporal lobe lesion,' consists of multiple, soft, gray-tan tissue fragments measuring 1.0 x 0.7 x 0.2 cm in aggregate.
+The specimen is submitted entirely in cassette A1.
+Immunohistochemical stains developed by the pathology department include GFAP, NeuN, and synaptophysin.
+Diagnosis Comments:
+Histological evaluation reveals a well-circumscribed low-grade glioneuronal neoplasm with features consistent with ganglioglioma.
+The tumor exhibits a biphasic pattern with intermixed glial and neuronal components.
+MIB-1 labeling index is low, approximately 1%.
+GFAP: Positive in glial components.
+NeuN: Positive in neuronal cells.
+Synaptophysin: Highlights the neuropil and neuronal components.
+EMA: Negative.
+Based on these findings, the neoplasm is classified as a ganglioglioma, WHO Grade I.
+This diagnosis is confirmed in consultation with Dr. Emily Harmon.
+Final Diagnosis:
+Brain, right temporal lobe, biopsy: Low grade ganglioglioma, WHO Grade I; see comment.",Stable post-surgery,Female,27,523840
+SURGICAL PATHOLOGY,"Anatomic Site: Cerebellar mass
+Clinical Diagnosis/History:
+The patient is a 45-year-old man with a history of headaches and ataxia, found to have a cerebellar mass on imaging.
+A posterior fossa craniotomy was performed for resection.
+Gross Description:
+The specimen consists of multiple irregular, firm, gray-white fragments measuring 1.2 x 1.0 x 0.3 cm in aggregate.
+The tissue is submitted entirely in cassettes labeled A1 and A2.
+Immunohistochemical panel includes GFAP, synaptophysin, OLIG2, and CD34.
+Diagnosis Comments:
+Sections reveal a glioneuronal tumor with a biphasic architecture.
+The tumor comprises mature ganglion cells and astrocytic elements.
+No mitotic figures are observed.
+GFAP: Strongly positive in astrocytic components.
+Synaptophysin: Highlights neuronal elements.
+OLIG2: Positive in glial cells.
+CD34: Shows focal positivity.
+These features support the diagnosis of a ganglioglioma, WHO Grade I.
+Reviewed with Dr. Michael Tran, who concurs with this diagnosis.
+Final Diagnosis:
+Cerebellum, biopsy: Ganglioglioma, WHO Grade I; see comment.",Recovering post-operatively,Male,45,486213
+SURGICAL PATHOLOGY,"Anatomic Site: Parietal lobe lesion
+Clinical Diagnosis/History:
+The patient is a 32-year-old man with a parietal lobe lesion and associated cognitive changes.
+Surgical resection was performed for definitive diagnosis and treatment.
+Gross Description:
+Received are several soft, friable pink-brown tissue fragments, measuring 0.8 x 0.6 x 0.2 cm in aggregate.
+The entire specimen is submitted in cassette A1.
+Immunohistochemical evaluation used antibodies against GFAP, NeuN, and synaptophysin.
+Diagnosis Comments:
+The histological sections demonstrate a low-grade glioneuronal tumor with characteristic ganglioglioma features.
+The tumor consists of large ganglion cells and a fibrillary glial background.
+MIB-1 labeling index is less than 1%.
+GFAP: Positive in the glial background.
+NeuN: Highlights ganglion cell nuclei.
+Synaptophysin: Positive in neuronal elements.
+The tumor lacks high-grade features such as necrosis or significant mitotic activity.
+The findings are consistent with a diagnosis of ganglioglioma, WHO Grade I.
+This case was reviewed with Dr. Rebecca Lin, who agrees with the diagnosis.
+Final Diagnosis:
+Parietal lobe, biopsy: Ganglioglioma, WHO Grade I; see comment.",Under close follow-up,Male,32,482915

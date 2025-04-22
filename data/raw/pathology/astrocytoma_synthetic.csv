@@ -1,0 +1,43 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site: Right frontal lobe, tumor resection (FS)
+Tumor
+Tumor
+Clinical Diagnosis/History:
+The patient is a 50-year-old woman with a history of grade II astrocytoma who presents with a 4.2 cm enhancing lesion on MRI, suggestive of progression. The patient underwent a right frontal craniotomy for tumor resection.
+Gross Description:
+The specimen is received in two parts, each labeled with the patient's name and medical record number.
+Part A, labeled 'tumor FS', consists of three irregular, unoriented, tan-pink soft tissue fragments measuring 0.9 x 0.7 x 0.3 cm in aggregate. The entire specimen is submitted in cassette A1.
+Part B, labeled 'permanent tumor', consists of multiple fragments of tan-white soft tissue measuring 1.5 x 1.0 x 0.5 cm in aggregate. The entire specimen is submitted in cassettes B1-B4.
+Diagnosis Comments:
+Histological examination reveals increased cellularity, nuclear atypia, and scattered mitotic figures. Immunohistochemical staining for GFAP and Ki-67 was performed, showing diffuse positivity in neoplastic cells. Features are consistent with progression to an anaplastic astrocytoma, WHO Grade III.
+Interoperative Diagnosis:
+A. Brain, right frontal lobe, biopsy: Favor anaplastic astrocytoma, WHO Grade III. (Dr. Emily Tan, 67845.)
+Final Diagnosis:
+A. Brain, right frontal lobe, tumor resection: Anaplastic astrocytoma, WHO Grade III.",Stable,Female,50,572834
+SURGICAL PATHOLOGY,"Anatomic Site: Left parietal lobe, tumor excision (FS)
+Brain, tumor excision
+Clinical Diagnosis/History:
+The patient is a 39-year-old man with recurrent astrocytoma, previously treated with surgical resection and radiotherapy, presenting with a 2.7 cm lesion on follow-up MRI.
+Gross Description:
+The specimen is received fresh in one part, labeled with the patient's name and medical record number.
+Part A, labeled 'tumor excision, FS', consists of two fragments of tan-gray soft tissue, measuring 1.2 x 0.6 x 0.4 cm in aggregate. The specimen is entirely submitted for permanent sections in cassette A1.
+Diagnosis Comments:
+Histopathologic examination shows hypercellularity, pleomorphic nuclei, and increased mitotic activity. Immunohistochemical analysis demonstrates GFAP positivity and elevated Ki-67 index. Findings are consistent with a WHO Grade III astrocytoma.
+Interoperative Diagnosis:
+A. Brain, left parietal lobe, tumor, FS: Recurrent astrocytoma, WHO Grade III. (Dr. Michael Lee, 71239.)
+Final Diagnosis:
+A. Brain, left parietal lobe, excision: Recurrent astrocytoma, WHO Grade III.",Undergoing treatment,Male,39,605712
+SURGICAL PATHOLOGY,"Anatomic Site: Right occipital lobe, tumor biopsy (FS)
+Brain, tumor biopsy
+Clinical Diagnosis/History:
+The patient is a 42-year-old woman with a new diagnosis of low-grade astrocytoma after presenting with seizures. MRI showed a 3.6 cm lesion.
+Gross Description:
+The specimen is received in two parts, labeled with the patient's name and medical record number.
+Part A, labeled 'tumor biopsy FS', consists of four fragments of tan-pink soft tissue, measuring 0.7 x 0.5 x 0.2 cm in aggregate. The entire specimen is submitted in cassette A1.
+Part B, labeled 'tumor biopsy', consists of multiple small fragments of tan-gray tissue, measuring 0.8 x 0.6 x 0.3 cm in aggregate. The specimen is entirely submitted in cassettes B1-B2.
+Diagnosis Comments:
+Microscopic examination reveals moderate cellularity and mild atypia without significant mitotic activity. Immunohistochemical stains for GFAP and Olig2 confirm the diagnosis of astrocytoma, WHO Grade II.
+Interoperative Diagnosis:
+A. Brain, right occipital lobe, biopsy: Low-grade astrocytoma, WHO Grade II. (Dr. Sarah James, 78901.)
+Final Diagnosis:
+A. Brain, right occipital lobe, biopsy: Astrocytoma, WHO Grade II.",New diagnosis,Female,42,489321

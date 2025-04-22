@@ -1,0 +1,63 @@
+# configs/finetune_config.yaml
+# Global configuration parameters
+global:
+  # Random seed (integer): Seed for random number generators to ensure reproducibility
+  seed: 42
+
+# Model configuration parameters
+model:
+  # Base model identifier (string): The model identifier to load from HuggingFace or local path
+  name: 'jinaai/jina-embeddings-v3'
+
+  # Trust remote code (boolean): Whether to trust the remote code of the model
+  trust_remote_code: true
+
+  # Task name (string): The specific task name for the model, options:
+  # retrieval.query: Used for query embeddings in asymmetric retrieval tasks
+  # retrieval.passage: Used for passage embeddings in asymmetric retrieval tasks
+  # separation: Used for embeddings in clustering and re-ranking applications
+  # classification: Used for embeddings in classification tasks
+  # text-matching: Used for embeddings in tasks that quantify similarity between two texts, such as STS or symmetric retrieval tasks
+  default_task: 'text-matching'
+
+  # Enable LoRA main parameters (boolean): Whether to make base model parameters trainable
+  lora_main_params_trainable: true
+
+# Training configuration parameters
+training:
+  # Number of training epochs (integer): Total number of epochs for training
+  num_epochs: 10
+
+  # Training batch size (integer): Batch size for training
+  train_batch_size: 8
+
+  # Evaluation batch size (integer): Batch size for evaluation
+  eval_batch_size: 16
+
+  # Gradient accumulation steps (integer): Number of steps to accumulate gradients
+  gradient_accumulation_steps: 8
+
+  # Learning rate (float): Base learning rate for training
+  learning_rate: 1e-5
+
+  # Warmup ratio (float): Fraction of steps to warm up the learning rate
+  warmup_ratio: 0.15
+
+  # Max gradient norm (float): Maximum gradient norm for gradient clipping
+  max_grad_norm: 1.0
+
+# Data configuration parameters
+data:
+  # Train data path (string): Path to training dataset
+  train_path: 'data/training/mnrl/train.csv'
+
+  # Evaluation data path (string): Path to evaluation dataset
+  eval_path: 'data/training/mnrl/eval.csv'
+
+# Output configuration parameters
+output:
+  # Results directory (string): Directory to save all outputs
+  results_dir: 'models/results'
+
+  # Model directory (string): Specific directory for model outputs
+  model_dir: 'mnrl_full_data'

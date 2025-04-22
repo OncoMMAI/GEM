@@ -1,0 +1,55 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site: frontal lobe lesion
+Recurrent oligodendroglioma vs treatment effect
+Clinical Diagnosis/History:
+The patient is a 52-year-old female with grade II oligodendroglioma status post radiotherapy. She presents for surgical resection.
+Gross Description:
+The specimen is received fresh in three parts, each labeled with the patient's name and medical record number.
+Part A is labeled ""frontal lobe lesion."" It comprises multiple soft tissue fragments, measuring 3.0 x 2.5 x 1.0 cm in aggregate. The tissue is predominantly tan-pink with areas of dark-brown discoloration. A portion is used for cytologic preparation, with the remaining tissue submitted entirely in cassettes A1 through A3.
+Part B is labeled ""necrotic tissue."" It consists of a single fragment of mottled brown and tan tissue, measuring 2.5 x 1.5 x 0.8 cm. The cut surface reveals a mixture of necrotic and viable tissue. The specimen is bisected and submitted in cassettes B1 and B2.
+Part C is labeled ""recurrent oligodendroglioma vs treatment effect."" It consists of a single unoriented fragment of tan and red-brown tissue, measuring 2.8 x 2.3 x 1.5 cm. Cut sections show central necrosis with surrounding hemorrhage and inflammation. The specimen is entirely submitted in cassettes C1 and C2.
+Diagnosis Comments:
+No infiltrative glioma is identified in Parts A-C. Immunohistochemical studies were performed to evaluate this case.
+- GFAP: Positive in reactive astrocytes.
+- IDH1: Negative.
+- Ki-67: Low proliferative index.
+Interoperative Diagnosis:
+FS1 (A) Brain, ""frontal lobe lesion,"" excision: Cortex with reactive changes and necrosis, consistent with treatment effect.
+Final Diagnosis:
+A. Brain, ""frontal lobe lesion,"" resection: Cortex and white matter with reactive and dystrophic changes; no infiltrative glioma identified.
+B. Brain, ""necrotic tissue,"" biopsy: Segment of cortex with necrotic and hemorrhagic changes.
+C. Brain, ""recurrent oligodendroglioma vs treatment effect,"" resection: Extensive necrosis and hemorrhage; no infiltrative glioma identified.",Stable,Female,52,98324
+SURGICAL PATHOLOGY,"Anatomic Site: temporal lobe mass
+Tumor
+Clinical Diagnosis/History:
+The patient is a 37-year-old male with a previously diagnosed anaplastic oligodendroglioma, WHO grade III, presenting for resection.
+Gross Description:
+The specimen is received fresh in two parts, each labeled with the patient's name and medical record number.
+Part A, labeled 'tumor,' consists of a single fragment of tan-white brain tissue (0.7 x 0.6 x 0.4 cm). A portion of the specimen is taken for frozen section diagnosis, with the remnant submitted in cassette A1. The non-frozen portion is submitted in cassette A2.
+Part B, labeled 'tumor,' consists of multiple, soft, pink-yellow, irregular unoriented tissue fragments (2.0 x 0.7 x 0.3 cm in aggregate). The specimen is entirely submitted in cassette B1.
+Interoperative Diagnosis:
+FS1 (A) Brain, biopsy: Consistent with anaplastic oligodendroglioma, WHO grade III.
+Final Diagnosis:
+A. Brain, temporal lobe, biopsy: Anaplastic oligodendroglioma, WHO grade III.
+B. Brain, temporal lobe, resection: Anaplastic oligodendroglioma, WHO grade III.",Undergoing treatment,Male,37,64782
+SURGICAL PATHOLOGY,"Anatomic Site: occipital lobe tumor
+Suspicion of recurrence
+Clinical Diagnosis/History:
+The patient is a 45-year-old female with a history of oligodendroglioma, WHO grade II, status post chemotherapy.
+Gross Description:
+The specimen is received fresh in four parts, each labeled with the patient's name and medical record number.
+Part A is labeled ""occipital lobe tumor."" It consists of multiple fragments of soft tissue, measuring 2.9 x 2.2 x 0.8 cm in aggregate. The specimen is tan-pink with areas of hemorrhage. A portion is used for frozen section diagnosis, and the remaining tissue is submitted in cassettes A1 through A3.
+Part B is labeled ""tumor bed."" It consists of a single unoriented fragment of tan tissue with brown mottling, measuring 3.2 x 1.7 x 1.1 cm. The cut surface shows tan tissue with areas of necrosis. The specimen is bisected and submitted in cassettes B1 and B2.
+Part C is labeled ""suspicion of recurrence."" It consists of a single unoriented fragment of pink-tan tissue with brown discoloration, measuring 2.5 x 2.1 x 1.4 cm. The cut sections show predominantly brown tissue with central necrosis. The specimen is entirely submitted in cassettes C1 and C2.
+Diagnosis Comments:
+Each part of this case (Parts A-C) has been submitted in their entirety for evaluation. No definitive infiltrative glioma is identified.
+Immunohistochemical studies were performed:
+- Synaptophysin: Negative.
+- Olig2: Positive.
+- Ki-67: Less than 5%.
+Interoperative Diagnosis:
+FS1 (A) Brain, ""occipital lobe tumor,"" excision: Cortex with treatment effect and reactive changes.
+Final Diagnosis:
+A. Brain, ""occipital lobe tumor,"" biopsy: Cortex with reactive and dystrophic changes; no infiltrative glioma identified.
+B. Brain, ""tumor bed,"" resection: Cortex with necrotic tissue; no definitive glioma identified.
+C. Brain, ""suspicion of recurrence,"" resection: Extensive necrosis and hemorrhage; no infiltrative glioma identified.",Recurrence suspected,Female,45,29834

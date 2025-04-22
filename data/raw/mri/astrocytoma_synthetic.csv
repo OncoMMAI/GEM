@@ -1,0 +1,41 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  3/11/2023 10:15 AM
+INDICATION (as provided by referring clinician): Suspected progression of diffuse astrocytoma
+ADDITIONAL HISTORY: History of diffuse astrocytoma
+COMPARISON: MRI from 2/12/2023
+TECHNIQUE: Multiple sequences through the brain were acquired at 1.5 tesla.
+MEDICATIONS:
+Gadovist - 5 mL - Intravenous
+FINDINGS:
+Increased size of left temporal diffuse astrocytoma, now measuring approximately 4.2 x 3.8 x 3.6 cm (CC x AP x TR). There is notable FLAIR hyperintensity surrounding the mass, with mild mass effect on the adjacent structures including the left lateral ventricle, leading to slight midline shift. The lesion demonstrates heterogeneous enhancement without evidence of necrosis. No new lesions identified.
+Postsurgical changes from prior biopsy noted, with trace susceptibility artifact.
+IMPRESSION: 
+Progressive enlargement of left temporal diffuse astrocytoma with associated mass effect. Continued surveillance recommended.
+Report dictated by: Alice J. Turner, MD, signed by: Michael F. Chen, MD
+Department of Radiology and Biomedical Imaging",Outpatient,Male,35,564327
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  6/21/2023 4:45 PM
+INDICATION (as provided by referring clinician): Follow-up post resection of anaplastic astrocytoma
+ADDITIONAL HISTORY: Anaplastic astrocytoma resection performed on 4/30/2023.
+COMPARISON: MRI from 5/18/2023
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
+MEDICATIONS:
+Dotarem - 7.5 mL - Intravenous
+FINDINGS:
+Postsurgical changes are evident with expected gliosis at the surgical site in the left frontal lobe. Residual hemosiderin staining noted. No evidence of recurrent tumor or residual enhancement. The ventricular system remains unchanged with no evidence of hydrocephalus. Normal diffusion weighted imaging.
+IMPRESSION: 
+No residual or recurrent anaplastic astrocytoma. Stable postsurgical changes.
+Report dictated by: John K. Lee, MD, signed by: Sarah L. Patel, MD
+Department of Radiology and Biomedical Imaging",Inpatient,Female,28,372654
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  9/5/2023 2:30 PM
+INDICATION (as provided by referring clinician): Assess response to chemotherapy for glioblastoma multiforme
+ADDITIONAL HISTORY: Glioblastoma multiforme diagnosed 3 months prior
+COMPARISON: MRI from 8/10/2023
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
+MEDICATIONS:
+Gadovist - 6 mL - Intravenous
+FINDINGS:
+Slight reduction in size of right parietal glioblastoma multiforme, now measuring approximately 4.5 x 4.0 x 3.8 cm (CC x AP x TR). Persistent irregular enhancement pattern with central necrosis unchanged. Mild surrounding edema noted, with continued mass effect on the right lateral ventricle. No new lesions or metastatic spread.
+IMPRESSION: 
+Partial response to chemotherapy with slight reduction in tumor size. Continued monitoring advised.
+Report dictated by: William D. Roberts, MD, signed by: Emily C. Wong, MD
+Department of Radiology and Biomedical Imaging",Outpatient,Male,50,481236

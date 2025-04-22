@@ -1,0 +1,58 @@
+Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site:Brain tumor biopsy
+Tumor margin assessment
+Clinical Diagnosis/History:
+The patient is a 12-year-old boy with a history of a supratentorial ependymoma, who presents for evaluation due to new onset seizures.
+Gross Description:
+The specimen is received fresh in two parts, labeled with the patient's name and medical record number.
+Part A is labeled ""brain tumor biopsy,"" consisting of three unoriented, gray-white soft tissue fragments measuring 1.0 x 0.8 x 0.5 cm in aggregate. A portion is frozen for frozen section diagnosis 1, and another portion is taken for cytologic preparation. The remainder is submitted in cassette A1.
+Part B is labeled ""tumor margin,"" consisting of two pale-pink, soft tissue fragments measuring 0.7 x 0.5 x 0.2 cm in aggregate. The entire specimen is submitted in cassette B1.
+Diagnosis Comments:
+Immunohistochemical analysis was performed using GFAP and EMA antibodies, confirming the diagnosis of a WHO Grade II Ependymoma. A formal GFAP labeling index will be provided in an addendum.
+Interoperative Diagnosis:
+FS1 (A) Brain, supratentorial region, biopsy: Ependymoma, consistent with recurrence. Tissue section and cytologic preparation.
+Final Diagnosis:
+A. Brain, biopsy: Ependymoma, WHO Grade II; see comment.
+B. Brain, ""tumor margin,"" excision: Fragments of brain parenchyma; no tumor identified.
+++++++++++Addendum++++++++++
+RESULTED BY
+Addendum Comment:
+The GFAP immunohistochemical labeling index is approximately 3.8%.",Inpatient,Male,12,234567
+SURGICAL PATHOLOGY,"Anatomic Site:Spinal cord tumor biopsy
+Spinal tumor
+Clinical Diagnosis/History:
+The patient is a 45-year-old woman with progressive lower extremity weakness, found to have a thoracic intradural tumor.
+Gross Description:
+The specimen is received fresh in two parts, labeled with the patient's name and medical record number.
+Part A is labeled ""spinal cord tumor biopsy,"" consisting of a single, unoriented, irregularly shaped, white-tan fragment of soft tissue measuring 0.4 x 0.3 x 0.2 cm. A portion is frozen for frozen section diagnosis 1, with the remaining specimen submitted in cassette A1.
+Part B is labeled ""spinal tumor,"" consisting of one, soft, pink-red tissue fragment measuring 5 x 2.5 x 1.5 cm. The specimen reveals soft pink-red parenchyma with areas of gross microvascular proliferation and measures 1.2 x 0.8 x 0.5 cm. The entire proliferative area is submitted in cassettes B1-B2, with representative sections in cassette B3.
+Diagnosis Comments:
+Histological examination shows moderate cellularity with oval nuclei, and rare mitotic figures. Microvascular proliferation is noted.
+Interoperative Diagnosis:
+FS1 (A) Spinal tumor, biopsy: Ependymoma, WHO grade II. Tissue section and cytologic preparation.
+Final Diagnosis:
+A. Thoracic spinal cord, biopsy: Ependymoma, WHO grade II, see comment.
+B. Thoracic spinal cord, biopsy: Ependymoma, WHO grade II, see comment.
+++++++++++Addendum++++++++++
+RESULTED BY
+Addendum Comment:
+The MIB-1 labeling index is approximately 5.5%, consistent with moderate proliferative activity.",Outpatient,Female,45,345678
+SURGICAL PATHOLOGY,"Anatomic Site:Posterior fossa tumor biopsy
+Tumor margin analysis
+Clinical Diagnosis/History:
+The patient is a 22-year-old man with headache and dizziness, found to have a posterior fossa lesion suspected to be an ependymoma.
+Gross Description:
+The specimen is received fresh in two parts, labeled with the patient's name and medical record number.
+Part A is labeled ""posterior fossa tumor biopsy,"" consisting of four unoriented, gray-tan soft tissue fragments measuring 1.5 x 1.0 x 0.5 cm in aggregate. A portion is frozen for frozen section diagnosis 1, with the remainder submitted in cassette A1.
+Part B is labeled ""tumor margin,"" consisting of three soft, pink-tan tissue fragments measuring 0.9 x 0.4 x 0.3 cm in aggregate. The entire specimen is submitted in cassette B1.
+Diagnosis Comments:
+Immunohistochemical analysis using Synaptophysin and Vimentin antibodies supports the diagnosis of WHO Grade III Ependymoma. A formal Synaptophysin labeling index will be performed and reported in an addendum.
+Interoperative Diagnosis:
+FS1 (A) Brain, posterior fossa, biopsy: Ependymoma, WHO grade III. Tissue section and cytologic preparation.
+Final Diagnosis:
+A. Posterior fossa, biopsy: Ependymoma, WHO Grade III; see comment.
+B. Posterior fossa, ""tumor margin,"" excision: Fragments of brain parenchyma; no tumor identified.
+++++++++++Addendum++++++++++
+RESULTED BY
+Addendum Comment:
+The Synaptophysin immunohistochemical labeling index is 6.2%, indicating increased proliferative activity.",Inpatient,Male,22,456789
