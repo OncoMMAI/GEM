@@ -4,7 +4,7 @@ This repository contains the implementation and evaluation framework for fine-tu
 
 ## Abstract
 
-Large Language Models (LLMs) demonstrate strong general text comprehension but remain limited in oncology due to insufficient contextual alignment. We pilot embedding alignment through radiology-pathology report matching to enhance oncology-specific representations. Using Multiple Negative Ranking Loss (MNRL) and Low-Rank Adaptation (LoRA)-adapted fine-tuning of jina-embeddings-v3, we aim to create a context-aware embedding model and evaluate its efficacy across glioma prognostication tasks, including tumor type classification, MGMT methylation prediction, and overall survival prediction.
+Large Language Models (LLMs) demonstrate strong general text comprehension but remain limited in oncology due to insufficient contextual alignment. We pilot embedding alignment through radiology-pathology report matching to enhance oncology-specific representations. Using Multiple Negative Ranking Loss (MNRL) and Low-Rank Adaptation (LoRA)-adapted fine-tuning of jina-embeddings-v3, we aim to create a context-aware embedding model and evaluate its efficacy across glioma prognostication tasks, including tumor type classification, MGMT methylation prediction, and overall survival prediction. We also compare our fine-tuned embeddings against zero-shot predictions from BioMistral, a specialized biomedical language model.
 
 ## Repository Structure
 
@@ -20,7 +20,7 @@ glioma_embedding/
 ├── configs/                     # Configuration files
 │   ├── dataset_config.yaml      # Dataset configuration
 │   ├── evaluation_config.yaml   # Evaluation configuration
-│   ├── finetune_config.yaml      # Fine-tuning configuration
+│   ├── finetune_config.yaml     # Fine-tuning configuration
 │   ├── generate_config.yaml     # Embedding generation configuration
 │   ├── inference_config.yaml    # Inference configuration
 │   └── visualize_config.yaml    # Visualization configuration
@@ -47,15 +47,15 @@ glioma_embedding/
 │
 ├── figures/                     # Generated figures and visualizations
 ├── models/                      # Trained model checkpoints
-├── notebooks/                   # Jupyter notebooks
-│   ├── 00_synthetic_data.ipynb  # Synthetic data generation
-│   ├── 01_create_dataset.ipynb  # Dataset creation
-│   ├── 02_biomistral_inference.ipynb # BioMistral inference
-│   ├── 02_finetune.ipynb        # Fine-tuning notebook
-│   ├── 03_get_embeddings.ipynb  # Embedding generation
-│   ├── 03_visualize_embeddings.ipynb # Embedding visualization
-│   ├── 04_eval.ipynb            # Evaluation notebook
-│   └── 05_kaplan_meier.ipynb    # Survival analysis
+├── notebooks/
+│   ├── 00_synthetic_data.ipynb          # Synthetic data generation
+│   ├── 01_create_dataset.ipynb          # Dataset creation
+│   ├── 02_biomistral_inference.ipynb    # BioMistral inference
+│   ├── 02_finetune.ipynb                # Fine-tuning notebook
+│   ├── 03_get_embeddings.ipynb          # Embedding generation
+│   ├── 03_visualize_embeddings.ipynb    # Embedding visualization
+│   ├── 04_eval.ipynb                    # Evaluation notebook
+│   └── 05_kaplan_meier.ipynb            # Survival analysis
 │
 ├── results/                     # Evaluation results
 │
@@ -99,34 +99,40 @@ The setup script will install UV, create all necessary directories, and install 
 
 ## Workflow
 
-### 1. Data Preparation
+The workflow consists of six main steps, each controlled by a corresponding configuration file. Each configuration file corresponds to specific modules in the codebase and enables reproducible experiments.
+
+- **dataset_config.yaml**: Configuration for data processing pipeline
+- **finetune_config.yaml**: Settings for MNRL and LoRA fine-tuning
+- **generate_config.yaml**: Configuration for embedding generation
+- **inference_config.yaml**: BioMistral model parameters for inference
+- **evaluation_config.yaml**: Parameters for model evaluation
+- **visualize_config.yaml**: Settings for embedding visualization
+
+Below is an overview of each step and the commands to execute them.
+
+### 1. Data Preparation (`dataset_config.yaml`)
 
 The data preparation phase includes cleaning clinical reports, matching radiology and pathology reports, and creating training datasets.
 
 ```bash
-# Process raw clinical data using the configuration file
+# Process raw clinical data
 uv run python glioma.py prepare-data --config configs/dataset_config.yaml
+
+# With custom parameters
+uv run python glioma.py prepare-data --input path/to/data --output data/processed --train_split 0.8
 ```
-
-#### Configuration Parameters
-
-The data preparation process uses the following parameters:
-
-- `--input`: Directory containing raw MRI and pathology reports
-- `--output`: Directory to save processed data (default: "data")
-- `--train_split`: Proportion of data to use for training (default: 0.8)
 
 The data pipeline performs the following steps:
 
 1. Loads and cleans raw MRI and pathology reports
-2. Extracts cancer type information from filenames
-3. Matches reports based on patient MRN and cancer type
+2. Extracts cancer type information from report metadata
+3. Matches reports based on patient identifiers and cancer type
 4. Creates anchor-positive pairs for Multiple Negative Ranking Loss (MNRL)
-5. Splits the data by patient to ensure no patient data leakage between train/test sets
+5. Splits the data by patient to ensure no data leakage between train/test sets
 
-### 2. Fine-tuning
+### 2. Fine-tuning (`finetune_config.yaml`)
 
-Fine-tune the JINA embeddings model using MNRL and LoRA:
+Fine-tune the JINA embeddings model using Multiple Negative Ranking Loss (MNRL) and Low-Rank Adaptation (LoRA):
 
 ```bash
 # Standard fine-tuning on single GPU
@@ -134,23 +140,44 @@ uv run python glioma.py finetune --config configs/finetune_config.yaml --gpus 0
 
 # Multi-GPU training with Distributed Data Parallel
 uv run python glioma.py finetune --gpus 0,1,2,3 --ddp --num_gpus 4
+
+# With custom output directory
+uv run python glioma.py finetune --output_dir models/custom_experiment --seed 42
 ```
 
-### 3. Embedding Generation
+### 3. Embedding Generation (`generate_config.yaml`)
 
-Generate embeddings for evaluation tasks:
+Generate embeddings from clinical texts using various models (JINA, NVIDIA NV-Embed, Gatortron):
 
 ```bash
-# Generate embeddings with default configuration
+# Generate embeddings with default configuration (all models)
 uv run python glioma.py generate --config configs/generate_config.yaml
 
 # Generate embeddings for specific model and task
 uv run python glioma.py generate --model jina --task tumor_type --gpus 0
+
+# Generate embeddings with multiple GPUs
+uv run python glioma.py generate --model nvidia --gpus 0,1,2,3
 ```
 
-### 4. Evaluation
+### 4. BioMistral Inference (`inference_config.yaml`)
 
-Evaluate model performance on glioma prognostication tasks:
+Run zero-shot inference using the BioMistral language model for glioma classification tasks:
+
+```bash
+# Run inference on all tasks
+uv run python glioma.py inference --config configs/inference_config.yaml
+
+# Run inference on a specific text
+uv run python glioma.py inference --input_text "Patient presents with diffuse astrocytoma..." --model biomistral-7b
+
+# Process a batch of texts
+uv run python glioma.py inference --input_file data/test_cases.csv --output_file results/predictions.csv
+```
+
+### 5. Evaluation (`evaluation_config.yaml`)
+
+Evaluate embedding model performance on glioma prognostication tasks:
 
 ```bash
 # Run evaluation on all tasks
@@ -158,66 +185,41 @@ uv run python glioma.py evaluate --config configs/evaluation_config.yaml
 
 # Run evaluation on specific task
 uv run python glioma.py evaluate --task tumor_type
+
+# Run evaluation with custom output directory
+uv run python glioma.py evaluate --output_dir results/custom_eval
 ```
 
-### 5. Visualization
+### 6. Visualization (`visualize_config.yaml`)
 
-Visualize embeddings using t-SNE:
+Visualize embeddings using dimension reduction techniques:
 
 ```bash
-# Create visualizations with default configuration
+# Create visualizations with default configuration (UMAP)
 uv run python glioma.py visualize --config configs/visualize_config.yaml
 
-# Create visualizations for specific task
-uv run python glioma.py visualize --task tumor_type
-```
+# Create visualizations using t-SNE
+uv run python glioma.py visualize --method tsne --task tumor_type
 
-## Configuration Files
-
-The project uses YAML configuration files in the `configs/` directory:
-
-- **dataset_config.yaml**: Configuration for data processing pipeline
-- **finetune_config.yaml**: Settings for MNRL and LoRA fine-tuning
-- **generate_config.yaml**: Configuration for embedding generation
-- **evaluation_config.yaml**: Parameters for model evaluation
-- **visualize_config.yaml**: Settings for t-SNE visualization
-
-### Dataset Configuration
-
-The dataset configuration file (`dataset_config.yaml`) controls the data processing pipeline:
-
-```yaml
-data:
-  input_dir: 'data/raw' # Base directory for raw data
-  mri_dir: 'data/raw/mri' # MRI reports directory
-  pathology_dir: 'data/raw/pathology' # Pathology reports directory
-
-training:
-  train_split: 0.8 # Train/validation split ratio
-
-output:
-  output_dir: 'data/training' # Output directory
-  matches_path: 'data/training/matches.csv' # Path for matched reports
-
-  # MNRL training data paths
-  mnrl_train_path: 'data/training/mnrl/train.csv'
-  mnrl_eval_path: 'data/training/mnrl/eval.csv'
-
-  # Evaluation dataset paths
-  tumor_type_eval_path: 'data/eval/tumor_type_eval.csv'
-  mgmt_eval_path: 'data/eval/mgmt_eval.csv'
-  os_eval_path: 'data/eval/os_eval.csv'
-
-  figures_dir: 'figures' # Directory for visualizations
+# Create visualizations for specific embedding type
+uv run python glioma.py visualize --embeddings_dir embeddings/tumor_type --output_dir figures/tumor_type
 ```
 
 ## Models
 
-The codebase supports multiple embedding models:
+### Embedding Models
 
-1. **JINA Embeddings (v3)**: Primary model used for fine-tuning
+The codebase supports multiple embedding models for generating text representations:
+
+1. **JINA Embeddings (v3)**: Primary model used for fine-tuning with MNRL
 2. **NVIDIA NV-Embed (v2)**: Medical domain embedding model
 3. **Gatortron-large**: Specialized medical language model
+
+### Inference Model
+
+For zero-shot inference on glioma classification tasks:
+
+- **BioMistral-7B**: Specialized biomedical large language model used for zero-shot classification of tumor type, MGMT methylation status, and survival prediction
 
 ## Data Availability
 
