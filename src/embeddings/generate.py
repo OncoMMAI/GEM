@@ -43,6 +43,7 @@ def jina_embed(
     max_length: int = 2048,
     device: Optional[str] = None,
     trust_remote_code: bool = True,
+    cache_dir: Optional[str] = None,
 ) -> np.ndarray:
     """Generate embeddings using Jina model.
 
@@ -57,6 +58,7 @@ def jina_embed(
         max_length: Maximum sequence length for encoding
         device: Device to run model on
         trust_remote_code: Whether to trust remote code in the model
+        cache_dir: Directory to cache downloaded models
 
     Returns:
         numpy array of embeddings
@@ -67,9 +69,15 @@ def jina_embed(
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
     logger.info(f"Loading JINA model: {model_name}")
+    model_kwargs = {"trust_remote_code": trust_remote_code}
+    
+    if cache_dir:
+        logger.info(f"Using cache directory: {cache_dir}")
+        model_kwargs["cache_dir"] = cache_dir
+        
     model = AutoModel.from_pretrained(
         model_name,
-        trust_remote_code=trust_remote_code,
+        **model_kwargs,
     ).to(device)
 
     if checkpoint_path:
@@ -122,6 +130,7 @@ def nvidia_embed(
     device_ids: Optional[List[int]] = None,
     trust_remote_code: bool = True,
     instruction: Optional[str] = None,
+    cache_dir: Optional[str] = None,
 ) -> np.ndarray:
     """Generate embeddings using NVIDIA NV-Embed model.
 
@@ -136,6 +145,7 @@ def nvidia_embed(
         device_ids: List of GPU device IDs for multi-GPU support
         trust_remote_code: Whether to trust remote code in the model
         instruction: Optional instruction template ('medical', 'none', or custom)
+        cache_dir: Directory to cache downloaded models
 
     Returns:
         numpy array of embeddings
@@ -146,7 +156,13 @@ def nvidia_embed(
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
     logger.info(f"Loading NVIDIA model: {model_name}")
-    model = AutoModel.from_pretrained(model_name, trust_remote_code=trust_remote_code)
+    model_kwargs = {"trust_remote_code": trust_remote_code}
+    
+    if cache_dir:
+        logger.info(f"Using cache directory: {cache_dir}")
+        model_kwargs["cache_dir"] = cache_dir
+    
+    model = AutoModel.from_pretrained(model_name, **model_kwargs)
 
     if device_ids:
         logger.info(f"Using multiple GPUs: {device_ids}")
@@ -225,6 +241,7 @@ def gatortron_embed(
     max_length: int = 512,
     device: Optional[str] = None,
     trust_remote_code: bool = True,
+    cache_dir: Optional[str] = None,
 ) -> np.ndarray:
     """Generate embeddings using Gatortron model.
 
@@ -238,6 +255,7 @@ def gatortron_embed(
         max_length: Maximum sequence length
         device: Device to run model on
         trust_remote_code: Whether to trust remote code in the model
+        cache_dir: Directory to cache downloaded models
 
     Returns:
         numpy array of embeddings
@@ -247,23 +265,29 @@ def gatortron_embed(
     if device is None:
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
+    # Prepare common kwargs for model loading
+    model_kwargs = {"trust_remote_code": trust_remote_code}
+    if cache_dir:
+        logger.info(f"Using cache directory: {cache_dir}")
+        model_kwargs["cache_dir"] = cache_dir
+
     logger.info(f"Loading Gatortron tokenizer: {model_name}")
     tokenizer = AutoTokenizer.from_pretrained(
         model_name,
-        trust_remote_code=trust_remote_code,
+        **model_kwargs,
     )
 
     logger.info(f"Loading Gatortron model configuration")
     config = AutoConfig.from_pretrained(
         model_name,
-        trust_remote_code=trust_remote_code,
+        **model_kwargs,
     )
 
     logger.info(f"Loading Gatortron model")
     model = AutoModel.from_pretrained(
         model_name,
-        trust_remote_code=trust_remote_code,
         config=config,
+        **model_kwargs,
     ).to(device)
 
     if checkpoint_path:
@@ -322,6 +346,17 @@ def generate_embeddings(config: Dict) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     logger.info(f"Embeddings will be saved to: {output_dir}")
+    
+    # Get cache directory 
+    cache_dir = None
+    if "global" in config and "cache_dir" in config["global"]:
+        cache_dir = config["global"]["cache_dir"]
+        
+        # Create cache directory if needed
+        if config.get("output", {}).get("create_cache_dir", True):
+            cache_path = Path(cache_dir)
+            cache_path.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Using cache directory: {cache_dir}")
 
     # Load datasets
     data_config = config["data"]
@@ -363,6 +398,7 @@ def generate_embeddings(config: Dict) -> None:
                 batch_size=jina_config.get("batch_size", 32),
                 max_length=jina_config.get("max_length", 2048),
                 trust_remote_code=jina_config.get("trust_remote_code", True),
+                cache_dir=cache_dir,
             )
 
         # NVIDIA model
@@ -386,6 +422,7 @@ def generate_embeddings(config: Dict) -> None:
                 device_ids=nvidia_config.get("device_ids"),
                 instruction=nvidia_config.get("instruction"),
                 trust_remote_code=nvidia_config.get("trust_remote_code", True),
+                cache_dir=cache_dir,
             )
 
         # Gatortron model
@@ -404,6 +441,7 @@ def generate_embeddings(config: Dict) -> None:
                 batch_size=gatortron_config.get("batch_size", 32),
                 max_length=gatortron_config.get("max_length", 512),
                 trust_remote_code=gatortron_config.get("trust_remote_code", True),
+                cache_dir=cache_dir,
             )
 
 

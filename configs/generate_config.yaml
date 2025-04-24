@@ -1,5 +1,9 @@
 # Configuration for embedding generation
 
+# Global settings
+global:
+  cache_dir: 'models/cache'  # Cache directory for HuggingFace models
+
 model:
   jina:
     name: 'jinaai/jina-embeddings-v3'
@@ -38,3 +42,5 @@ data:
 output:
   # Directory for saving embeddings
   output_dir: 'embeddings'
+  # Create cache directory if it doesn't exist
+  create_cache_dir: true
