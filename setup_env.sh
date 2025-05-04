@@ -19,7 +19,7 @@ fi
 # Install UV if not already installed
 if ! command -v uv &> /dev/null; then
     echo "Installing UV package manager..."
-    curl -sSf https://install.ultraviolet.rs | sh
+    curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
 
 # Create virtual environment with UV
@@ -49,9 +49,10 @@ echo -e "\nTo start using the Glioma toolkit, run:"
 echo -e "uv run python glioma.py --help"
 
 echo -e "\nExample commands:"
+echo -e "  uv run python glioma.py prepare-data --config configs/dataset_config.yaml"
 echo -e "  uv run python glioma.py finetune --config configs/finetune_config.yaml"
 echo -e "  uv run python glioma.py generate --config configs/generate_config.yaml"
 echo -e "  uv run python glioma.py evaluate --config configs/evaluation_config.yaml"
 echo -e "  uv run python glioma.py visualize --config configs/visualize_config.yaml" 
 echo -e "  uv run python glioma.py inference --config configs/inference_config.yaml"
-echo -e "  uv run python glioma.py prepare-data --config configs/dataset_config.yaml"
+
