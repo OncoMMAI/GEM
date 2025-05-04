@@ -122,14 +122,16 @@ def load_and_combine_data(
             # Load MRI data
             mri_df = pd.read_csv(file_path)
             mri_df["cancer_type"] = cancer_type
-            
+
             # Get text column from config if available
             text_column = "Report Text"
             if config and "data" in config and "text_column" in config["data"]:
                 text_column = config["data"]["text_column"]
-                
+
             # Clean text with config options
-            mri_df["clean_text"] = mri_df[text_column].apply(lambda x: clean_text(x, config))
+            mri_df["clean_text"] = mri_df[text_column].apply(
+                lambda x: clean_text(x, config)
+            )
             # Add an accession number if not present
             if "Accession Number" not in mri_df.columns:
                 mri_df["Accession Number"] = [
@@ -157,14 +159,16 @@ def load_and_combine_data(
             # Load pathology data
             path_df = pd.read_csv(file_path)
             path_df["cancer_type"] = cancer_type
-            
+
             # Get text column from config if available
             text_column = "Report Text"
             if config and "data" in config and "text_column" in config["data"]:
                 text_column = config["data"]["text_column"]
-                
+
             # Clean text with config options
-            path_df["clean_text"] = path_df[text_column].apply(lambda x: clean_text(x, config))
+            path_df["clean_text"] = path_df[text_column].apply(
+                lambda x: clean_text(x, config)
+            )
             # Add an accession number if not present
             if "Accession Number" not in path_df.columns:
                 path_df["Accession Number"] = [
@@ -192,9 +196,7 @@ def load_and_combine_data(
 
 
 def match_clinical_reports(
-    mri_df: pd.DataFrame, 
-    path_df: pd.DataFrame,
-    config: Optional[Dict[str, Any]] = None
+    mri_df: pd.DataFrame, path_df: pd.DataFrame, config: Optional[Dict[str, Any]] = None
 ) -> pd.DataFrame:
     """Match MRI and pathology reports based on patient and cancer type.
 
@@ -254,8 +256,7 @@ def match_clinical_reports(
 
 
 def create_mnrl_pairs(
-    matches_df: pd.DataFrame, 
-    config: Optional[Dict[str, Any]] = None
+    matches_df: pd.DataFrame, config: Optional[Dict[str, Any]] = None
 ) -> pd.DataFrame:
     """Create multiple negative ranking loss pairs from matched reports.
 
@@ -272,9 +273,11 @@ def create_mnrl_pairs(
     mnrl_enabled = True
     if config and "training" in config and "mnrl" in config["training"]:
         mnrl_enabled = config["training"]["mnrl"].get("enable", True)
-    
+
     if not mnrl_enabled:
-        logger.warning("MNRL training is disabled in config, but continuing to create pairs")
+        logger.warning(
+            "MNRL training is disabled in config, but continuing to create pairs"
+        )
 
     # Only need anchor-positive pairs for MNRL
     mnrl_pairs = pd.DataFrame(
@@ -403,7 +406,7 @@ def main():
     numeric_level = getattr(logging, log_level.upper(), None)
     if isinstance(numeric_level, int):
         logger.setLevel(numeric_level)
-    
+
     # Override config with command line arguments if provided
     input_path = args.input or config.get("data", {}).get("input_dir", "data/raw")
     output_path = args.output or config.get("output", {}).get(
@@ -423,17 +426,16 @@ def main():
     logger.info(f"Input directory: {input_path}")
     logger.info(f"Output directory: {output_path}")
     logger.info(f"Train split ratio: {train_split}")
-    
+
     # Report data filtering settings
     min_length = config.get("data", {}).get("min_report_length", 50)
     max_length = config.get("data", {}).get("max_report_length", 5000)
     logger.info(f"Report length filtering: min={min_length}, max={max_length}")
-    
+
     # Report MNRL settings
     mnrl_enabled = config.get("training", {}).get("mnrl", {}).get("enable", True)
-    neg_samples = config.get("training", {}).get("mnrl", {}).get("negative_samples", 5)
-    logger.info(f"MNRL enabled: {mnrl_enabled}, negative samples: {neg_samples}")
-    
+    logger.info(f"MNRL enabled: {mnrl_enabled}")
+
     # Report class balancing
     balance = config.get("training", {}).get("balance_classes", True)
     logger.info(f"Class balancing: {balance}")
@@ -463,23 +465,7 @@ def main():
             train_split=train_split,
             config=config,
         )
-        
-        # Save demographics figure if configured
-        save_demographics = config.get("logging", {}).get("save_demographics", False)
-        if save_demographics:
-            figures_dir = config.get("output", {}).get("figures_dir", "figures")
-            Path(figures_dir).mkdir(parents=True, exist_ok=True)
-            logger.info(f"Generating demographics figure to {figures_dir}/demographics.pdf")
-            try:
-                from src.data.visualization import create_demographics_figure
-                create_demographics_figure(
-                    mri_data=mri_data,
-                    path_data=path_data,
-                    output_path=f"{figures_dir}/demographics.pdf"
-                )
-            except ImportError:
-                logger.warning("Unable to create demographics figure - visualization module not found")
-        
+
         logger.info("Data creation completed successfully!")
 
     except Exception as e:

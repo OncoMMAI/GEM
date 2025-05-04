@@ -12,10 +12,6 @@ data:
   # Report columns
   text_column: "Report Text"
   mrn_column: "Patient MRN"
-  
-  # Report filtering options
-  min_report_length: 50
-  max_report_length: 5000
 
 # Training data creation
 training:
@@ -28,7 +24,6 @@ training:
   # MNRL training parameters
   mnrl:
     enable: true
-    negative_samples: 5
 
 # Output settings
 output:
@@ -42,17 +37,6 @@ output:
   mnrl_train_path: "data/training/mnrl/train.csv"
   mnrl_eval_path: "data/training/mnrl/eval.csv"
   
-  # Evaluation dataset paths
-  tumor_type_eval_path: "data/eval/tumor_type_eval.csv"
-  mgmt_eval_path: "data/eval/mgmt_eval.csv"
-  os_eval_path: "data/eval/os_eval.csv"
-  
-  # Directory for figures
-  figures_dir: "figures"
-  
-  # Output file formats
-  save_format: "csv"
-  
   # Report processing
   clean_text: true
   lowercase: true
@@ -60,4 +44,3 @@ output:
 # Logging
 logging:
   level: "INFO"
-  save_demographics: true
