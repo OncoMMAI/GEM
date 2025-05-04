@@ -2,17 +2,26 @@
 
 # Global settings
 global:
-  cache_dir: 'models/cache'  # Cache directory for HuggingFace models
+  cache_dir: 'YOUR_CACHE_DIR'  # Cache directory for HuggingFace models
 
 model:
-  jina:
+  jina_base:
     name: 'jinaai/jina-embeddings-v3'
-    checkpoint_path: 'models/mnrl_full_data/final/model.safetensors' # Path to fine-tuned model
+    checkpoint_path: null
     trust_remote_code: true
     batch_size: 32
     max_length: 2048
     task: 'text-matching' # Task type influences the embedding properties
-    # Setting task to 'text-matching' aligns with notebook settings
+    device_ids: 7
+
+  jina:
+    name: 'jinaai/jina-embeddings-v3'
+    checkpoint_path: 'PATH/model.safetensors' # Path to fine-tuned model
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 2048
+    task: 'text-matching' # Task type influences the embedding properties
+    device_ids: 7
 
   nvidia:
     name: 'nvidia/NV-Embed-v2'
@@ -30,11 +39,9 @@ model:
     max_length: 512
 
 data:
-  # Paths to evaluation datasets
   tumor_type_path: 'data/eval/tumor_type_eval.csv'
   mgmt_path: 'data/eval/mgmt_eval.csv'
   survival_path: 'data/eval/os_eval.csv'
-  os_path: 'data/eval/os_eval.csv'  # Added to match notebook naming
 
   # Column name containing the text to embed
   text_column: 'report'

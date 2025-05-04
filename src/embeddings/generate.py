@@ -70,11 +70,11 @@ def jina_embed(
 
     logger.info(f"Loading JINA model: {model_name}")
     model_kwargs = {"trust_remote_code": trust_remote_code}
-    
+
     if cache_dir:
         logger.info(f"Using cache directory: {cache_dir}")
         model_kwargs["cache_dir"] = cache_dir
-        
+
     model = AutoModel.from_pretrained(
         model_name,
         **model_kwargs,
@@ -157,11 +157,11 @@ def nvidia_embed(
 
     logger.info(f"Loading NVIDIA model: {model_name}")
     model_kwargs = {"trust_remote_code": trust_remote_code}
-    
+
     if cache_dir:
         logger.info(f"Using cache directory: {cache_dir}")
         model_kwargs["cache_dir"] = cache_dir
-    
+
     model = AutoModel.from_pretrained(model_name, **model_kwargs)
 
     if device_ids:
@@ -346,12 +346,12 @@ def generate_embeddings(config: Dict) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     logger.info(f"Embeddings will be saved to: {output_dir}")
-    
-    # Get cache directory 
+
+    # Get cache directory
     cache_dir = None
     if "global" in config and "cache_dir" in config["global"]:
         cache_dir = config["global"]["cache_dir"]
-        
+
         # Create cache directory if needed
         if config.get("output", {}).get("create_cache_dir", True):
             cache_path = Path(cache_dir)
@@ -380,6 +380,27 @@ def generate_embeddings(config: Dict) -> None:
         task_dir.mkdir(exist_ok=True)
 
         # JINA model
+        if "jina_base" in config["model"]:
+            jina_config = config["model"]["jina_base"]
+            logger.info(f"Generating JINA embeddings for {task_name} task")
+
+            output_path = task_dir / f"jina_base.npy"
+
+            jina_embed(
+                df=df,
+                output_path=output_path,
+                text_col=text_column,
+                task=jina_config.get("task", "text-matching"),
+                model_name=jina_config.get("name", "jinaai/jina-embeddings-v3"),
+                checkpoint_path=jina_config.get("checkpoint_path"),
+                batch_size=jina_config.get("batch_size", 32),
+                max_length=jina_config.get("max_length", 2048),
+                device_ids=jina_config.get("device_ids", 0),
+                trust_remote_code=jina_config.get("trust_remote_code", True),
+                cache_dir=cache_dir,
+            )
+
+        # JINA model
         if "jina" in config["model"]:
             jina_config = config["model"]["jina"]
             logger.info(f"Generating JINA embeddings for {task_name} task")
@@ -392,11 +413,12 @@ def generate_embeddings(config: Dict) -> None:
                 df=df,
                 output_path=output_path,
                 text_col=text_column,
-                task=task_name,
+                task=jina_config.get("task", "text-matching"),
                 model_name=jina_config.get("name", "jinaai/jina-embeddings-v3"),
                 checkpoint_path=jina_config.get("checkpoint_path"),
                 batch_size=jina_config.get("batch_size", 32),
                 max_length=jina_config.get("max_length", 2048),
+                device_ids=jina_config.get("device_ids", 0),
                 trust_remote_code=jina_config.get("trust_remote_code", True),
                 cache_dir=cache_dir,
             )
@@ -447,6 +469,7 @@ def generate_embeddings(config: Dict) -> None:
 
 def main() -> None:
     """Main entry point for embedding generation."""
+
     # Setup logger
     logger = setup_logger(
         name="glioma.embeddings", level=logging.INFO, log_file="embeddings.log"
@@ -457,10 +480,6 @@ def main() -> None:
 
     # Load configuration
     config = get_config()
-
-    # Set CUDA devices if specified in config
-    if "gpus" in config.get("training", {}):
-        os.environ["CUDA_VISIBLE_DEVICES"] = config["training"]["gpus"]
 
     # Generate embeddings
     generate_embeddings(config)
