@@ -38,7 +38,7 @@ training:
   gradient_accumulation_steps: 8
 
   # Learning rate (float): Base learning rate for training
-  learning_rate: 1e-5
+  learning_rate: 0.00001
 
   # Warmup ratio (float): Fraction of steps to warm up the learning rate
   warmup_ratio: 0.15
