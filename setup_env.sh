@@ -30,6 +30,11 @@ uv venv
 echo "Installing dependencies..."
 uv pip install -e .
 
+echo "Installing build dependencies for flash-attn..."
+uv pip install setuptools psutil
+echo "Installing flash-attn..."
+uv pip install flash-attn --no-build-isolation
+
 # Create necessary directories
 echo "Creating necessary directories..."
 mkdir -p data/{raw,training/mnrl,eval}
