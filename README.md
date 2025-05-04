@@ -248,11 +248,11 @@ The code in this repository can be adapted to work with similar clinical text da
 If you use this code in your research, please cite our paper:
 
 ```bibtex
-@article{neo2024clinically,
+@article{neo2025clinically,
   title={A Clinically Aligned Embedding Model for Glioma Prognostication via Radiology-Pathology Report Matching},
   author={Neo, Benedict and Liu, Bo and Interian, Yannet and Braunstein, Steve and Lupo, Janine and Morin, Olivier and Lin, Hui},
   journal={},
-  year={2024}
+  year={2025}
 }
 ```
 
