@@ -22,7 +22,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Benedict Neo",
-    author_email="your.email@example.com",
+    author_email="benedict.neo@ucsf.com",
     url="https://github.com/benedictneo/glioma_embedding",
     packages=find_packages(),
     python_requires=">=3.8",
