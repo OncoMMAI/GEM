@@ -41,22 +41,13 @@ def load_embeddings(embedding_path: Path) -> Tuple[Optional[np.ndarray], Optiona
             - numpy array of embeddings (None if loading failed)
             - model name derived from filename (None if loading failed)
     """
-    # Define allowed files (matching notebook exactly)
-    ALLOWED_FILES = {
-        "nv_embed.npy",
-        "jina_base_text_match.npy",
-        "mnrl_full_data.npy",
-        "gatortron_large.npy",
-    }
-
     if embedding_path.suffix == ".npy":
-        if embedding_path.name in ALLOWED_FILES:
-            try:
-                embeddings = np.load(embedding_path)
-                model_name = embedding_path.stem
-                return embeddings, model_name
-            except Exception as e:
-                logger.error(f"Failed to load embeddings from {embedding_path}: {e}")
+        try:
+            embeddings = np.load(embedding_path)
+            model_name = embedding_path.stem
+            return embeddings, model_name
+        except Exception as e:
+            logging.error(f"Failed to load embeddings from {embedding_path}: {e}")
 
     return None, None
 
@@ -193,7 +184,7 @@ def evaluate_task(
     n_splits: int = 5,
     n_estimators: int = 1000,
     random_state: int = 7,
-    baseline_model: str = "jina_base_text_match",
+    baseline_model: str = "jina_base",
 ) -> None:
     """Evaluate embeddings for a specific task.
 
@@ -331,22 +322,22 @@ def evaluate_models(config: Dict) -> None:
     n_splits = eval_config.get("n_splits", 5)
     random_state = eval_config.get("random_state", 7)
     n_estimators = eval_config.get("n_estimators", 1000)
-    baseline_model = eval_config.get("baseline_model", "jina_base_text_match")
+    baseline_model = eval_config.get("baseline_model", "jina_base")
 
     # Define tasks
     tasks = {}
 
     if type_df is not None:
-        tasks["tumor_type"] = {  # Changed from "type" to "tumor_type" to match notebook
+        tasks["tumor_type"] = {
             "embeddings_dir": Path("embeddings/tumor_type"),  # Updated path
             "df": type_df,
-            "label_col": "class_label",
+            "label_col": "tumor_type",
             "id_col": "MRN",
         }
 
     if os_df is not None:
         tasks["survival"] = {
-            "embeddings_dir": Path("embeddings/os"),
+            "embeddings_dir": Path("embeddings/survival"),
             "df": os_df,
             "label_col": "one_year_survival",  # Using column name from notebook
             "id_col": "Patient_mrn",  # Updated to match notebook

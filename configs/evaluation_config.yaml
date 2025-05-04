@@ -6,7 +6,7 @@ global:
 model:
   # Baseline and fine-tuned model paths
   base_model: 'jinaai/jina-embeddings-v3'
-  finetuned_model: 'models/mnrl_full_data/final'
+  finetuned_model: 'models/results/mnrl_full_data/final'
   trust_remote_code: true
 
 embedding:
@@ -30,12 +30,12 @@ data:
 
 evaluation:
   # Random Forest classifier parameters
-  n_splits: 5 # Number of cross-validation folds
+  n_splits: 10 # Number of cross-validation folds
   random_state: 7 # Random seed for validation splits
   n_estimators: 1000 # Number of trees in random forest
 
   # Model to use as baseline for significance testing
-  baseline_model: 'jina_base_text_match'
+  baseline_model: 'jina_base'
 
 output:
   # Directory to save evaluation results
