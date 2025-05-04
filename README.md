@@ -136,13 +136,10 @@ Fine-tune the JINA embeddings model using Multiple Negative Ranking Loss (MNRL) 
 
 ```bash
 # Standard fine-tuning on single GPU
-uv run python glioma.py finetune --config configs/finetune_config.yaml --gpus 0
+uv run torchrun --nproc_per_node=1 glioma.py finetune --config configs/finetune_config.yaml
 
 # Multi-GPU training with Distributed Data Parallel
-uv run python glioma.py finetune --gpus 0,1,2,3 --ddp --num_gpus 4
-
-# With custom output directory
-uv run python glioma.py finetune --output_dir models/custom_experiment --seed 42
+CUDA_VISIBLE_DEVICES=0,1,2,3 uv run torchrun --nproc_per_node=4 glioma.py finetune --config configs/finetune_config.yaml
 ```
 
 ### 3. Embedding Generation (`generate_config.yaml`)
@@ -165,14 +162,30 @@ uv run python glioma.py generate --model nvidia --gpus 0,1,2,3
 Run zero-shot inference using the BioMistral language model for glioma classification tasks:
 
 ```bash
-# Run inference on all tasks
+# start the server
+CUDA_VISIBLE_DEVICES=4,5,6,7 vllm serve \
+    BioMistral-7B \
+    --gpu-memory-utilization=0.95 \
+    --tensor-parallel-size=4 \
+    --trust-remote-code
+
+# On a new terminal, run inference on all tasks
 uv run python glioma.py inference --config configs/inference_config.yaml
 
-# Run inference on a specific text
-uv run python glioma.py inference --input_text "Patient presents with diffuse astrocytoma..." --model biomistral-7b
-
-# Process a batch of texts
-uv run python glioma.py inference --input_file data/test_cases.csv --output_file results/predictions.csv
+# sample call
+curl -X POST "http://localhost:8000/v1/chat/completions" \
+    -H "Content-Type: application/json" \
+    --data '{
+        "model": "BioMistral-7B",
+        "messages": [
+            {
+                "role": "user",
+                "content": "Classify this brain tumor into exactly one of these categories: glioblastoma, astrocytoma, oligodendroglioma, or oligoastrocytoma.\n\nReport:\nThere is a large, irregular mass in the right temporal lobe measuring approximately 4.8 x 3.9 x 4.2 cm. The lesion demonstrates heterogeneous enhancement with central necrosis on post-contrast images. Significant surrounding vasogenic edema is present, causing mass effect and midline shift of approximately 7mm to the left. The mass shows restricted diffusion and demonstrates thick, irregular ring enhancement. Multiple areas of hemorrhage are noted within the tumor on susceptibility-weighted imaging.\n\nOutput format:\nCLASSIFICATION: [tumor type]"
+            }
+        ],
+        "temperature": 0.0,
+        "max_tokens": 50
+    }'
 ```
 
 ### 5. Evaluation (`evaluation_config.yaml`)
@@ -185,9 +198,6 @@ uv run python glioma.py evaluate --config configs/evaluation_config.yaml
 
 # Run evaluation on specific task
 uv run python glioma.py evaluate --task tumor_type
-
-# Run evaluation with custom output directory
-uv run python glioma.py evaluate --output_dir results/custom_eval
 ```
 
 ### 6. Visualization (`visualize_config.yaml`)
@@ -195,10 +205,8 @@ uv run python glioma.py evaluate --output_dir results/custom_eval
 Visualize embeddings using dimension reduction techniques:
 
 ```bash
-# Create visualizations with default configuration (UMAP)
 uv run python glioma.py visualize --config configs/visualize_config.yaml
 
-# Create visualizations using t-SNE
 uv run python glioma.py visualize --method tsne --task tumor_type
 
 # Create visualizations for specific embedding type
