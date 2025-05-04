@@ -179,7 +179,7 @@ def create_model(config: Dict[str, Any]) -> SentenceTransformer:
                 language=["en"],
                 license="apache-2.0",
                 model_name="Jina-v3-Clinical-Cross-Modal-Alignment",
-                model_id="Jina-v3-Clinical-Cross-Modal-Alignment",
+                model_id="bneo/Jina-v3-Clinical-Cross-Modal-Alignment",
                 tags=["clinical", "radiology", "pathology", "cross-modal", "glioma"],
             ),
         )
