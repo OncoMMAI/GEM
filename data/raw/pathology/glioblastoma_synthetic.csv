@@ -1,67 +1,56 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-SURGICAL PATHOLOGY,"Anatomic Site:Brain, biopsy (FS) - tumor
-Brain, biopsy (FS) - tumor (#2)
-Temporal lobe
+Exam Description,Report Text,Patient Status,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site:Brain, biopsy, recurrent, GBM, fs
+Left recurrent tumor- FS
+Left recurrent tumor- FS
+Brain, biopsy- ""NM"" (FS)
 Clinical Diagnosis/History:
-The patient is a 68-year-old woman with a suspected glioblastoma, presenting with seizure episodes.
+The patient is a 68-year-old man with history of glioblastoma multiforme,
+status post radiation and chemotherapy.
 Gross Description:
-The specimen is received fresh in three parts, each labeled with the patient's name and medical record number.
-Part A, additionally labeled ""tumor frozen section,"" consists of a 0.6 x 0.4 x 0.2 cm piece of friable, gray-tan tissue. The entire specimen is frozen for frozen section diagnosis 1, and subsequently submitted in cassette A1.
-Part B, additionally labeled ""tumor (frozen section),"" consists of a 0.5 x 0.3 x 0.3 cm piece of gray-white, soft tissue. A portion of the specimen is submitted for frozen section diagnosis 2, with the frozen section remnant submitted in cassette B1.
-The remainder of the tissue is submitted for permanent section in cassette B2.
-Part C is labeled ""temporal lobe"" and consists of a 1.2 x 0.9 x 0.4 cm piece of irregular, soft, gray-pink tissue. Representative sections are submitted in cassette C1.
+The specimen is received fresh in three parts, each labeled with the patient's
+name and medical record number.
+Part A is additionally labeled ""recurrent GBM."" It consists of a single
+unoriented fragment of pink-gray, soft tissue, measuring
+0.5 x 0.6 x 0.4 cm. Half of this fragment is submitted for frozen section
+diagnosis as FS1, with the frozen section remnant
+submitted in cassette A1. The remaining unfrozen portion is submitted in
+cassette A2.
+Part B is additionally labeled ""recurrent tumor."" It consists of multiple
+fragments of gray-white, soft tissue, measuring 0.7 x
+1.0 x 0.4 cm in aggregate. Approximately one-fourth of the specimen is
+submitted for frozen section diagnosis as FS2, with the
+frozen section remnant submitted in cassette B1. The remainder of the
+specimen is then submitted for frozen section diagnosis
+as FS3, with the frozen section remnant submitted in cassette B2.
+Part C is additionally labeled ""left recurrent tumor."" It consists of three
+unoriented fragments of yellow-tan, soft tissue,
+measuring 1.2 x 0.7 x 0.5 cm in aggregate. The specimen is entirely submitted
+for frozen section diagnosis as FS4, with the
+frozen section remnant submitted in cassette C1.
 Diagnosis Comments:
-The tumor tissue within these specimens shows extensive necrosis and microvascular proliferation. Parts B and C demonstrate a malignant glioma consistent with glioblastoma, WHO grade IV.
+In the biopsy submitted as Part C, approximately 75% of the tissue is necrotic
+with scattered clusters of neoplastic astrocytes,
+most notably on slides C2-C4. These findings support the diagnosis of
+residual/recurrent glioblastoma multiforme (astrocytoma,
+WHO grade IV).
 Interoperative Diagnosis:
-FS1  (A) Brain, biopsy:  High-grade glioma with necrotic areas, consistent with glioblastoma. Tissue section and cytologic preparation.  (Dr. Emily Carter, 55210.)
-FS2  (B) Brain, biopsy:  Malignant glioma, favor glioblastoma multiforme. Tissue section and cytologic preparation.  (Dr. Emily Carter, 55210.)
+FS1 (A) Brain, ""recurrent GBM,"" biopsy: Extensive necrosis with adjacent
+granulation tissue, no glioblastoma identified.
+Tissue section and cytologic preparation (one-third of specimen utilized).
+(Dr. Lisa Chang, 60832.)
+FS2 (B) Brain, ""recurrent tumor,"" biopsy: Gray and white matter with
+astrogliosis and rare atypical astrocytes; no definitive
+glioblastoma. Tissue section and cytologic preparation. (Dr. Lisa Chang,
+60832.)
+FS3 (B) Brain, ""recurrent tumor,"" biopsy: Gray and white matter with
+astrogliosis. (Dr. Lisa Chang, 60832.)
+FS4 (C) Brain, ""left recurrent tumor,"" biopsy: Gray and white matter with
+astrogliosis. (Dr. Lisa Chang, 60832.)
 Final Diagnosis:
-A.  Brain, biopsy:  High-grade glioma with necrosis, consistent with glioblastoma; see comment.
-B.  Brain, biopsy:  Malignant glioma consistent with glioblastoma; see comment.
-C.  Temporal lobe, biopsy:  Malignant glioma consistent with glioblastoma, WHO grade IV; see comment.
-++++++++++Addendum++++++++++
-RESULTED BY 55210 Carter, Emily
-Addendum Comment:
-The MIB-1 labeling index is 14.67%.",Inpatient,Female,68,382591
-SURGICAL PATHOLOGY,"Anatomic Site:Brain, biopsy (fs)
-Right parietal tumor
-Clinical Diagnosis/History:
-The patient is a 55-year-old man with a rapidly growing brain mass, suspicious for glioblastoma.
-Gross Description:
-The specimen is received in three parts, each labeled with the patient's name and medical record number.
-Part A is additionally labeled ""tumor."" It consists of multiple irregular fragments of neural tissue, with an aggregate measurement of 1.3 x 0.8 x 0.3 cm. Representative sections are submitted for frozen section diagnosis as FS1 and cytologic preparation, with the frozen section remnant submitted in cassette A1. The remainder is submitted in cassette A2.
-Part B, additionally labeled ""right parietal tumor--permanent,"" consists of a 2.5 x 1.5 x 0.4 cm, rectangular, firm tissue fragment. The specimen is entirely submitted in cassette B1.
-Part C, labeled ""right parietal tissue,"" consists of a 0.8 x 0.5 x 0.2 cm piece of white-gray, soft tissue, submitted entirely in cassette C1.
-Diagnosis Comments:
-This malignant neoplasm is composed of densely packed cells with pleomorphic nuclei and a high mitotic rate. Microvascular proliferation and areas of necrosis are evident. Although the morphological features are compatible with glioblastoma, differential diagnoses include metastatic carcinoma.
-Immunohistochemical stains were performed and evaluated to establish the diagnosis and include GFAP, neurofilament, and p53 on A2, as well as keratin and vimentin on B1.
-GFAP shows strong positive staining, while neurofilament shows infiltration of neoplastic cells. P53 shows strong positive staining, supporting the diagnosis of glioblastoma.
-Interoperative Diagnosis:
-FS1  (A) Brain, biopsy:  Glioblastoma, WHO grade IV. Tissue section and cytologic preparation.  (Dr. Michael Nguyen, 69432.)
-Final Diagnosis:
-A.  Brain, right parietal, biopsy:  Glioblastoma (Astrocytoma WHO grade IV); see comment.
-B.  Brain, right parietal, biopsy:  Glioblastoma (Astrocytoma WHO grade IV); see comment.
-C.  Right parietal tissue, biopsy:  Glioblastoma, WHO grade IV; see comment.
-++++++++++Addendum++++++++++
-RESULTED BY 69432 Nguyen, Michael
-Addendum Comment:
-The EGFR immunohistochemical score is 3. In aggregate, there is >75% immunoreactivity of cells.",Outpatient,Male,55,517483
-SURGICAL PATHOLOGY,"Anatomic Site:Brain, biopsy (FS)
-Occipital lobe mass
-Clinical Diagnosis/History:
-The patient is a 72-year-old male with a recurrent brain tumor, previously diagnosed as glioblastoma.
-Gross Description:
-The specimen is received fresh in two parts, each labeled with the patient's name and medical record number.
-Part A, additionally labeled ""tumor frozen section,"" consists of a 0.9 x 0.6 x 0.3 cm piece of friable, gray-brown tissue. The entire specimen is frozen for frozen section diagnosis 1, and subsequently submitted in cassette A1.
-Part B, labeled ""occipital lobe - permanent,"" consists of a 1.8 x 1.1 x 0.5 cm piece of irregular, firm, pink-gray tissue. The specimen is entirely submitted in cassette B1.
-Diagnosis Comments:
-The tumor tissue within these specimens displays marked cellular atypia, necrosis, and microvascular proliferation. The features are consistent with recurrent glioblastoma, WHO grade IV.
-Interoperative Diagnosis:
-FS1  (A) Brain, biopsy:  Recurrent glioblastoma multiforme. Tissue section and cytologic preparation.  (Dr. Sarah Lee, 32598.)
-Final Diagnosis:
-A.  Brain, biopsy:  Recurrent glioblastoma multiforme; see comment.
-B.  Occipital lobe, resection:  Glioblastoma, WHO grade IV; see comment.
-++++++++++Addendum++++++++++
-RESULTED BY 32598 Lee, Sarah
-Addendum Comment:
-The MIB-1 labeling index is 12.54%.",Inpatient,Male,72,839245
+A. Brain, left temporal lobe, biopsy: Extensive necrosis with adjacent
+granulation tissue, no glioblastoma identified.
+B. Brain, left temporal lobe, biopsy: Gray and white matter with mild
+astrogliosis; no glioblastoma identified.
+C. Brain, left temporal lobe, biopsy: Multifocal neoplastic astrocytes,
+consistent with residual/recurrent glioblastoma
+multiforme; see comment.",Inpatient,SYN1006

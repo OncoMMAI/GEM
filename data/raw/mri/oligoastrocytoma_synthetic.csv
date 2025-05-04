@@ -1,78 +1,60 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-MR BRAIN U+E+1,"MRI BRAIN: 10/15/23.
+Exam Description,Report Text,Patient Status,Patient MRN
+MSTEALTH,"MR BRAIN: 03/22/2023
 
-COMPARISON: 08/10/23.
-
-CLINICAL HISTORY: Status post resection of grade III oligoastrocytoma.
-
-TECHNIQUE:
-
-Sagittal T1, axial T2 EPI, axial FLAIR, axial T1 pre and post contrast, coronal T1 post contrast.
-
-FINDINGS:
-
-A prior left parietal craniotomy is noted with an underlying resection cavity, stable in morphology and size compared to the previous examination. Minimal linear enhancement surrounding the resection cavity persists, with no evidence of nodular enhancement. There is stable T2 prolongation noted within the left frontal white matter and extending into the anterior corona radiata.
-
-The ventricles exhibit a stable size and configuration. No abnormal extra-axial fluid collections are identified. Mild diffuse dural enhancement noted, likely post-surgical, remains unchanged. Major intracranial vessels display normal flow voids. Limited views of the orbits and sinuses are unremarkable.
-
-IMPRESSION:
-
-1. Stable MRI findings post resection of left parietal oligoastrocytoma with no new contrast-enhancing lesions identified.
-
-2. Persistent T2 prolongation within the left frontal white matter, likely representing post-surgical changes versus residual non-enhancing tumor.
-
-END OF IMPRESSION",Outpatient,Male,52,487321
-MR BRAIN WITH AND WITHOUT CONTRAST,"MRI OF THE BRAIN: 09/25/23
-
-CLINICAL DATA: Left temporal oligoastrocytoma.
-
-COMPARISON: 07/15/23
+HISTORY: Patient with recurrent Grade II oligoastrocytoma, initially
+resected in 2005.
 
 TECHNIQUE:
 
-Sagittal T1, FLAIR axial, EPI axial, T1 axial pre- and post- gadolinium, T1 coronal post- gadolinium.
-
-FINDINGS:
-
-Comparison to the prior examination dated 07/15/23 indicates no significant interval change.
-
-A prior craniotomy in the left temporal region with an underlying resection cavity is identified, unchanged in size and appearance since the last MRI. T2 prolongation is noted at the posterior margin of the resection cavity, consistent with previous imaging. No abnormal signals are detected. No enhancement is noted post-gadolinium administration.
-
-T2 prolongation is observed within the bilateral thalami, consistent with effects of prior radiation therapy.
-
-Ventricular system and sulci remain stable in size. Intracranial arteries and dural venous sinuses display normal flow voids.
+Sagittal T1 FFE, sagittal FLAIR, axial diffusion, axial 3-D T2,
+axial perfusion, and 3-D T1 post-gadolinium.
 
 IMPRESSION:
 
-1. No significant interval change when compared to previous MRI dated 07/15/23.
+1. Evidence of a prior left parietal craniotomy with the
+resection cavity affecting portions of the superior parietal
+lobule. There is notable T2 prolongation in the surrounding
+resection cavity with focal expansion of gyri, particularly
+within the left superior parietal lobule. Additionally, T2
+prolongation extends towards the posterior horn of the left
+lateral ventricle with mild subependymal involvement. No distal
+signal abnormality is present. These changes have progressed
+since 2018.
 
-2. Status post left temporal craniotomy and surgical resection of a left temporal oligoastrocytoma.
+2. No significant enhancement is observed. MR perfusion, despite
+suboptimal quality, indicates increased blood volume within the lesion.
 
-3. Stable T2 prolongation at the posterior margin of the resection cavity without abnormal enhancement post-gadolinium.
+3. Collectively, these findings, along with increased mass effect,
+increased blood volume, and prolonged T2 signal, raise concern
+for recurrence of the previously resected oligoastrocytoma. There
+is no indication of distal dissemination.
 
-4. Post-radiation changes noted in the bilateral thalami.
-
-END OF IMPRESSION",Outpatient,Female,47,293841
-MR BRAIN U+E+1,"MRI BRAIN: 11/05/23.
-
-COMPARISON: 09/01/23.
-
-CLINICAL HISTORY: Post-surgical follow-up of grade II oligoastrocytoma.
-
-TECHNIQUE:
-
-Sagittal T1, axial T2 EPI, axial FLAIR, axial T1 pre and post contrast, coronal T1 post contrast.
-
+END OF IMPRESSION:",Outpatient,SYN1012
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  6/15/2024 3:45 PM
+INDICATION (as provided by referring clinician): anaplastic oligoastrocytoma
+Tumor Type: Anaplastic oligoastrocytoma, IDH1 R132H mutant, ATRX retained
+Location: Left Temporal
+Age at Diagnosis: 42 year old left-handed female
+Treatment History:
+1. Presented with headaches
+2. 09/10/2015: Subtotal resection. Pathology: anaplastic oligoastrocytoma, 1p deleted and 19q intact
+3. 09/10/2015: Completion of radiation plus temozolomide
+4. Temozolomide x 12
+5. 11/20/2017: Subtotal resection. Pathology: oligoastrocytoma WHO grade-3, 1p19q co-deleted
+6. 12/15/2018: Completion of 12 cycles of temozolomide
+7. 05/10/2024 - present: Ivosidenib 500mg daily
+COMPARISON: MR of the Brain 4/20/2024
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
+MEDICATIONS:
+Dotarem - 15 mL - Intravenous
 FINDINGS:
+Compared to 4/20/2024, stable appearance of infiltrative nonenhancing T2 FLAIR signal abnormality involving the right cerebellum, vermis, right and mid pons, right flocculus, and right superior and middle cerebellar peduncles which is nevertheless increased compared to more remote priors.
+Unchanged postsurgical left temporal craniotomy and underlying resection cavity with moderate resection cavity and minimal associated peripheral blood products. No new or suspicious enhancement, T2/FLAIR signal, increased MRI perfusion, or reduced diffusion.
+Similar patchy supratentorial white matter T2/FLAIR hyperintensities likely reflecting a combination of posttreatment changes and sequela of chronic microvascular ischemic disease.
+Otherwise, no new intracranial hemorrhage, hydrocephalus, or mass effect. No acute infarct. No extra-axial collection. Unchanged ventricular configuration.
 
-A prior right occipital craniotomy is identified with a stable resection cavity. The cavity shows minimal linear enhancement without nodularity, unchanged from prior imaging. T2 prolongation is noted in the right occipital lobe extending to the splenium of the corpus callosum, stable in appearance.
-
-The ventricular system and sulci appear normal. No abnormal extra-axial fluid collections are seen. Diffuse dural enhancement over the right hemisphere, likely post-operative, is stable. Major intracranial vessels maintain normal flow voids. Limited orbital and sinus views are unremarkable.
-
-IMPRESSION:
-
-1. Stable post-operative MRI findings following resection of right occipital oligoastrocytoma with no new areas of enhancement.
-
-2. Persistent T2 prolongation in the right occipital lobe, likely representing radiation changes versus residual non-enhancing tumor.
-
-END OF IMPRESSION",Outpatient,Male,55,375612
+IMPRESSION: 
+1. Compared to 4/20/2024, no definite evidence of disease progression. Similar appearance of diffuse nonenhancing infiltrative disease within the right posterior fossa involving the right cerebellum, right greater than left pons, and right superior and middle cerebellar peduncles.
+2. No evidence of recurrent disease within the left temporal lobe.
+Report dictated by: Alexis J. Turner, MD PhD, signed by: Alexis J. Turner, MD PhD
+Department of Radiology and Biomedical Imaging",Outpatient,SYN1013

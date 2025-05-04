@@ -1,67 +1,55 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-MR BRAIN U+E,"MRI OF THE BRAIN: 09/12/23
+Exam Description,Report Text,Patient Status,Patient MRN
+MR BRAIN WITH AND WITHOUT CONTRAST,"EXAMINATION: MRI BRAIN 09/22/2023
 
-CLINICAL INDICATION: 62-year-old male with progressive cognitive decline and suspected gliomatosis cerebri.
+CLINICAL HISTORY: 68-year-old male with known gliomatosis cerebri.
 
-TECHNIQUE:
-
-Axial T1, axial T2 FLAIR, coronal T2, axial diffusion-weighted imaging, and post-gadolinium coronal and axial T1 sequences.
-
-COMPARISON: MRI from 07/15/23.
-
-FINDINGS:
-
-The examination reveals diffuse T2 and FLAIR hyperintensity involving the deep and subcortical white matter of both cerebral hemispheres, with a predilection for the left parietal lobe and bilateral insular regions. No significant enhancement is observed post-gadolinium administration. The ventricles are mildly effaced, consistent with mild mass effect. No restricted diffusion is noted to suggest acute ischemic changes.
-
-The basal ganglia and thalami appear normal. The corpus callosum shows involvement, particularly in the splenium. The brainstem and cerebellum are unremarkable. The major dural sinuses and basilar cisterns are patent.
-
-IMPRESSION:
-
-Findings consistent with gliomatosis cerebri, with extensive involvement of the supratentorial white matter, and mild mass effect. No new enhancing lesions compared to prior study.
-
-
-END OF IMPRESSION:",Outpatient,Male,62,123456
-MR BRAIN STEREOTACTIC,"STEREOTACTIC MRI BRAIN: 04/05/23
-
-CLINICAL DATA: 55-year-old female with neurological deficits, preparing for biopsy.
-
-COMPARISON: None.
+COMPARISON: MR STEALTH, 06/15/2023.
 
 TECHNIQUE:
 
-Axial T2-weighted, sagittal T1, coronal FLAIR, and post-gadolinium axial T1.
+MR brain utilizing the following sequences: Three-plane localizer, sagittal T1, axial FLAIR, coronal FLAIR, axial diffusion, axial T1, axial T1 post-gadolinium, and coronal T1 post-gadolinium.
 
 FINDINGS:
 
-The MRI reveals extensive bilateral white matter signal abnormalities, most notably within the frontal lobes and extending into the periventricular regions. The signal changes are infiltrative and cause mild effacement of adjacent sulci. There is no definitive enhancement post-gadolinium, which is typical for gliomatosis cerebri. The ventricles and basal cisterns are unremarkable.
+The previous examination was obtained with a STEALTH technique, limiting direct comparison.
 
-There is no evidence of midline shift or herniation. The cerebellum and brainstem show no abnormal signal. The calvarium and skull base structures are intact without destructive lesions.
+No significant interval change is noted since the prior study.
+
+Multifocal areas of T2 prolongation are seen within the bilateral frontal lobes, left basal ganglia, left caudate nucleus, left greater than right cingulate gyri, left corona radiata, left insular cortex, and high left parietal lobe. No evidence of enhancement on post-gadolinium sequences.
+
+Stable mass effect on the left lateral ventricle is observed. No restricted diffusion. No abnormal extra-axial fluid collections are identified. The paranasal sinuses and mastoid air cells remain clear.
+
+No abnormal enhancement is seen in the left internal auditory canal.
 
 IMPRESSION:
 
-Diffuse white matter signal alterations consistent with gliomatosis cerebri, with mild mass effect and no enhancement. Suitable for stereotactic planning for biopsy.
+1. Multifocal areas of T2 prolongation within the bilateral frontal lobes, left basal ganglia, left caudate nucleus, left greater than right cingulate gyri, left insular cortex, and left parietal lobe without significant enhancement, consistent with gliomatosis cerebri. Due to limitations in comparison technique, there is no significant interval change.
 
-
-END OF IMPRESSION:",Inpatient,Female,55,789012
-MR BRAIN U+E+2,"MRI OF THE BRAIN: 07/20/23
-
-CLINICAL INDICATION: 48-year-old male presenting with seizures and progressive gliomatosis.
-
-TECHNIQUE:
-
-Sagittal T1, axial T2, coronal FLAIR, axial diffusion, and post-gadolinium axial and coronal T1-weighted images.
-
-COMPARISON: Prior MRI from 05/10/23.
-
+END OF IMPRESSION:",Outpatient,SYN1008
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST 02/14/2025 10:45 AM 
+COMPARISON: MR brain with contrast 6/15/2024, CT brain 9/20/2024
+CLINICAL HISTORY: History of gliomatosis cerebri. For assessment of tumor progression. Previous biopsy confirmed grade 3 gliomatosis involving multiple lobes.
+Images of the brain were obtained prior to and following contrast administration.
+TECHNIQUE: MRI of the brain was performed utilizing standard protocol.
+MEDICATIONS:
+Gadovist - 10 mL - Intravenous
 FINDINGS:
+Cerebrum: Diffuse, infiltrative hyperintensity involving the right frontal and temporal lobes, extending into the insular cortex and subcortical white matter, consistent with known gliomatosis cerebri. No significant change in size compared to prior imaging.
+Cerebellum: Unremarkable
+Brainstem: Unremarkable
+Ventricles: Slight enlargement of the lateral ventricles, likely secondary to volume loss.
+Meninges: No abnormal enhancement
+Sinuses: Unremarkable
+Orbits: Unremarkable
+Vascular Structures: No evidence of acute infarction or hemorrhage.
+Lymphadenopathy: Absent
+Bones: Calvarium and skull base are unremarkable.
+Extracerebral soft tissues: Unremarkable
+Lines/drains/medical devices: None
 
-The MRI demonstrates widespread abnormal T2 hyperintensity within the subcortical white matter, predominantly involving the temporal lobes and perisylvian regions bilaterally. There is mild expansion of affected areas with no significant enhancement noted post-gadolinium contrast. The signal abnormality extends into the anterior corpus callosum, with subtle mass effect observed.
-
-The ventricular system is symmetrical, and the sulci are mildly effaced. No acute hemorrhage or infarction is identified. The extracranial structures, including the orbits and paranasal sinuses, appear normal.
-
-IMPRESSION:
-
-Extensive T2 hyperintensity involving the white matter, consistent with gliomatosis cerebri. No new enhancing lesions are seen. Continued monitoring is recommended.
-
-
-END OF IMPRESSION:",Outpatient,Male,48,345678
+IMPRESSION: 
+1. Stable appearance of gliomatosis cerebri involving the right frontal and temporal lobes with extension into the insular cortex, without significant interval change since 6/15/2024.
+2. Mild ventriculomegaly, likely due to chronic volume loss.
+3. No acute intracranial abnormalities noted on this examination.
+Report dictated by: Alex Thompson, MD, signed by: Maria L. Chen, MD
+Department of Radiology and Biomedical Imaging",Outpatient,SYN1009

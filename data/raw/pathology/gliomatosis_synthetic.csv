@@ -1,236 +1,147 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-SURGICAL PATHOLOGY,"Anatomic Site: Right Temporal Lobe #1, Superficial (FS)
-Right Temporal Lobe Deep (FS)
-Right temporal anterior biopsy
-Right temporal inferior biopsy
+Exam Description,Report Text,Patient Status,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site:Left frontal lobe, (FS)
 Clinical Diagnosis/History:
-The patient is a 45-year-old man with a history of gliomatosis cerebri, currently under observation after prior treatments,
-now undergoing a right temporal lobe biopsy.
+The patient is a 68-year-old man who presented with progressive cognitive decline;
+he was given the working diagnosis of
+gliomatosis cerebri.  He now undergoes diagnostic biopsy.
 Gross Description:
-The specimen is received fresh in four parts, each labeled with the patient's
-name and medical record number.
-Part A is additionally labeled 'right temporal lobe #1, superficial,' and
-consists of one irregular, unoriented, tan-grey, soft
-tissue specimen (0.5 x 0.3 x 0.1 cm). A portion of the specimen is submitted
-for cytologic prep #1, with the remaining unused
-tissue submitted in cassette A1. (ah)
-Part B is additionally labeled 'deep temporal lobe,' and consists of one
-irregular, unoriented, tan-grey soft tissue specimen
-(0.7 x 0.3 x 0.2 cm). A portion of the specimen is submitted for cytologic
-prep #2, with the remainder of the tissue submitted
-in cassette B1. (ah)
-Part C, additionally labeled 'right temporal anterior biopsy,' consists of one,
-soft, greyish tissue fragment (1.0 x 0.3 x 0.1 cm). The entire specimen is submitted in cassette C1. (jk)
-Part D, additionally labeled 'right temporal inferior biopsy,' consists of one,
-soft, grey tissue fragment (0.9 x 0.2 x 0.1 cm). The entire specimen is submitted in cassette D1. (jk)
+The specimen is received fresh in one part, labeled with the patient's name,
+medical record number, and ""tumor.""  It consists of
+three unoriented cores of grayish-white tissue, one measuring 1.0 cm and 0.2
+cm in diameter and the others measuring 0.7 cm in
+length and 0.2 cm in diameter.  A section is removed from the largest core of
+tissue and submitted for cytologic preparation;
+the remaining cores are submitted for frozen section diagnosis as FS1, with the
+frozen section remnants wrapped in tissue paper and
+submitted in cassette B1.  The unfrozen cores of tissue are wrapped in tissue
+paper and submitted in cassette B2.
 Diagnosis Comments:
-This infiltrating astrocytoma is clinically consistent with gliomatosis cerebri,
-and the tumor is present in all samples examined.
-Immunohistochemistry for IDH1 R132H will be performed and evaluated on block
-B1 and the results will be reported in an addendum.
-Interoperative Diagnosis:
-FS1 (A) Right temporal lobe #1, superficial, biopsy: Rare atypical cells
-suggestive of infiltrating glioma, on cytologic prep.
-(Dr. Alex Kim, 56789.)
-FS2 (B) Right temporal lobe, deep, biopsy: Infiltrating glioma, on cytologic
-prep. (Dr. Alex Kim, 56789.)
-The pathology intraoperative diagnosis was discussed with Dr. Lee by Dr.
-Kim.
-Final Diagnosis:
-A. Brain, right temporal lobe, superficial, biopsy: Anaplastic astrocytoma,
-WHO Grade III.
-B. Brain, right temporal lobe, deep, biopsy: Anaplastic astrocytoma, WHO
-Grade III.
-C. Brain, right temporal anterior, biopsy: Anaplastic astrocytoma, WHO Grade
-III.
-D. Brain, right temporal inferior, biopsy: Anaplastic astrocytoma, WHO Grade
-III.
-++++++++++Addendum++++++++++
-RESULTED BY 56789 Kim, Alex
-Addendum Comment:
-Immunohistochemical studies performed and evaluated at Brain Tumor Research
-Center show that the neoplastic cells are positive
-with the antibodies against IDH1 (R132H mutant) protein.
-The immunohistochemical stain reported above was developed and its performance
-characteristics determined by the Neurosurgery
-Tissue Core. The stain has not been cleared or approved by the U.S. Food and
-Drug Administration. The FDA has
-determined that such clearance or approval is not necessary. These tests are
-used for clinical purposes. They should not be
-regarded as investigational or for research. This laboratory is certified
+Both sections B1 and B2 show a diffusely infiltrating population of relatively
+uniform oligodendrocytes involving white matter
+consistent with frontal lobe, with neoplastic satellitosis and infiltration along
+vessels (best demonstrated on Slide B2).  No
+mitoses are identified, and significant nuclear pleomorphism is not present.
+Foci of microvascular proliferation and necrosis
+are absent.  Immunohistochemical stains are performed and examined at Stanford
+Medical Center to establish the diagnosis on Slide B2, including
+GFAP, CD45, and Ki-67.  These show only a rare benign GFAP positive
+astrocyte, and only a few CD45 positive lymphocytes.  A Ki-67
+labeling index will be performed and reported in an addendum.
+The immunoperoxidase stain(s) reported above were developed and their
+performance characteristics determined by the Stanford Medical
+Center Department of Pathology.  They have not been cleared or approved by the
+U. S. Food and Drug Administration.  The FDA has
+determined that such clearance or approval is not necessary.  These tests are
+used for clinical purposes.  They should not be
+regarded as investigational or for research.  This laboratory is certified
 under the Clinical Laboratory Improvement Amendments
-of 1988 ('CLIA') as qualified to perform high-complexity clinical testing.",Inpatient,Male,45,624385
-SURGICAL PATHOLOGY,"UNIVERSITY OF CALIFORNIA SAN FRANCISCO
+of 1988 (""CLIA"") as qualified to perform high-complexity clinical testing.
+Interoperative Diagnosis:
+FS1  (B) Brain, left frontal lobe, core biopsy:  Cytologic preparation
+favors a diagnosis of infiltrating oligodendroglioma, grade
+II; single core frozen shows oligodendrogliosis.  Tissue section and cytologic
+preparation.  (Dr. Susan Clark, 30214.)
+Final Diagnosis:
+Left frontal lobe, stereotactic biopsy:  Oligodendroglioma, WHO grade II.
+++++++++++Addendum++++++++++
+RESULTED BY
+Addendum Comment:
+The Ki-67 immunohistochemical labelling is 2.35%
+The immunoperoxidase stain(s) reported above were developed and their
+performance characteristics determined by the Stanford Medical
+Center Department of Pathology.  They have not been cleared or approved by the
+U. S. Food and Drug Administration.  The FDA has
+determined that such clearance or approval is not necessary.  These tests are
+used for clinical purposes.  They should not be
+regarded as investigational or for research.  This laboratory is certified
+under the Clinical Laboratory Improvement Amendments
+of 1988 (""CLIA"") as qualified to perform high-complexity clinical testing.",Inpatient,SYN1008
+SURGICAL PATHOLOGY,"JOHNS HOPKINS UNIVERSITY
 DEPARTMENT OF PATHOLOGY
-1825 4th Street, M2369
-SAN FRANCISCO, CA 94158
-TEL: (415) 353-1613  FAX: (415) 353-1612
-SURGICAL PATHOLOGY REPORT
-Patient Name: LARSON, JAMES
-Med. Rec.#: 582473
-DOB: 10/12/2010 (Age: 13)
-Sex: Male
-Accession #: S23-1123
-Visit #: 102345678
-Service Date: 10/11/2023
-Received: 10/11/2023
-Location: P2G
-Client:Parnassus 
-Physician(s): Sarah B. Thomas ((415) 476-2538)
+600 NORTH WOLFE STREET
+BALTIMORE, MD 21287
+PATHOLOGY REPORT
+Patient Name: SMITH, ALEXANDRA
+Med. Rec.#: 87654321
+DOB: 5/15/2005 (Age: 18)
+Legal Sex: Female
+Accession #: JH-2024-1234
+Visit #: 987654321
+Service Date: 2/28/2024
+Received: 2/28/2024
+Location: JHU-Pathology
+Client: Johns Hopkins Hospital
+Provider(s): Dr. Emily Johnson ((410) 955-5000)
 FINAL PATHOLOGIC DIAGNOSIS
-A. ""Abdominal tumor margin"", excision: Fibroadipose tissue with focal
-neuroglial tissue, consistent with gliomatosis peritonei.
-
-B. Right ovary, oophorectomy:
-1. Serosal involvement by neuroglial tissue, consistent with gliomatosis
-peritonei; see comment.
-2. Serosal adhesions.
-
-C. Abdominal tumor, excision: Gliomatosis peritonei with increased
-cellularity; see comment.
+A. Left frontal lobe, biopsy:  
+-Gliomatosis cerebri, WHO Grade II. 
+ 
+B. Right temporal lobe, biopsy:  Gliomatosis cerebri.
+ 
+C. Right parietal lobe, biopsy:  Gliomatosis cerebri.
+ 
+D. Cerebellum, biopsy:  No significant pathologic abnormality.
+ 
 COMMENT:
-H&E sections of the abdominal tumor (Parts A and C) show a variably
-cellular proliferation of spindle cells with eosinophilic
-cytoplasm and open chromatin in a collagenous to myxoid
-stroma. Prominent lymphoid aggregates surround the mass. The
-differential diagnosis includes fibromatosis, leiomyoma, and glial
-tissue (gliomatosis peritonei). Immunohistochemical stains were
-performed and evaluated on block C4 with the following results in the
-spindle cells:
-- GFAP: Positive.
-- SOX2: Positive.
-This immunostaining pattern confirms that these cells are glial in
-origin.
-The findings are consistent with gliomatosis but the proliferation is
-more cellular than typical cases of gliomatosis. Additional
-immunohistochemical stains were performed on block C5 with
-the following results:
-- ATRX: Retained staining.
-- Olig2: Scattered positive.
-- MIB-1: Increased staining in a rim of tissue.
-- p53: No increase in staining.
-- SOX10: Rare positive cells.
-The staining results are not specific but are diagnostic of a glioma or
-another specific entity.
-There are no rosettes or evidence of immature teratoma and the features
-are not diagnostic of a glioma. Ultimately, the findings are consistent
-with gliomatosis with increased cellularity and proliferative activity.
-The significance of these findings is uncertain and close clinical
-follow-up should be considered.
-Select slides from the patient's prior specimen (S22-3456-C1) are
-concurrently reviewed in comparison and show similar features.
-Drs. J. Doe, H. Smith (UCSF Pediatric Pathology) and C. Jones (UCSF Neuropathology) have reviewed selected slides and agree with
-the diagnosis.
+Histological examination of the left frontal lobe reveals diffuse infiltration by atypical glial cells with an astrocytic phenotype. The infiltrative pattern is consistent with gliomatosis cerebri, WHO Grade II. Immunohistochemistry shows positive staining for GFAP and negative for IDH1 R132H. The Ki-67 proliferation index is low, approximately 3%. No necrosis or microvascular proliferation is observed. The molecular profile suggests a low-grade glioma without IDH mutation.
+The right temporal and parietal lobes show similar histological features, confirming the diagnosis of gliomatosis cerebri. The cerebellum biopsy shows no evidence of tumor involvement.
+The diagnosis of gliomatosis cerebri is based on the extensive involvement of multiple lobes with glial tumor cells. The tumor is not amenable to surgical resection, and management will focus on adjunctive therapies.
+Neuropathology Synoptic Report
+Procedures:     
+-Brain biopsy: Performed.
+-Cerebellar biopsy: Performed.
+-Resection: Not performed.
+Specimen integrity: Intact.
+Primary site of tumor for staging purposes: Brain.
+Histologic type: Gliomatosis cerebri.
+Histologic grade: WHO Grade II.
+Sites of tumor involvement: Frontal, temporal, and parietal lobes.
+Cerebellum involvement: None.
+Neoadjuvant chemotherapy treatment response: Not applicable.
+Distant metastasis: None.
+AJCC (8th edition) pathologic stage:
+-pT: 1.
+-pN: 0.
+-pM: X.
+FIGO stage: Not applicable.
+Note: This synoptic report contains all core data elements designated as ""required"" by the College of American Pathologists Protocol for reporting central nervous system tumors, fulfilling reporting requirements of the 8th edition AJCC Staging Manual.
+Dr. R. Thompson reviewed select slides from parts A, B, and C and concurs with the diagnosis.
 Specimen(s) Received
-A:Abdominal tumor margin in pouch of Douglas - Rectal/sigmoid surface -
-FROZEN
-B:right ovary - permanent
-C:abdominal tumor - permanent
+A: Left frontal lobe
+B: Right temporal lobe
+C: Right parietal lobe
+D: Cerebellum
 Intraoperative Diagnosis
-A. Abdominal tumor margin in pouch of Douglas - Rectal/sigmoid surface
-(FS1): Cauterized and crushed tissue. Discussed with surgeon. Dr. K.
-Simpson agrees (#98765). (Dr. Tyler Green, #56789)
+A. Left frontal lobe: Diffuse glioma, consistent with gliomatosis cerebri.
+- Procedure (FS/TP/IOC): FS.
+- Pathologist(s): Dr. Michael Lee (145678), Dr. Sarah Kim (145679).
+- Reported at (date, time): 2/28/2024 at 15:30.
+- Performed at: 600 North Wolfe St., Baltimore, MD 21287.
 Clinical History
-The patient is a 13-year-old boy with history of immature abdominal
-teratoma status post resection (S22-3456) who presents with difficulty
-in defecation. Imaging showed a hyperintense mass (6.5 x 5.5 x 4.5 cm)
-centered in the rectouterine pouch. He undergoes exploratory
-laparotomy. Intraoperatively there was a bulky tumor in the abdomen in
-the pouch of Douglas and a plaque-like tumor near the left broad
-ligament, both of which were resected. The right ovary was scarred to the peritoneum and was also resected.
+The patient is 18 years old with a history of progressive neurological symptoms and MRI findings suggestive of diffuse glioma.
 Gross Description
-The case is received in three parts, each labeled with the patient's
-name and medical record number.
-Part A is received fresh, additionally labeled ""abdominal tumor margin
-frozen,"" (""abdominal tumor margin in pouch of Douglas-rectal/sigmoid
-surface,"" per requisition) and consists of an aggregate of red soft
-tissue (1 x 0.5 x 0.1 cm). The specimen is submitted entirely for frozen
-section diagnosis A FS1; the frozen section remnant is submitted in
-cassette A1. (kag)
-Part B is received fresh, additionally labeled ""R ovary,"" and
-consists of a fragmented ovary (3.5 cm in aggregate length x up to 1 cm in diameter x 0.3 cm in wall thickness). The serosa is pink and
-smooth with no discrete cysts or nodules. The fimbriated segment is
-hemorrhagic; otherwise, the ovary is unremarkable. The bisected fimbria
-are submitted in cassette B1 and the remainder of the tube is cross
-sectioned and submitted in cassettes B2 and B3. (nxc)
-Part C is received fresh, additionally labeled ""abdominal tumor,"" and
-consists of a rubbery pink-tan nodular mass (7 x 5 x 4 cm)
-and a free-floating piece of irregular firm pink-tan tissue (3 x 2 x
-1 cm). There are multiple white sutures stitched into the mass and
-there is a midline liner incision at the bend. The external surfaces are
-inked black. The cut surfaces of the mass and free-floating piece of
-tissue are homogenous, tan-white to yellow and thinly encapsulated.
-There are multifocal areas of punctate hemorrhage but no necrosis.
-Representative sections of the mass are submitted in cassettes C1-C8 and
-representative sections of the free-floating piece of tissue are
-submitted in cassettes C9 and C10. (nxc)
-Diagnosis based on gross and microscopic examinations. Final diagnosis
-made by attending pathologist following review of all pathology slides.
-The attending pathologist has reviewed all dictations, including
-prosector work, and preliminary interpretations performed by any
-resident involved in the case and performed all necessary edits before
-signing the final report.
-Andrew B. Lee/Pathology Resident
-Jessica M. Goldstein/Pathologist
-     Electronically signed out on 10/25/2023 16:32",Outpatient,Male,13,582473
-SURGICAL PATHOLOGY,"Anatomic Site: Left Occipital Lobe #1, Superficial (FS)
-Left Occipital Lobe Deep (FS)
-Left occipital medial biopsy
-Left occipital posterior biopsy
-Clinical Diagnosis/History:
-The patient is a 60-year-old woman with a known case of gliomatosis cerebri, experiencing new neurological symptoms,
-who now undergoes a left occipital lobe biopsy.
-Gross Description:
-The specimen is received fresh in four parts, each labeled with the patient's
-name and medical record number.
-Part A is additionally labeled 'left occipital lobe #1, superficial,' and
-consists of one irregular, unoriented, greyish, soft
-tissue specimen (0.6 x 0.3 x 0.1 cm). A portion of the specimen is submitted
-for cytologic prep #1, with the remaining unused
-tissue submitted in cassette A1. (lb)
-Part B is additionally labeled 'deep occipital lobe,' and consists of one
-irregular, unoriented, greyish soft tissue specimen
-(0.7 x 0.3 x 0.2 cm). A portion of the specimen is submitted for cytologic
-prep #2, with the remainder of the tissue submitted
-in cassette B1. (lb)
-Part C, additionally labeled 'left occipital medial biopsy,' consists of one,
-soft, grey tissue fragment (1.2 x 0.3 x 0.1 cm). The entire specimen is submitted in cassette C1. (sm)
-Part D, additionally labeled 'left occipital posterior biopsy,' consists of one,
-soft, grey tissue fragment (0.9 x 0.3 x 0.1 cm). The entire specimen is submitted in cassette D1. (sm)
-Diagnosis Comments:
-This diffusely infiltrating glioma is consistent with gliomatosis cerebri,
-and the neoplasm is identified in all specimens examined.
-Immunohistochemistry for IDH1 R132H will be performed and evaluated on block
-B1 and the results will be reported in an addendum.
-Interoperative Diagnosis:
-FS1 (A) Left occipital lobe #1, superficial, biopsy: Rare atypical cells
-indicative of infiltrating glioma, on cytologic prep.
-(Dr. Emily Tan, 33456.)
-FS2 (B) Left occipital lobe, deep, biopsy: Infiltrating glioma, on cytologic
-prep. (Dr. Emily Tan, 33456.)
-The pathology intraoperative diagnosis was discussed with Dr. Patel by Dr.
-Tan.
-Final Diagnosis:
-A. Brain, left occipital lobe, superficial, biopsy: Diffuse astrocytoma,
-WHO Grade II.
-B. Brain, left occipital lobe, deep, biopsy: Diffuse astrocytoma, WHO
-Grade II.
-C. Brain, left occipital medial, biopsy: Diffuse astrocytoma, WHO Grade
-II.
-D. Brain, left occipital posterior, biopsy: Diffuse astrocytoma, WHO Grade
-II.
-++++++++++Addendum++++++++++
-RESULTED BY 33456 Tan, Emily
-Addendum Comment:
-Immunohistochemical studies performed and evaluated at UCSF Neuropathology
-Laboratory show that the neoplastic cells are positive
-with the antibodies against IDH1 (R132H mutant) protein.
-The immunohistochemical stain reported above was developed and its performance
-characteristics determined by the UCSF
-Neurosurgery Tissue Core. The stain has not been cleared or approved by the
-U.S. Food and Drug Administration. The FDA has
-determined that such clearance or approval is not necessary. These tests are
-used for clinical purposes. They should not be
-regarded as investigational or for research. This laboratory is certified
-under the Clinical Laboratory Improvement Amendments
-of 1988 ('CLIA') as qualified to perform high-complexity clinical testing.",Inpatient,Female,60,739201
+The case is received in four parts, each labeled with the patient's name and medical record number.
+
+Part A is received fresh and labeled ""left frontal lobe,"" consisting of multiple fragments of soft, tan-gray tissue (total 3.0 x 2.0 x 0.5 cm). The tissue is friable with no distinct nodularity.
+INTRAOPERATIVE CONSULTATION: Yes (performed by ml).
+INKING: Not applicable.
+TISSUE BANKING: Not performed.
+CASSETTES: Representative sections submitted as follows:
+A1-A3: Frontal lobe tissue.
+
+Part B is received fresh and labeled ""right temporal lobe,"" consisting of multiple fragments of soft, tan-gray tissue (total 2.5 x 1.5 x 0.4 cm). The tissue is friable with no distinct nodularity.
+B1-B2: Temporal lobe tissue.
+
+Part C is received fresh and labeled ""right parietal lobe,"" consisting of multiple fragments of soft, tan-gray tissue (total 2.0 x 1.0 x 0.3 cm). The tissue is friable with no distinct nodularity.
+C1-C2: Parietal lobe tissue.
+
+Part D is received fresh and labeled ""cerebellum,"" consisting of a single fragment of soft, tan-white tissue (1.5 x 1.0 x 0.2 cm). The tissue is firm with no distinct nodularity.
+D1: Cerebellum tissue.
+
+The diagnosis may have been rendered in whole, or in part, using whole slide digital images of the glass slides on a validated digital pathology platform.
+If immunofluorescence, immunohistochemistry, or in-situ hybridization was performed and evaluated, all controls performed with the stains reported above reacted appropriately. These stains were developed and their performance characteristics determined by the Johns Hopkins Medical Center Department of Pathology. They have not been cleared or approved by the U.S. Food and Drug Administration. The FDA has determined that such clearance or approval is not necessary. These tests are used for clinical purposes. They should not be regarded as investigational or for research. This laboratory is certified under the Clinical Laboratory Improvement Amendments of 1988 (""CLIA"") as qualified to perform high-complexity clinical testing.
+Diagnosis based on microscopic and/or gross examinations. Final Diagnosis made by attending pathologist following review of all pathology slides (histochemical quality is satisfactory). The attending pathologist has reviewed all dictations, including prosector work, and preliminary interpretations performed by any resident involved in the case and performed all necessary edits before signing the final report.
+Dr. Cynthia A. Gasper/Pathologist
+Electronically signed out on 3/5/2024 10:22
+Reviewed at Johns Hopkins Pathology 600 North Wolfe Street Baltimore MD 21287
+CLIA Director Dr. Grace E. Kim MD",Inpatient,SYN1009

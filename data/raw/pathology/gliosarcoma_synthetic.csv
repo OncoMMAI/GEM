@@ -1,109 +1,139 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-SURGICAL PATHOLOGY,"UNIVERSITY OF CALIFORNIA LOS ANGELES
-DEPARTMENT OF PATHOLOGY
-10833 LE CONTE AVE., M-234
-LOS ANGELES, CA 90095-1732
-TEL: (310) 825-6311 FAX: (310) 825-5653
-SURGICAL PATHOLOGY REPORT
-Patient Name: SMITH, ALEX
-Med. Rec.#: 738529
-DOB: 2/15/1965 (Age: 58)
-Sex: Male
-Accession #: S23-95763
-Visit #: 87421453
-Service Date: 3/12/2023
-Received: 3/12/2023
-Location: UCLA Medical Center
-Client: UCLA
-Physician(s): Dr. Michael Green ((310) 825-3344)
-Dr. Lisa Chen ((310) 825-6423)
-FINAL PATHOLOGIC DIAGNOSIS
-A. Brain, left frontal lobe tumor, biopsy: Gliosis with prominent vascular proliferation.
-B. Brain, left frontal lobe tumor, biopsy: Gliosarcoma with necrotic areas; see comment.
-C. Brain, CUSA contents, removal: Gliosarcoma with predominant glial component.
-COMMENT:
-Specimen B exhibits a mixture of glial and mesenchymal elements. Approximately 60% of the tissue shows viable neoplastic growth. The necrotic regions in specimen C account for 25% of the tumor mass, while the remaining is active gliosarcoma tissue.
-Intraoperative Diagnosis
-A. Brain, left frontal lobe tumor, biopsy (FS+TP): Predominantly treatment effect observed.
-B. Left frontal lobe tumor (FS+TP): Gliosarcoma with approximately 65% viable tissue.
-Gross Description
-Received fresh in three parts, labeled with the patient's name and medical record number.
-Part A is labeled ""#1 left frontal tumor frozen"" and consists of three fragments of unoriented soft tissue (fragment #1: 0.7 x 0.5 x 0.3 cm; fragment #2: 0.4 x 0.3 x 0.2 cm). Fragment #1 is gray-white with red streaks, while fragment #2 is dark brown.
-Part B is labeled ""#2 left frontal tumor, frozen #2"" and consists of an unoriented fragment of red-brown soft tissue (1.0 x 0.5 x 0.4 cm). A portion is used for frozen section diagnosis and cytologic prep, submitted in cassette B1.
-Part C is received fresh and labeled ""Cusa contents,"" consisting of multiple fragments of tan-pink and red tissue with blood clot admixture (5.0 x 4.0 x 1.5 cm in aggregate). Sections are submitted in cassettes C1-C8.
-Clinical History
-The patient is a 58-year-old man with a history of left frontal gliosarcoma, previously treated with surgical resection, radiation, and chemotherapeutic interventions. He presents with enhanced lesion in the left frontal region, necessitating craniotomy for further examination.
-Diagnosis confirmed through detailed histopathological analysis and review of all slides by attending pathologist.
-Marion R. Lee/Pathology Resident
-Jonathan P. Wong/Pathologist
-Signed: 3/13/2023 15:45",Active,Male,58,738529
-SURGICAL PATHOLOGY,"UNIVERSITY OF CALIFORNIA DAVIS
-DEPARTMENT OF PATHOLOGY
-2315 Stockton Blvd, Rm 3100
-Sacramento, CA 95817
-TEL: (916) 734-3334 FAX: (916) 734-2563
-SURGICAL PATHOLOGY REPORT
-Patient Name: JONES, EMILY
-Med. Rec.#: 549873
-DOB: 7/23/1978 (Age: 45)
-Sex: Female
-Accession #: S23-36592
-Visit #: 23478965
-Service Date: 6/18/2023
-Received: 6/18/2023
-Location: UC Davis Medical Center
-Client: UC Davis
-Physician(s): Dr. Roger Kim ((916) 734-1234)
-Dr. Anna Smith ((916) 734-5678)
-FINAL PATHOLOGIC DIAGNOSIS
-A. Brain, right occipital tumor, biopsy: Gliosarcoma with sarcomatous differentiation.
-B. Brain, right occipital tumor, biopsy: Mixed gliosarcoma with glial and mesenchymal components.
-COMMENT:
-Specimen B reveals approximately 70% sarcomatous and 30% glial elements, exhibiting high cellularity and pleomorphism. The presence of necrosis is noted in 20% of the tissue.
-Intraoperative Diagnosis
-A. Brain, right occipital tumor, biopsy (FS+TP): Gliosarcoma with evident mitotic activity.
-Gross Description
-Received fresh in two parts, labeled with patient's name and medical record number.
-Part A is labeled ""#1 right occipital tumor frozen"" and consists of unoriented fragments of soft tissue (0.8 x 0.6 x 0.3 cm in aggregate) showing mixed tan and red coloration.
-Part B is labeled ""#2 right occipital tumor, frozen #2"" consisting of a single fragment of firm, tan tissue (1.2 x 0.6 x 0.5 cm), fully submitted in cassette B1.
-Clinical History
-The patient is a 45-year-old female with a diagnosis of right occipital gliosarcoma, undergoing surgical intervention following radiological evidence of tumor progression.
-Thorough diagnostic workup performed to confirm findings.
-Sarah T. Nguyen/Pathology Resident
-David H. Lee/Pathologist
-Signed: 6/19/2023 09:32",Active,Female,45,549873
+Exam Description,Report Text,Patient Status,Patient MRN
 SURGICAL PATHOLOGY,"UNIVERSITY OF SOUTHERN CALIFORNIA
 DEPARTMENT OF PATHOLOGY
-1975 Zonal Ave, Rm 200
-Los Angeles, CA 90033
-TEL: (323) 442-1100 FAX: (323) 442-1200
+123 HEALTH SCIENCES CAMPUS
+LOS ANGELES, CA 90033-0002
+TEL: (323) 555-1234 FAX: (323) 555-5678
 SURGICAL PATHOLOGY REPORT
-Patient Name: DAVIS, MARCUS
-Med. Rec.#: 926573
-DOB: 1/10/1955 (Age: 68)
+Patient Name: DOE, JOHN Q.
+Med. Rec.#: 12345678
+DOB: 3/15/1990 (Age: 33)
 Sex: Male
-Accession #: S23-48217
-Visit #: 98456123
-Service Date: 10/1/2023
-Received: 10/1/2023
-Location: USC Medical Center
-Client: USC
-Physician(s): Dr. Samuel Lee ((323) 442-7800)
-Dr. Christine Park ((323) 442-8765)
+Accession #: S23-98765
+Visit #: 987654321
+Service Date: 10/5/2023
+Received: 10/5/2023
+Location: HSC
+Client: USC Medical Center
+Provider(s): Dr. Sarah L. Kim ((323) 555-7890)
+Dr. Michael T. Nguyen ((323) 555-4567)
 FINAL PATHOLOGIC DIAGNOSIS
-A. Brain, left parietal tumor, biopsy: Gliosarcoma with prominent glial components.
-B. Brain, left parietal tumor, biopsy: Gliosarcoma with necrosis and hemorrhage.
+A. Brain, right parietal tumor, biopsy: High-grade glioma with a differential of gliosarcoma and anaplastic astrocytoma; see comment.
+
+B. Brain, right parietal tumor, resection: High-grade glioma with a differential of gliosarcoma and anaplastic astrocytoma; see comment.
+
+C. Brain, right parietal tumor #2, resection: High-grade glioma with a differential of gliosarcoma and anaplastic astrocytoma; see comment.
+
+D. Brain, CUSA contents, resection: High-grade glioma with a differential of gliosarcoma and anaplastic astrocytoma; see comment.
+
 COMMENT:
-Specimen B reveals a complex mixture of gliosarcoma tissue with notable necrotic zones comprising 30% of the specimen. Hemorrhagic areas are observed across 15% of the biopsy.
+Sections reveal a densely cellular and infiltrative glial neoplasm composed of spindle-shaped and xanthomatous tumor cells in fascicular patterns. The tumor displays prominent nuclear atypia with bizarre multinucleated forms. Elevated mitotic activity is noted, up to 15 mitoses per ten high-power fields (2 mm2). Areas of necrosis and microvascular proliferation are present. Occasional eosinophilic granular bodies are observed.
+Immunohistochemical stains performed at USC Medical Center on block A3 show the following:
+- GFAP: Positive in scattered tumor cells.
+- OLIG2: Strong positivity.
+- IDH1 R132H mutant protein: Negative.
+- ATRX: Retained expression.
+- p53: Strong nuclear staining in approximately 60% of tumor cells.
+- Ki-67: Labeling index estimated at up to 30%.
+- CD34: Positive in numerous tumor cells.
+- p16: Retained expression.
+- BRAF V600E mutant protein: Shows equivocal staining.
+- Reticulin: Highlights focal pericellular deposition.
+- SMA: Highlights background blood vessels only.
+- MLH1: Retained expression.
+- PMS2: Retained expression.
+- MSH2: Retained expression.
+- MSH6: Retained expression.
+Immunohistochemical stains performed at USC Medical Center on block C2 show the following:
+- PAS: Highlights rare eosinophilic granular bodies.
+- Reticulin: Highlights increased pericellular deposition.
+- SMA: Highlights background blood vessels only.
+- Desmin: Highlights background blood vessels only.
+Immunohistochemical stains performed at USC Medical Center on block C3 show the following:
+- GFAP: Positive.
+- Reticulin: Does not highlight increased pericellular deposition.
+- BRAF V600E mutant protein: Shows equivocal staining.
+- CyclinD1: Positive.
+Overall, the findings are consistent with a high-grade glioma. The increased reticulin deposition suggests the possibility of an anaplastic astrocytoma (CNS WHO grade 3) and a gliosarcoma (CNS WHO grade 4).
+For further genetic characterization, this tumor will be evaluated by the USC Comprehensive Genomics Panel at the USC Clinical Cancer Genomics Laboratory and DNA-based methylation at the NIH. These results will be reported separately, as well as in an addendum if clinically indicated.
+This case was discussed at the weekly intradepartmental neuropathology consensus conference.
+MGMT methylation analysis will be performed at the USC Molecular Diagnostics Laboratory, and a separate report will follow.
+The diagnosis was rendered using whole slide digital images of the glass slides on Philips' FDA-approved (21 CFR 864.3700) PIPS-based platform validated at USC.
+All controls performed with the immunohistochemical stains reported above reacted appropriately. These immunohistochemical stains were developed and their performance characteristics determined by the USC Medical Center Department of Pathology. They have not been cleared or approved by the U. S. Food and Drug Administration. The FDA has determined that such clearance or approval is not necessary. These tests are used for clinical purposes. They should not be regarded as investigational or for research. This laboratory is certified under the Clinical Laboratory Improvement Amendments of 1988 (""CLIA"") as qualified to perform high-complexity clinical testing.
 Intraoperative Diagnosis
-A. Brain, left parietal tumor, biopsy (FS+TP): Active gliosarcoma with necrotic foci.
+A. Brain, right parietal tumor, biopsy: High-grade glioma, strongly favor anaplastic astrocytoma over glioblastoma.
+- Procedure (FS/TP/IOC): FS + TP.
+- Pathologist(s): Dr. Emily R. Johnson (65432).
+- Reported at (date, time): 10/5/2023 15:30.
+- Performed at: 123 Health Sciences Campus, Los Angeles, CA 90033.
+
 Gross Description
-Received fresh in two parts, labeled with the patient's name and medical record number.
-Part A is labeled ""#1 left parietal tumor frozen"" and consists of unoriented fragments of soft tissue (0.9 x 0.7 x 0.4 cm in aggregate), displaying gray and dark red hues.
-Part B is labeled ""#2 left parietal tumor, frozen #2"" consisting of a firm, tan-white fragment (1.3 x 0.7 x 0.5 cm), completely submitted in cassette B1.
+The case is received in 4 parts, each labeled with the patient's name and medical record number.
+Part A is received fresh and additionally labeled ""right parietal tumor (frozen),"" and consists of multiple unoriented fragments of soft pink tissue (1.8 x 1.3 x 0.6 cm in aggregate). A portion of the specimen is frozen for frozen section diagnosis and cytologic preparation, with the frozen section remnant submitted in cassette A1. The remaining tissue is submitted in cassette A3. (ej)
+A small portion of the tissue is sampled for research purposes by Dr. Nathaniel Green.
+Part B is received fresh and additionally labeled ""right parietal tumor,"" and consists of multiple unoriented fragments of soft off-white to tan tissue (3.8 x 2.5 x 1.5 cm in aggregate). The specimen is serially sectioned and entirely submitted in cassettes B1-B6. (ej)
+Part C is received fresh and additionally labeled ""right parietal tumor #2,"" and consists of multiple unoriented fragments of soft tan-red tissue (4.0 x 2.9 x 1.4 cm in aggregate). The specimen is serially sectioned and entirely submitted in cassettes C1-C6. (ej)
+Part D is received fresh and additionally labeled ""cusa trap,"" and consists of multiple unoriented fragments of soft, white-brown and red tissue (11 x 8.0 x 1.8 cm in aggregate). Representative sections are submitted in cassettes D1-D9. (ej)
 Clinical History
-The patient is a 68-year-old male with a recurrent left parietal gliosarcoma, presenting with progressive neurological symptoms prompting re-evaluation.
-Comprehensive histopathological examination undertaken to confirm diagnosis.
-Helen K. Wong/Pathology Resident
-Robert F. Young/Pathologist
-Signed: 10/2/2023 16:10",Active,Male,68,926573
+The patient is a 33-year-old man who presented with a 4.5 x 3.0 x 4.8 cm multilobed enhancing mass with slight T2 heterogeneity centered in the right parietal lobe extending inferiorly to the right body of the corpus callosum. He underwent resection of the mass.
+Diagnosis based on microscopic and/or gross examinations. Final Diagnosis made by attending pathologist following review of all pathology slides (histochemical quality is satisfactory). The attending pathologist has reviewed all dictations, including prosector work, and preliminary interpretations performed by any resident involved in the case and performed all necessary edits before signing the final report.
+Jessica Tran/Pathology Resident
+Emily R. Johnson/Pathologist
+Signed: 10/12/2023 09:45",Inpatient,SYN1010
+SURGICAL PATHOLOGY,"UNIVERSITY OF CALIFORNIA SAN FRANCISCO
+DEPARTMENT OF PATHOLOGY
+505 PARNASSUS AVE., M-551
+SAN FRANCISCO, CA 94143-0102
+TEL: (415) 353-1613
+FAX: (415) 353-1612
+SURGICAL PATHOLOGY REPORT
+Patient Name: SMITH, JOHN
+Med. Rec.#: 62847301
+DOB: 07/15/1958 (Age: 65)
+Sex: Male
+Soc. Sec. #: 000-00-6587
+Accession #: S23-8923
+Visit #: 20458392
+Service Date: 9/14/2023
+Received: 9/14/2023
+Location: M05
+Client: California Pacific 
+Physician(s):  Emily K. Tran (415-600-2200)
+FINAL PATHOLOGIC DIAGNOSIS
+Review of outside slides from California Pacific Medical Center, San
+Francisco, CA:
+Brain, left frontal, resection (CPP23-24367, 09/08/2023):
+Residual/recurrent glioblastoma with extensive gliosarcoma; see comment.
+COMMENT:  
+See microscopic description.
+[UCSF #: S23-8923; NP-17543]
+[California Pacific Medical Center#:CPP23-24367 MR#: 07894532]
+Microscopic Description
+The resection reveals predominantly glioblastoma with notable reactive vessels.
+ However, as highlighted in section A3, areas of spindling are
+identified best categorized as gliosarcoma.  
+Review of submitted immunohistochemistry shows positivity with GFAP and
+S100, which are negative in the regions of the gliosarcoma.  EMA is
+negative within the tumor, and CD34 highlights background vessels.  A Ki-67
+shows a labeling index of approximately 35%.
+Overall, the findings are best classified as a residual/recurrent
+glioblastoma with gliosarcoma (WHO grade IV).
+Gross Description
+Received are the following outside materials:
+Slides:  Ten glass slides labeled CPP23-24367 (A1-1, A2-1, A2-2,
+A3-1, A3-2, A3-3, A3-4, A3-5, A3-6, A3-7).
+Blocks:  None.
+Tissue:  None.
+Hospital or lab:  California Pacific Medical Center, San Francisco, CA.
+Pathology report dated:  09/08/2023.
+Prepared by:  Emily K. Tran.
+Clinical History
+The patient is a 65-year-old man with a left frontal lobe tumor who
+underwent resection in March 2023 for a glioblastoma (S23-456). 
+Patient now undergoes resection for recurrent tumor.  Dr. Chen is
+asked to review this case by Dr. Tran.
+Diagnosis based on gross and microscopic examinations.  Final diagnosis
+made by attending pathologist following review of all pathology slides.
+Jessica Lee/Pathology Resident 
+David H. Chen/Pathologist
+Signed: 9/20/2023 11:45",Stable,SYN1011

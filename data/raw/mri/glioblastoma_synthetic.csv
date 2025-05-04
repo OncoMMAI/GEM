@@ -1,49 +1,26 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  11/12/2023 2:14 PM
-INDICATION (as provided by referring clinician): Known history of glioblastoma, surveillance post-treatment
-ADDITIONAL HISTORY: Right frontal glioblastoma resection on October 20, 2023
-COMPARISON: Brain MRI dated November 1, 2023.
-TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
-MEDICATIONS:
-Gadobutrol - 15 mL - Intravenous
-FINDINGS:
-Postsurgical changes in the right frontal region, consistent with previous craniotomy for glioblastoma resection. The resection cavity shows expected postoperative enhancement and mild surrounding vasogenic edema. No new significant FLAIR hyperintensities are noted. Mild leftward midline shift is present, stable compared to prior.
-No evidence of hydrocephalus or herniation. Perfusion study reveals no abnormal hyperperfusion.
+Exam Description,Report Text,Patient Status,Patient MRN
+MR SPECTROSCOPY,"MR SPECTROSCOPY: 08/15/2023.
 
-IMPRESSION: 
-1. Stable postoperative changes in the right frontal lobe following glioblastoma resection. No new enhancement outside of expected postoperative areas.
-2. Mild leftward midline shift, unchanged from previous imaging.
-Report dictated by: Jonathan R. Smith, MD, signed by: Jonathan R. Smith, MD
-Department of Radiology and Biomedical Imaging",Outpatient,Male,56,56231
-MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  3/5/2023 9:45 AM
-INDICATION (as provided by referring clinician): Monitoring known glioblastoma post-chemotherapy
-ADDITIONAL HISTORY: Chemotherapy completed January 2023 for right temporal glioblastoma
-COMPARISON: Brain MRI dated February 15, 2023.
-TECHNIQUE: Multiple sequences through the brain were performed at 3 Tesla.
-MEDICATIONS:
-Gadoteridol - 18 mL - Intravenous
-FINDINGS:
-Right temporal lobe shows post-treatment changes with residual enhancing tissue consistent with recurrent glioblastoma. Increased FLAIR signal intensity in the surrounding white matter, indicative of treatment-related changes. No new subdural hematoma or other intracranial hemorrhage identified.
-No significant mass effect or midline shift. Diffusion-weighted imaging shows restricted diffusion correlating with known tumor areas.
+CLINICAL DATA: Recurrent glioblastoma.
 
-IMPRESSION: 
-1. Evidence of recurrent glioblastoma in the right temporal lobe with surrounding treatment-related changes.
-2. Stable post-chemotherapy changes without new complications.
-Report dictated by: Angela L. Chu, MD, signed by: Angela L. Chu, MD
-Department of Radiology and Biomedical Imaging",Inpatient,Female,45,471082
-MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  7/19/2023 3:30 PM
-INDICATION (as provided by referring clinician): Newly diagnosed glioblastoma, preoperative assessment
-ADDITIONAL HISTORY: Right occipital glioblastoma diagnosis confirmed July 10, 2023
-COMPARISON: None available.
-TECHNIQUE: Multiple sequences through the brain were obtained at 3 Tesla.
-MEDICATIONS:
-Dotarem - 20 mL - Intravenous
-FINDINGS:
-Large right occipital mass with heterogeneous enhancement and central necrosis, compatible with glioblastoma. Surrounding vasogenic edema extending into adjacent occipital white matter. Mass effect noted with compression of the occipital horn of the right lateral ventricle, no overt midline shift.
-No evidence of intracranial hemorrhage or acute infarction. Perfusion imaging shows increased perfusion within the mass.
+COMPARISON: Prior MRI dated 06/10/2023.
 
-IMPRESSION: 
-1. Large right occipital glioblastoma with significant surrounding edema and mass effect.
-2. Preoperative findings to assist surgical planning.
-Report dictated by: Michael A. Lee, MD, signed by: Michael A. Lee, MD
-Department of Radiology and Biomedical Imaging",Outpatient,Male,67,384592
+TECHNIQUE:
+
+MR spectroscopy was performed through bilateral hemispheres.
+
+FINDINGS:
+
+There is loss of normal spectroscopy throughout the left
+hemisphere and interrogated areas of abnormal signal in the right
+hemisphere. Some of the voxels have elevated choline levels and
+decreased NAA. Others show lipid peaks and/or lactate peaks.
+These findings are highly abnormal and consistent with recurrent
+glioblastoma.
+
+IMPRESSION:
+
+Diffusely abnormal MR spectroscopy consistent with recurrent
+glioblastoma.
+
+END OF IMPRESSION:",Outpatient,SYN1006

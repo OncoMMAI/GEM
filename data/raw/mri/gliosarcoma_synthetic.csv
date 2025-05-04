@@ -1,102 +1,37 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-MR BRAIN WITH AND WITHOUT CONTRAST,"MRI OF THE BRAIN: 11/15/23
-
-CLINICAL HISTORY: Gliosarcoma.
-
-COMPARISON: 9/20/23 MR of the brain.
-
-TECHNIQUE:
-
-Multiplanar, multisequence MR imaging of the brain was performed
-including axial T1, T2-weighted, axial FLAIR, axial diffusion-weighted
-imaging (DWI), and post-contrast axial, coronal, and sagittal T1
-sequences.
-
-FINDINGS:
-
-The patient has undergone a right parietal craniotomy. There is a
-noted resection cavity with surrounding gliosis and mild FLAIR
-hyperintensity extending into the adjacent parietal white matter.
-There is stable enhancement along the margins of the resection
-cavity with no new enhancing lesions identified. The T2-weighted
-images show no significant change in the hyperintensity involving
-the right parietal lobe and extending towards the occipital lobe.
-
-MR perfusion analysis reveals relative cerebral blood volume
-that is mildly elevated around the resection cavity, consistent
-with residual neoplastic activity. No restricted diffusion is
-observed to suggest acute infarction.
-
-IMPRESSION:
-
-1. Stable post-surgical changes in the right parietal region with
-   persistent enhancement and no new enhancement.
-
-2. Mildly increased perfusion surrounding the resection cavity
-   indicating possible residual gliosarcoma.
-
-END OF IMPRESSION:",Inpatient,Male,62,347892
-MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  12/02/2023 09:45 AM
-INDICATION (as provided by referring clinician): History of left occipital gliosarcoma.
-COMPARISON: MRI brain 10/30/2023.
-TECHNIQUE: Multisequence MRI of the brain was performed on a 3T scanner.
+Exam Description,Report Text,Patient Status,Patient MRN
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  11/15/2024 9:15 AM
+INDICATION (as provided by referring clinician): gliosarcoma
+ADDITIONAL HISTORY: History of a right temporal lobe tumor status post resection on 06/12/2023 with pathology revealing gliosarcoma (MGMT methylated with a methylation index of 12. Genetic analysis shows alterations in EGFR, PTEN, and CDKN2A, with chromosome 10 loss). 
+Status post completion of radiation and chemotherapy as part of the phase II OPTIMIZE clinical trial.
+Rt+Temodar dates: 07/15/2023 - 09/05/2023
+Adjuvant temodar and bevacizumab 
+Completed 9 cycles of Temodar on 8/20/24, continuing bevacizumab 
+Last cycle: C10 of OPTIMIZE 
+COMPARISON: Brain MRI 8/25/2024
+TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
 MEDICATIONS:
-Gadolinium contrast - 15 mL - Intravenous
+Dotarem - 18 mL - Intravenous
 FINDINGS:
-Postoperative changes noted in the left occipital lobe with a resection
-cavity. There is irregular enhancement along the cavity, consistent
-with post-treatment changes. FLAIR hyperintensity involves the
-surrounding occipital and parietal white matter with no significant
-change from previous imaging. 
-A new 4 mm enhancing nodule is noted in the left temporal lobe,
-raising concern for recurrent disease. No midline shift or significant
-mass effect is present. Background FLAIR changes in periventricular
-white matter are stable and nonspecific. MR perfusion shows no abnormal
-elevation in cerebral blood flow in the areas of interest.
+Postoperative changes from right temporal craniotomy with resection cavity located in the right middle temporal gyrus. Persistent linear band of enhancement in the resection cavity with surrounding susceptibility artifact and T2/FLAIR hyperintensity. No new enhancement, nodularity, or elevated perfusion on ASL to suggest recurrent tumor.
+No acute hemorrhage, acute infarct, hydrocephalus, herniation, or worsening mass effect. Stable chronic right temporal extra-axial collection. Ex vacuo dilatation of the right lateral ventricle. Unchanged atrophy and deformity of the splenium of the corpus callosum.
+
+IMPRESSION: 
+Relative to 8/25/2024, no evidence of tumor progression.
+Report dictated by: Alex Kim, MD, signed by: Alex Kim, MD
+Department of Radiology and Biomedical Imaging",Outpatient,SYN1010
+MR SPECTROSCOPY,"MR SPECTROSCOPY 8/15/2023 3:30 PM
+
+COMPARISON: None
+
+CLINICAL HISTORY: 67-year-old woman with history of glioblastoma
+status post surgical resection with diagnosis of gliosarcoma currently
+on Avastin therapy; presents for routine surveillance MR imaging.
 
 IMPRESSION:
 
-1. Postoperative changes in the left occipital region with stable
-   surrounding FLAIR hyperintensity.
+Several voxels within the FLAIR hyperintense region adjacent to the
+resection site show decreased NAA and elevated choline levels,
+indicative of tumor activity. The focal enhancement zone remains
+inadequately assessed by MR spectroscopy.
 
-2. New 4 mm enhancing nodule in the left temporal lobe, suspicious
-   for recurrence of gliosarcoma.
-
-Report discussed with Dr. Angela Singh (Neuro-Oncology) on 12/02/2023
-at 10:30 AM.
-Report dictated by: John Doe, MD, signed by: Alice Smith, MD
-Department of Radiology",Outpatient,Female,68,512673
-MR BRAIN WITH AND WITHOUT CONTRAST,"MRI OF THE BRAIN: 11/10/23
-
-CLINICAL HISTORY: Known high-grade gliosarcoma, monitoring for progression.
-
-COMPARISON: 10/05/23 MR of the brain.
-
-TECHNIQUE:
-
-Multi-sequence MRI of the brain was conducted, including axial FLAIR,
-axial and sagittal T1-weighted, axial T2-weighted, and post-contrast
-t1-weighted images.
-
-FINDINGS:
-
-The previously identified left frontal craniotomy site shows stable
-postoperative changes with a resection cavity. There is persistent,
-but stable, enhancement along the resection margin. The surrounding
-FLAIR hyperintensity extends into the frontal white matter as
-before. No new areas of enhancement are identified.
-
-MR perfusion imaging reveals a subtle increase in cerebral blood
-volume adjacent to the resection cavity, indicative of potential
-residual tumor. Diffusion-weighted images do not show areas of
-restricted diffusion, suggesting no acute ischemic changes.
-
-IMPRESSION:
-
-1. Stable post-surgical changes in the left frontal lobe with no
-   new enhancing lesions.
-
-2. Slightly elevated perfusion adjacent to the resection cavity,
-   suggestive of residual gliosarcoma.
-
-END OF IMPRESSION:",Outpatient,Male,58,298471
+END OF IMPRESSION:",Outpatient,SYN1011

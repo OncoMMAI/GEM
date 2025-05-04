@@ -1,58 +1,112 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-SURGICAL PATHOLOGY,"Anatomic Site:Brain tumor biopsy
-Tumor margin assessment
+Exam Description,Report Text,Patient Status,Patient MRN
+CYTOLOGY EXAM,"Anatomic Site:Cranial, Fine Needle Aspirate, Other
 Clinical Diagnosis/History:
-The patient is a 12-year-old boy with a history of a supratentorial ependymoma, who presents for evaluation due to new onset seizures.
+History of ependymoma. ICD-9: 225.2.
 Gross Description:
-The specimen is received fresh in two parts, labeled with the patient's name and medical record number.
-Part A is labeled ""brain tumor biopsy,"" consisting of three unoriented, gray-white soft tissue fragments measuring 1.0 x 0.8 x 0.5 cm in aggregate. A portion is frozen for frozen section diagnosis 1, and another portion is taken for cytologic preparation. The remainder is submitted in cassette A1.
-Part B is labeled ""tumor margin,"" consisting of two pale-pink, soft tissue fragments measuring 0.7 x 0.5 x 0.2 cm in aggregate. The entire specimen is submitted in cassette B1.
+8 cc of slightly cloudy fluid.  1 Thin Prep Pap.
 Diagnosis Comments:
-Immunohistochemical analysis was performed using GFAP and EMA antibodies, confirming the diagnosis of a WHO Grade II Ependymoma. A formal GFAP labeling index will be provided in an addendum.
-Interoperative Diagnosis:
-FS1 (A) Brain, supratentorial region, biopsy: Ependymoma, consistent with recurrence. Tissue section and cytologic preparation.
+The sample is sparsely cellular and contains a few mildly atypical cells.
 Final Diagnosis:
-A. Brain, biopsy: Ependymoma, WHO Grade II; see comment.
-B. Brain, ""tumor margin,"" excision: Fragments of brain parenchyma; no tumor identified.
-++++++++++Addendum++++++++++
-RESULTED BY
-Addendum Comment:
-The GFAP immunohistochemical labeling index is approximately 3.8%.",Inpatient,Male,12,234567
-SURGICAL PATHOLOGY,"Anatomic Site:Spinal cord tumor biopsy
-Spinal tumor
-Clinical Diagnosis/History:
-The patient is a 45-year-old woman with progressive lower extremity weakness, found to have a thoracic intradural tumor.
-Gross Description:
-The specimen is received fresh in two parts, labeled with the patient's name and medical record number.
-Part A is labeled ""spinal cord tumor biopsy,"" consisting of a single, unoriented, irregularly shaped, white-tan fragment of soft tissue measuring 0.4 x 0.3 x 0.2 cm. A portion is frozen for frozen section diagnosis 1, with the remaining specimen submitted in cassette A1.
-Part B is labeled ""spinal tumor,"" consisting of one, soft, pink-red tissue fragment measuring 5 x 2.5 x 1.5 cm. The specimen reveals soft pink-red parenchyma with areas of gross microvascular proliferation and measures 1.2 x 0.8 x 0.5 cm. The entire proliferative area is submitted in cassettes B1-B2, with representative sections in cassette B3.
-Diagnosis Comments:
-Histological examination shows moderate cellularity with oval nuclei, and rare mitotic figures. Microvascular proliferation is noted.
-Interoperative Diagnosis:
-FS1 (A) Spinal tumor, biopsy: Ependymoma, WHO grade II. Tissue section and cytologic preparation.
-Final Diagnosis:
-A. Thoracic spinal cord, biopsy: Ependymoma, WHO grade II, see comment.
-B. Thoracic spinal cord, biopsy: Ependymoma, WHO grade II, see comment.
-++++++++++Addendum++++++++++
-RESULTED BY
-Addendum Comment:
-The MIB-1 labeling index is approximately 5.5%, consistent with moderate proliferative activity.",Outpatient,Female,45,345678
-SURGICAL PATHOLOGY,"Anatomic Site:Posterior fossa tumor biopsy
-Tumor margin analysis
-Clinical Diagnosis/History:
-The patient is a 22-year-old man with headache and dizziness, found to have a posterior fossa lesion suspected to be an ependymoma.
-Gross Description:
-The specimen is received fresh in two parts, labeled with the patient's name and medical record number.
-Part A is labeled ""posterior fossa tumor biopsy,"" consisting of four unoriented, gray-tan soft tissue fragments measuring 1.5 x 1.0 x 0.5 cm in aggregate. A portion is frozen for frozen section diagnosis 1, with the remainder submitted in cassette A1.
-Part B is labeled ""tumor margin,"" consisting of three soft, pink-tan tissue fragments measuring 0.9 x 0.4 x 0.3 cm in aggregate. The entire specimen is submitted in cassette B1.
-Diagnosis Comments:
-Immunohistochemical analysis using Synaptophysin and Vimentin antibodies supports the diagnosis of WHO Grade III Ependymoma. A formal Synaptophysin labeling index will be performed and reported in an addendum.
-Interoperative Diagnosis:
-FS1 (A) Brain, posterior fossa, biopsy: Ependymoma, WHO grade III. Tissue section and cytologic preparation.
-Final Diagnosis:
-A. Posterior fossa, biopsy: Ependymoma, WHO Grade III; see comment.
-B. Posterior fossa, ""tumor margin,"" excision: Fragments of brain parenchyma; no tumor identified.
-++++++++++Addendum++++++++++
-RESULTED BY
-Addendum Comment:
-The Synaptophysin immunohistochemical labeling index is 6.2%, indicating increased proliferative activity.",Inpatient,Male,22,456789
+Soft tissue, cranial region, fine needle aspiration: Benign; see comment.",Stable,SYN1002
+SURGICAL PATHOLOGY,"UNIVERSITY OF SOUTHERN CALIFORNIA
+DEPARTMENT OF PATHOLOGY
+1234 HEALTH SCIENCES DRIVE
+LOS ANGELES, CA 90033
+5678 MEDICAL CENTER DRIVE
+LOS ANGELES, CA 90033
+PATHOLOGY REPORT
+Patient Name: SMITH, ALEXANDRA
+Med. Rec.#: 75820476
+DOB: 11/15/1963 (Age: 59)
+Legal Sex: Female
+Accession #: S23-48902
+Visit #: 204857392
+Service Date: 10/15/2023
+Received: 10/15/2023
+Location: USC Medical Center
+Client: Keck Hospital 
+Provider(s):  Dr. Johnathan M. Lee ((323) 442-5900)
+FINAL PATHOLOGIC DIAGNOSIS
+A. Brain, posterior fossa mass, biopsy:  Posterior fossa ependymoma,
+favor RELA fusion-positive, CNS WHO grade 2; see comment.
+ 
+B. Brain, posterior fossa mass, resection:  Posterior fossa ependymoma,
+favor RELA fusion-positive, CNS WHO grade 2.
+ 
+C. Brain, aspirated contents, aspirate:  Posterior fossa ependymoma,
+favor RELA fusion-positive, CNS WHO grade 2.
+  
+COMMENT:  
+Sections reveal a moderately cellular glial neoplasm with a fibrillary
+matrix. Tumor cells exhibit round to oval nuclei with finely dispersed
+chromatin and elongated cytoplasmic extensions. Numerous perivascular
+pseudorosettes are evident. There is no necrosis, and mitotic figures
+are rare.  
+The following immunohistochemical stains were performed at USC and
+evaluated on block B1:
+- GFAP:          Positive staining in tumor cells, highlighting
+perivascular pseudorosettes.
+- EMA:               Dot-like positivity in tumor cells.
+- H3K27me3:          Retained expression in tumor cells.
+- Ki-67:                Labeling index estimated at less than 2%.
+Overall, the features are consistent with a posterior fossa ependymoma,
+favor RELA fusion-positive, CNS WHO grade 2. Further genetic
+characterization will be conducted using the USC NGS panel, with a
+separate report from the USC Clinical Cancer Genomics Laboratory to
+follow, and an addendum will be issued if clinically warranted. 
+Intraoperative Diagnosis
+A. Posterior fossa mass, biopsy:  Ependymoma.
+- Procedure:  FS, TP.
+- Pathologist:  Dr. Emily Tran, 89234.
+- Reported at:  10/15/2023 14:45.
+- Performed at:  1234 Health Sciences Dr., Los Angeles, CA 90033. 
+Gross Description
+The case is received in three parts, each labeled with the patient's
+name and medical record number.
+Part A is received fresh, additionally labeled, ""posterior fossa
+mass-frozen,"" and consists of an unoriented fragment of soft, pink-gray
+tissue (0.6 x 0.5 x 0.3 cm). A portion of the specimen is frozen for
+frozen section diagnosis and cytologic preparation, with the frozen
+section remnant submitted in cassette A1. The remaining tissue is
+submitted in cassette B1. (dlt)
+Part B is received fresh, additionally labeled, ""posterior fossa
+mass,"" and consists of four, soft, irregular, gray-white tissue fragments
+(1.7 x 1.4 x 0.3 cm aggregate). The specimen is entirely submitted in
+cassette B2. (dlt)
+Part C is received fresh, additionally labeled, ""aspirate contents,"" and
+consists of multiple, soft, irregular, gray-white tissue fragments (2.8 x
+2.0 x 0.8 cm aggregate). The specimen is entirely submitted in cassettes
+C1-C2. (dlt)
+Clinical History
+The patient is a 59-year-old woman presenting with headaches and balance
+disturbances, found to have a 3.2 cm enhancing mass in the posterior
+fossa on MRI with increased T2/FLAIR signal and reduced T1 signal.
+Radiographically, the differential diagnosis included ependymoma,
+medulloblastoma, and metastasis. Additionally, subtle enhancement in the
+left cerebellar hemisphere was noted. She now undergoes resection of the
+mass. 
+The diagnosis may have been rendered in whole, or in part, using whole
+slide digital images of the glass slides on Philips FDA-approved (21 CFR
+864.3700) PIPS-based platform validated at USC.
+If immunofluorescence, immunohistochemistry or in-situ hybridization was
+performed and evaluated at USC in the above report, all controls
+performed with the stains reported above reacted appropriately. These
+stains were developed and their performance characteristics determined
+by the USC Medical Center Department of Pathology. They have not been
+cleared or approved by the U. S. Food and Drug Administration. The FDA
+has determined that such clearance or approval is not necessary. These
+tests are used for clinical purposes. They should not be regarded as
+investigational or for research. This laboratory is certified under the
+Clinical Laboratory Improvement Amendments of 1988 (""CLIA"") as qualified
+to perform high-complexity clinical testing.
+Diagnosis based on microscopic and/or gross examinations. Final
+Diagnosis made by attending pathologist following review of all
+pathology slides (histochemical quality is satisfactory). The attending
+pathologist has reviewed all dictations, including prosector work, and
+preliminary interpretations performed by any resident involved in the
+case and performed all necessary edits before signing the final report.
+Michael Chen/Pathology Resident 
+Emily Tran/Pathologist 
+Signed: 10/18/2023 09:15
+Reviewed at USC Pathology 1234 Health Sciences Drive Los Angeles CA 90033
+CLIA Director Sarah L. Wong MD PhD",Inpatient,SYN1003

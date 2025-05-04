@@ -1,55 +1,72 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-SURGICAL PATHOLOGY,"Anatomic Site: frontal lobe lesion
-Recurrent oligodendroglioma vs treatment effect
+Exam Description,Report Text,Patient Status,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site:NP Consult without blocks (Smith,Alex 03/22/85 8x LHS
+""CPP-08-14567"" NP-15234.)
 Clinical Diagnosis/History:
-The patient is a 52-year-old female with grade II oligodendroglioma status post radiotherapy. She presents for surgical resection.
+The patient is a 34-year-old man with a diagnosis of oligodendroglioma, WHO
+grade II, from a biopsy of the left temporal lobe
+on March 12, 2019. He underwent resection in late April.
+Dr. Emily Carter is asked to review this case by Dr. Michael Lee (LHS
+Pathology).
 Gross Description:
-The specimen is received fresh in three parts, each labeled with the patient's name and medical record number.
-Part A is labeled ""frontal lobe lesion."" It comprises multiple soft tissue fragments, measuring 3.0 x 2.5 x 1.0 cm in aggregate. The tissue is predominantly tan-pink with areas of dark-brown discoloration. A portion is used for cytologic preparation, with the remaining tissue submitted entirely in cassettes A1 through A3.
-Part B is labeled ""necrotic tissue."" It consists of a single fragment of mottled brown and tan tissue, measuring 2.5 x 1.5 x 0.8 cm. The cut surface reveals a mixture of necrotic and viable tissue. The specimen is bisected and submitted in cassettes B1 and B2.
-Part C is labeled ""recurrent oligodendroglioma vs treatment effect."" It consists of a single unoriented fragment of tan and red-brown tissue, measuring 2.8 x 2.3 x 1.5 cm. Cut sections show central necrosis with surrounding hemorrhage and inflammation. The specimen is entirely submitted in cassettes C1 and C2.
+Received are the following outside materials:
+Slides: Eight Glass slides labeled ""CPP-08-14567 H&amp;E SMITH,ALEX Lincoln
+Health, NY."" Individual slides bear labels ""A-1,""
+""A2-1,"" ""A3-1,"" ""B1-1,"" ""C1-1,"" ""D1-1,"" ""E1-1,"" and ""F1-1.""
+Blocks: None.
+Tissue: None.
+Hospital or lab: Lincoln Health System, New York, NY.
+Pathology report dated: 04/25/2019. This report bears both the patient's name
+and ""CPP-08-14567.""
+Prepared by: Michael Lee, M.D.
 Diagnosis Comments:
-No infiltrative glioma is identified in Parts A-C. Immunohistochemical studies were performed to evaluate this case.
-- GFAP: Positive in reactive astrocytes.
-- IDH1: Negative.
-- Ki-67: Low proliferative index.
-Interoperative Diagnosis:
-FS1 (A) Brain, ""frontal lobe lesion,"" excision: Cortex with reactive changes and necrosis, consistent with treatment effect.
+The findings were reported to Dr. Michael Lee on 05/02/2019.
+[LHS #: S19-12345; NP-15234]
+[Lincoln Health System #: CPP-08-14567 MR#: 06123456]
 Final Diagnosis:
-A. Brain, ""frontal lobe lesion,"" resection: Cortex and white matter with reactive and dystrophic changes; no infiltrative glioma identified.
-B. Brain, ""necrotic tissue,"" biopsy: Segment of cortex with necrotic and hemorrhagic changes.
-C. Brain, ""recurrent oligodendroglioma vs treatment effect,"" resection: Extensive necrosis and hemorrhage; no infiltrative glioma identified.",Stable,Female,52,98324
-SURGICAL PATHOLOGY,"Anatomic Site: temporal lobe mass
-Tumor
+Review of outside slides from Lincoln Health System, New
+York, NY (CPP-08-14567):
+A. Brain, left temporal tumor, resection: Oligodendroglioma, WHO grade II.
+B. Brain, left temporal margin, biopsy: Gray and white matter - no
+oligodendroglioma identified.
+C. Brain, left anterior margin, biopsy: Gray and white matter - no
+oligodendroglioma identified.
+D. Brain, left inferior margin, biopsy: Gray and white matter with
+infiltrating oligodendroglioma present, principally in
+white matter.
+E. Brain, left posterior margin, biopsy: Gray and white matter - no
+oligodendroglioma identified.",Stable,SYN1014
+SURGICAL PATHOLOGY,"Anatomic Site:Brain, biopsy (FS) - no req
 Clinical Diagnosis/History:
-The patient is a 37-year-old male with a previously diagnosed anaplastic oligodendroglioma, WHO grade III, presenting for resection.
+The patient is a 42-year-old woman with a history of grade II oligodendroglioma,
+resected in 2005. The patient now undergoes
+left temporal craniotomy with mapping.
 Gross Description:
-The specimen is received fresh in two parts, each labeled with the patient's name and medical record number.
-Part A, labeled 'tumor,' consists of a single fragment of tan-white brain tissue (0.7 x 0.6 x 0.4 cm). A portion of the specimen is taken for frozen section diagnosis, with the remnant submitted in cassette A1. The non-frozen portion is submitted in cassette A2.
-Part B, labeled 'tumor,' consists of multiple, soft, pink-yellow, irregular unoriented tissue fragments (2.0 x 0.7 x 0.3 cm in aggregate). The specimen is entirely submitted in cassette B1.
-Interoperative Diagnosis:
-FS1 (A) Brain, biopsy: Consistent with anaplastic oligodendroglioma, WHO grade III.
-Final Diagnosis:
-A. Brain, temporal lobe, biopsy: Anaplastic oligodendroglioma, WHO grade III.
-B. Brain, temporal lobe, resection: Anaplastic oligodendroglioma, WHO grade III.",Undergoing treatment,Male,37,64782
-SURGICAL PATHOLOGY,"Anatomic Site: occipital lobe tumor
-Suspicion of recurrence
-Clinical Diagnosis/History:
-The patient is a 45-year-old female with a history of oligodendroglioma, WHO grade II, status post chemotherapy.
-Gross Description:
-The specimen is received fresh in four parts, each labeled with the patient's name and medical record number.
-Part A is labeled ""occipital lobe tumor."" It consists of multiple fragments of soft tissue, measuring 2.9 x 2.2 x 0.8 cm in aggregate. The specimen is tan-pink with areas of hemorrhage. A portion is used for frozen section diagnosis, and the remaining tissue is submitted in cassettes A1 through A3.
-Part B is labeled ""tumor bed."" It consists of a single unoriented fragment of tan tissue with brown mottling, measuring 3.2 x 1.7 x 1.1 cm. The cut surface shows tan tissue with areas of necrosis. The specimen is bisected and submitted in cassettes B1 and B2.
-Part C is labeled ""suspicion of recurrence."" It consists of a single unoriented fragment of pink-tan tissue with brown discoloration, measuring 2.5 x 2.1 x 1.4 cm. The cut sections show predominantly brown tissue with central necrosis. The specimen is entirely submitted in cassettes C1 and C2.
+The specimen is received in one part, labeled with the patient's name and
+medical record number and ""tumor FS/perm"". It consists
+of a single soft, pink-gray tissue fragment measuring 1.0 x 0.7 x 0.4 cm.
+Normal gray and white matter is not apparent. A
+portion is used for cytologic preparation and frozen section diagnosis 1, with
+the frozen section remnant submitted in cassette
+B1. The non-frozen tissue is entirely submitted in cassette B2.
+The immunoperoxidase stain(s) reported above were developed and their
+performance characteristics determined by the NYU Medical
+Center Department of Pathology. They have not been cleared or approved by the
+U. S. Food and Drug Administration. The FDA has
+determined that such clearance or approval is not necessary. These tests are
+used for clinical purposes. They should not be
+regarded as investigational or for research. This laboratory is certified
+under the Clinical Laboratory Improvement Amendments
+of 1988 (""CLIA"") as qualified to perform high-complexity clinical testing.
 Diagnosis Comments:
-Each part of this case (Parts A-C) has been submitted in their entirety for evaluation. No definitive infiltrative glioma is identified.
-Immunohistochemical studies were performed:
-- Synaptophysin: Negative.
-- Olig2: Positive.
-- Ki-67: Less than 5%.
+Immunohistochemical studies were necessary to evaluate this case and establish
+the correct diagnosis, and were performed and
+evaluated on block B2. GFAP and IDH1 show focal positive staining in tumor
+cells, and Ki-67 stain demonstrates a low labeling
+index, estimated to be less than 4%. All of these findings are consistent
+with a diagnosis of oligodendroglioma, WHO grade II.
 Interoperative Diagnosis:
-FS1 (A) Brain, ""occipital lobe tumor,"" excision: Cortex with treatment effect and reactive changes.
+FS1  (B) Brain, left temporal, biopsy: Recurrent oligodendroglioma. No
+high-grade features in frozen. Tissue section and
+cytologic preparation. (Dr. Susan Lee, 47231.)
 Final Diagnosis:
-A. Brain, ""occipital lobe tumor,"" biopsy: Cortex with reactive and dystrophic changes; no infiltrative glioma identified.
-B. Brain, ""tumor bed,"" resection: Cortex with necrotic tissue; no definitive glioma identified.
-C. Brain, ""suspicion of recurrence,"" resection: Extensive necrosis and hemorrhage; no infiltrative glioma identified.",Recurrence suspected,Female,45,29834
+Brain, left temporal lobe, biopsy: Oligodendroglioma, grade II; see comment.",Stable,SYN1015

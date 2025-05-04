@@ -1,62 +1,144 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-SURGICAL PATHOLOGY,"Anatomic Site: Right temporal lobe lesion
+Exam Description,Report Text,Patient Status,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site: Right frontal lesion - FS
+Right frontal lesion #2 - perm
+Brain, for tumor resection
+Right frontal pole - perm
+Inferior Medial Frontal Lobe - perm
+Superior frontal gyrus - lesion
 Clinical Diagnosis/History:
-The patient is a 27-year-old woman presenting with a right temporal lobe lesion and recurrent seizures.
-She underwent a craniotomy for excision of the lesion.
+The patient is a 39-year-old woman with a history of chronic headaches and progressive memory loss. Imaging revealed an enlarging frontal lesion, prompting surgical intervention.
 Gross Description:
-The specimen is received fresh, labeled with the patient's name and medical record number.
-Part A, labeled 'right temporal lobe lesion,' consists of multiple, soft, gray-tan tissue fragments measuring 1.0 x 0.7 x 0.2 cm in aggregate.
-The specimen is submitted entirely in cassette A1.
-Immunohistochemical stains developed by the pathology department include GFAP, NeuN, and synaptophysin.
+The specimen is received fresh in five parts, each labeled with the patient's name and medical record number.
+Part A, is received fresh and additionally labeled ""right frontal lesion,"" and consists of multiple unoriented, gray-tan soft tissue fragments measuring 2.0 x 1.5 x 0.5 cm in aggregate. A representative portion is submitted for frozen section as FS1, the remnant of which is submitted in cassette A1. The remainder of the specimen is entirely submitted in cassette A2.
+Part B is additionally labeled ""right frontal lesion #2."" It consists of a single unoriented fragment of pink-tan, soft tissue, measuring 1.0 x 0.8 x 0.4 cm. The specimen is entirely submitted in cassette B1.
+Part C is additionally labeled ""inferior frontal cortex."" It consists of three fragments of cerebral cortex and subjacent white matter, measuring 3.5 x 2.7 x 1.8 cm in aggregate. The gray-white junction is sharp and distinct. The cortex measures 0.3 cm in average thickness. No masses or lesions are grossly identified. The specimen is entirely submitted in cassettes C1 through C7.
+Part D is additionally labeled ""right frontal pole."" It consists of a single unoriented fragment of gray and white matter, measuring 2.3 x 1.8 x 1.2 cm. The gray-white matter junction is somewhat blurred, with the cortex measuring approximately 0.3 cm in thickness. No distinct masses are identified. The specimen is entirely submitted in cassettes D1 through D4.
+Part E is additionally labeled ""inferior-medial frontal lobe (perm)."" It consists of a single unoriented piece of pink-tan, soft tissue, measuring 2.4 x 1.7 x 0.6 cm. The specimen is bisected and entirely submitted in cassette E1.
+The immunoperoxidase stain(s) reported above were developed and their performance characteristics determined by the Stanford Medical Center Department of Pathology. They have not been cleared or approved by the U.S. Food and Drug Administration. The FDA has determined that such clearance or approval is not necessary. These tests are used for clinical purposes. They should not be regarded as investigational or for research. This laboratory is certified under the Clinical Laboratory Improvement Amendments of 1988 (""CLIA"") as qualified to perform high-complexity clinical testing.
 Diagnosis Comments:
-Histological evaluation reveals a well-circumscribed low-grade glioneuronal neoplasm with features consistent with ganglioglioma.
-The tumor exhibits a biphasic pattern with intermixed glial and neuronal components.
-MIB-1 labeling index is low, approximately 1%.
-GFAP: Positive in glial components.
-NeuN: Positive in neuronal cells.
-Synaptophysin: Highlights the neuropil and neuronal components.
-EMA: Negative.
-Based on these findings, the neoplasm is classified as a ganglioglioma, WHO Grade I.
-This diagnosis is confirmed in consultation with Dr. Emily Harmon.
+The tumor consists of a hypercellular population of glial cells with admixed variably sized neurons. These neurons are present in small groups and clusters with architectural disarray and mild pleomorphism. These cells are especially predominant around vascular structures. Occasional eosinophilic granular bodies are noted. The grading of gangliogliomas is subjective, but the tumors that resemble dysplastic processes rather than proliferative tumors are more likely to be classified as WHO Grade I lesions, while tumors that exhibit a more diffuse growth pattern and multifocality are more likely to be considered WHO Grade II. The prognostic significance of Grade I vs. Grade II gangliogliomas is not well established.
+Immunohistochemical studies were performed and evaluated in our laboratory on blocks A2 and C7 to confirm the final diagnosis. The studies show that the abnormal neuronal cells are positive with antibodies against Neu-N, as well as CD34, confirming the nature and extent of this glioneuronal tumor. Immunohistochemical staining for ki-67 (MIB-1) antibody demonstrates a low labeling index. These findings confirm the diagnosis of ganglioglioma.
+Interoperative Diagnosis:
+FS1 (A) Brain, right frontal lobe, biopsy: Glioma, favor low-grade. Type and final grade to be performed on permanent sections (tissue sections and cytologic preparation). (Dr. Lisa Chen, 55673.)
 Final Diagnosis:
-Brain, right temporal lobe, biopsy: Low grade ganglioglioma, WHO Grade I; see comment.",Stable post-surgery,Female,27,523840
-SURGICAL PATHOLOGY,"Anatomic Site: Cerebellar mass
-Clinical Diagnosis/History:
-The patient is a 45-year-old man with a history of headaches and ataxia, found to have a cerebellar mass on imaging.
-A posterior fossa craniotomy was performed for resection.
-Gross Description:
-The specimen consists of multiple irregular, firm, gray-white fragments measuring 1.2 x 1.0 x 0.3 cm in aggregate.
-The tissue is submitted entirely in cassettes labeled A1 and A2.
-Immunohistochemical panel includes GFAP, synaptophysin, OLIG2, and CD34.
-Diagnosis Comments:
-Sections reveal a glioneuronal tumor with a biphasic architecture.
-The tumor comprises mature ganglion cells and astrocytic elements.
-No mitotic figures are observed.
-GFAP: Strongly positive in astrocytic components.
-Synaptophysin: Highlights neuronal elements.
-OLIG2: Positive in glial cells.
-CD34: Shows focal positivity.
-These features support the diagnosis of a ganglioglioma, WHO Grade I.
-Reviewed with Dr. Michael Tran, who concurs with this diagnosis.
-Final Diagnosis:
-Cerebellum, biopsy: Ganglioglioma, WHO Grade I; see comment.",Recovering post-operatively,Male,45,486213
-SURGICAL PATHOLOGY,"Anatomic Site: Parietal lobe lesion
-Clinical Diagnosis/History:
-The patient is a 32-year-old man with a parietal lobe lesion and associated cognitive changes.
-Surgical resection was performed for definitive diagnosis and treatment.
-Gross Description:
-Received are several soft, friable pink-brown tissue fragments, measuring 0.8 x 0.6 x 0.2 cm in aggregate.
-The entire specimen is submitted in cassette A1.
-Immunohistochemical evaluation used antibodies against GFAP, NeuN, and synaptophysin.
-Diagnosis Comments:
-The histological sections demonstrate a low-grade glioneuronal tumor with characteristic ganglioglioma features.
-The tumor consists of large ganglion cells and a fibrillary glial background.
-MIB-1 labeling index is less than 1%.
-GFAP: Positive in the glial background.
-NeuN: Highlights ganglion cell nuclei.
-Synaptophysin: Positive in neuronal elements.
-The tumor lacks high-grade features such as necrosis or significant mitotic activity.
-The findings are consistent with a diagnosis of ganglioglioma, WHO Grade I.
-This case was reviewed with Dr. Rebecca Lin, who agrees with the diagnosis.
-Final Diagnosis:
-Parietal lobe, biopsy: Ganglioglioma, WHO Grade I; see comment.",Under close follow-up,Male,32,482915
+A. Brain, right frontal lobe, biopsy: Ganglioglioma, WHO Grade II; see comment.
+B. Brain, ""right frontal lesion#2"", resection: Ganglioglioma, WHO Grade II; see comment.
+C. Brain, inferior frontal lobe, resection: Ganglioglioma, WHO Grade II; see comment.
+D. Brain, right frontal pole, resection: Ganglioglioma, WHO Grade II; see comment.
+E. Brain, right inferior medial frontal lobe, resection: Segment of cortex and white matter with moderate gliosis and focal architectural disarray.",Inpatient,SYN1004
+SURGICAL PATHOLOGY,"UNIVERSITY OF SOUTHERN CALIFORNIA
+DEPARTMENT OF PATHOLOGY
+123 MEDICAL PLAZA, SUITE 200
+LOS ANGELES, CA 90089-0012
+TEL: (213) 740-1234 FAX: (213) 740-5678
+SURGICAL PATHOLOGY REPORT
+Patient Name: SMITH, JASON
+Med. Rec.#: 48290123
+DOB: 3/15/1985 (Age: 38)
+Sex: Male
+Accession #: S23-54321
+Visit #: 987654321
+Service Date: 3/25/2023
+Received: 3/25/2023
+Location: USC Medical Center
+Client: USC Hospital 
+Physician(s): Dr. Emily Chang ((213) 740-9876)
+FINAL PATHOLOGIC DIAGNOSIS
+A. Brain, right frontal, biopsy:  
+Cortical gray matter, no tumor identified.
+ 
+B. Brain, right frontal, biopsy:  
+Residual/recurrent Ganglioglioma, BRAF p.V600E-mutant, WHO grade I; see
+comment. 
+ 
+C. Brain, right frontal, resection: 
+Residual/recurrent Ganglioglioma, BRAF p.V600E-mutant, WHO grade I; see
+comment. 
+ 
+D. Brain, right frontal, CUSA: 
+Residual/recurrent Ganglioglioma, BRAF p.V600E-mutant, WHO grade I; see
+comment. 
+COMMENT:  
+Sections demonstrate a solid appearing neoplasm composed of atypical
+glial cells and dysmorphic ganglion cells. Mitoses are inconspicuous,
+and no microvascular proliferation or necrosis is seen. To further
+evaluate the tumor cells, immunohistochemical stains were performed and
+evaluated on block C1 and are interpreted as follows:
+Synaptophysin:  Positive in neoplastic ganglion cell component. 
+NeuN:  Neoplastic ganglion cells show diminished weak staining.
+Reticulin:  Shows increased intercellular reticulin deposition.
+p16:  Strongly positive in tumor cells. 
+BRAF V600E:  Positive for mutant protein. 
+ATRX:  Intact/retained expression, with variable intensity.
+Ki-67:  Labeling index estimated at approximately 4% in tumor cells
+(also highlights admixed lymphocytes).
+The morphologic and immunohistochemical findings support the diagnosis
+of residual/recurrent ganglioglioma, WHO grade I.  This ganglioglioma
+demonstrates abundant intercellular reticulin deposition, which is an
+unusual feature for gangliogliomas and similar cases have sometimes been
+referred to in the literature as non-infantile desmoplastic
+ganglioglioma.  The intact p16 expression, definitive ganglion cell
+component, and absence of xanthomatous cells all argue against the
+alternative possibility of pleomorphic xanthoastrocytoma.  This
+residual/recurrent ganglioglioma will also be evaluated using the
+USC500 NGS panel for further genetic characterization and the results
+will be reported separately, as well as in an addendum if clinically
+indicated.
+Intraoperative Diagnosis
+A. Brain, right tumor, biopsy (FS+TP):  No definite tumor identified. 
+- Procedure (FS/TP/IOC):  FS/TP.
+- Pathologist(s):  Dr. Michael Lee, 88307.
+- Reported at (date, time):  3/25/2023, 11:45 AM.
+- Performed at:  123 Medical Plaza, Los Angeles, CA 90089.
+B. Brain, right brain tumor, biopsy (FS+TP):  Low-grade glial or
+glioneuronal tumor, consistent with ganglioglioma, residual/recurrent.
+- Procedure (FS/TP/IOC):  FS/TP.
+- Pathologist(s):  Dr. Michael Lee, 88307.
+- Reported at (date, time):  3/25/2023, 12:30 PM.
+- Performed at:  123 Medical Plaza, Los Angeles, CA 90089.
+Gross Description
+The case is received in four parts, each labeled with the patient's name
+and medical record number.
+Part A is received fresh, additionally labeled, ""right tumor-frozen"", and
+consists of three tan soft irregular fragments of tissue (0.3 x 0.4 x
+0.2 cm in aggregate). A portion of the specimen is submitted for frozen
+section diagnosis and cytologic preparation, and subsequently submitted
+in cassette A1. The remainder of the specimen is submitted in cassette
+A2. (klb)
+Part B is received fresh, additionally labeled, ""right brain tumor
+(FS+TP)"", and consists of 3 fragments of pink-red soft tissue (0.5 x 0.3
+x 0.1 cm in aggregate). A portion of the specimen is submitted for
+frozen section diagnosis and cytologic preparation, and subsequently
+submitted in cassette B1. The remainder of the specimen is submitted in
+cassette B2. (tab)
+Part C is received fresh, additionally labeled, ""right brain tumor,"" and
+consists of two, soft, irregular, red-tan tissue fragments (0.6 x 0.4 x
+0.3 cm aggregate). The specimen is entirely submitted in cassette C1.
+(br1)
+Part D is received fresh, additionally labeled, ""cusa contents,"" and
+consists of multiple, soft, irregular, red-tan tissue fragments admixed
+with abundant friable, tan material (5.0 x 3.8 x 1 cm aggregate).
+Representative sections are submitted in cassettes D1-D8. (br1)
+Clinical History
+The patient is a 38-year-old man with a history of ganglioglioma with
+BRAF V600E mutant protein expression (S21-98765) who now undergoes
+resection of residual disease.
+All controls performed with the immunohistochemical stains reported
+above reacted appropriately. These immunohistochemical stains were
+developed and their performance characteristics determined by the USC
+Medical Center Department of Pathology. They have not been cleared or
+approved by the U. S. Food and Drug Administration. The FDA has
+determined that such clearance or approval is not necessary. These tests
+are used for clinical purposes. They should not be regarded as
+investigational or for research. This laboratory is certified under the
+Clinical Laboratory Improvement Amendments of 1988 (""CLIA"") as qualified
+to perform high-complexity clinical testing.
+Diagnosis based on microscopic and/or gross examinations.  Final
+Diagnosis made by attending pathologist following review of all
+pathology slides (histochemical quality is satisfactory).  The attending
+pathologist has reviewed all dictations, including prosector work, and
+preliminary interpretations performed by any resident involved in the
+case and performed all necessary edits before signing the final report.
+Alexandra T. Grant/Pathology Resident 
+Michael Lee/Pathologist
+Signed: 4/1/2023 15:45",Active,SYN1005

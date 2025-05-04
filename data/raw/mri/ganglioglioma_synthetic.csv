@@ -1,52 +1,53 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  8/25/2024 2:30 PM
-INDICATION (as provided by referring clinician): ganglioglioma
-ADDITIONAL HISTORY: Known ganglioglioma, left temporal lobe resection on 1/15/2024.
-COMPARISON: MRI brain 5/20/2024
-TECHNIQUE: Multiple sequences through the brain were acquired at 3.0 tesla.
-MEDICATIONS:
-Gadovist - 11 mL - Intravenous
-FINDINGS:
-Postoperative changes are noted following the left temporal craniotomy. No new or enlarging masslike FLAIR signal abnormality or enhancing lesion is observed, suggesting no tumor progression. The left temporal resection cavity is stable, with no evidence of abnormal enhancement or diffusion restriction.
-No acute intracranial abnormality identified. No signs of hemorrhage or hydrocephalus.
-Slight prominence of the ventricular system, possibly related to encephalomalacia post-surgery.
+Exam Description,Report Text,Patient Status,Patient MRN
+MR BRAIN WITH AND WITHOUT CONTRAST,"MR OF THE BRAIN: 11/12/2023.
 
-IMPRESSION: 
-1. No evidence of recurrent ganglioglioma in the left temporal lobe.
-2. Stable postoperative changes with no new abnormalities.
-Report dictated by: Emily J. Harper, MD, signed by: John R. Smith, MD
-Department of Radiology and Biomedical Imaging",Outpatient,Female,34,672934
-MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  7/10/2024 11:00 AM
-INDICATION (as provided by referring clinician): Recurrent ganglioglioma
-ADDITIONAL HISTORY: Right occipital mass resection on 2/28/2023, pathology confirmed ganglioglioma, CNS WHO Grade 2.
-COMPARISON: MRI brain 3/12/2024
-TECHNIQUE: Multi-sequence imaging of the brain performed at 3 Tesla.
-MEDICATIONS:
-ProHance - 12 mL - Intravenous
-FINDINGS:
-Post-surgical changes noted in the right occipital region. No overt evidence of recurrent tumorous enhancement or abnormal diffusion signal. The resection cavity remains unchanged in size and shows no enhancement.
-There is a small amount of chronic blood products noted within the resection cavity, consistent with prior surgery.
-No acute intracranial findings such as infarct, hemorrhage, or midline shift.
+CLINICAL HISTORY: Right frontal grade 2 ganglioglioma resected
+05/2021 here for surveillance.
 
-IMPRESSION: 
-1. Stable appearance of the right occipital resection cavity with no evidence of recurrent ganglioglioma.
-2. Chronic blood products within the cavity are unchanged since prior imaging.
-Report dictated by: Michael T. Nguyen, MD, signed by: Susan L. Carter, MD
-Department of Radiology and Biomedical Imaging",Inpatient,Male,29,845321
-MR BRAIN WITH AND WITHOUT CONTRAST,"MR BRAIN WITH AND WITHOUT CONTRAST:  12/5/2024 1:45 PM
-INDICATION (as provided by referring clinician): ganglioglioma follow-up
-ADDITIONAL HISTORY: Post-surgical evaluation after subtotal resection of right frontal ganglioglioma on 8/10/2024.
-COMPARISON: MRI brain 10/15/2024
-TECHNIQUE: Comprehensive brain MRI at 3 Tesla.
-MEDICATIONS:
-Multihance - 10 mL - Intravenous
-FINDINGS:
-Residual mass in the right frontal lobe shows stable size and enhancement characteristics. No new lesions or signs of progression. The surgical bed demonstrates expected postoperative changes with no significant fluid accumulation.
-Ventricular size appears normal. No evidence of acute ischemic change or hemorrhagic event.
-Mild periventricular white matter changes are consistent with chronic small vessel ischemic disease.
+TECHNIQUE: The following MR sequences were obtained on a 1.5 Tesla
+scanner: triplanar localization, axial and sagittal FLAIR, axial T1,
+axial and coronal T1 post-gadolinium, axial diffusion weighted
+imaging.
 
-IMPRESSION: 
-1. Stable residual right frontal ganglioglioma with no indication of progression.
-2. No acute intracranial abnormalities detected.
-Report dictated by: Sarah A. Lee, MD, signed by: David K. Johnson, MD
-Department of Radiology and Biomedical Imaging",Outpatient,Male,52,573210
+COMPARISON: MR of the brain 09/15/2022.
+
+FINDINGS: Redemonstrated is remote right frontal craniotomy
+for resection of reported ganglioglioma. The right frontal
+resection cavity with minimal surrounding FLAIR hyperintensity is
+overall unchanged in appearance. There is no abnormal enhancement.
+No new mass is identified.
+
+The ventricles and sulci remain normal for age. There is no reduced
+diffusion. No susceptibility artifact is present to suggest
+hemorrhage. There are no extra-axial fluid collections or abnormal
+leptomeningeal enhancement.
+
+Again noted is a nonenhancing T2 hyperintense mucus retention cyst
+in the right maxillary sinus.
+
+IMPRESSION:
+
+1. Stable postsurgical changes of the right frontal lobe for
+reported ganglioglioma, with no MR evidence of residual or
+recurrent tumor.
+
+END OF IMPRESSION:",Outpatient,SYN1004
+MR BRAIN WITH AND WITHOUT CONTRAST,"INDICATION:
+MR BRAIN WITH AND WITHOUT CONTRAST : 03/22/2023 2:15 PM
+CLINICAL HISTORY: Right frontal ganglioglioma status post resection in 2021 undergoing surveillance for recurrence.
+COMPARISON: MRI brain 11/11/2022
+TECHNIQUE: Multiple sequences through the brain were acquired at 1.5 tesla.
+CONTRAST MEDIA: Intravenous gadolinium chelate was administered for post-contrast imaging.
+FINDINGS:
+Parenchyma: There are stable post surgical changes related to a right frontal craniotomy for resection of a ganglioglioma, with residual gliosis and a small area of encephalomalacia at the site of resection. No acute hemorrhage. No herniation. The brain is otherwise normal in signal intensity and morphology for the patient's age. There are no suspicious areas of parenchymal T2 hyperintensity. No reduced diffusion. No suspicious enhancement of the brain or leptomeninges on administration of gadolinium.
+Ventricles: Within normal limits of size for the patient's age.
+Extra-axial spaces: Normal.
+Vasculature: Normal flow voids.
+Marrow: Otherwise normal marrow signal intensity within the skull base, calvarium and facial skeleton.
+Orbits: Unremarkable.
+Paranasal sinuses: Mild mucosal thickening of the maxillary sinuses.
+
+IMPRESSION:
+Compared to 11/11/2022, no evidence of recurrent ganglioglioma. Otherwise normal MRI findings of the brain.
+Report dictated by: Jordan Lee, MD, signed by: Samantha Chen, MD
+Department of Radiology and Biomedical Imaging",Outpatient,SYN1005

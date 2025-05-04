@@ -1,43 +1,113 @@
-Exam Description,Report Text,Patient Status,Patient Sex,Patient Age,Patient MRN
-SURGICAL PATHOLOGY,"Anatomic Site: Right frontal lobe, tumor resection (FS)
-Tumor
-Tumor
+Exam Description,Report Text,Patient Status,Patient MRN
+SURGICAL PATHOLOGY,"Anatomic Site: Left temporal lobe
 Clinical Diagnosis/History:
-The patient is a 50-year-old woman with a history of grade II astrocytoma who presents with a 4.2 cm enhancing lesion on MRI, suggestive of progression. The patient underwent a right frontal craniotomy for tumor resection.
+The patient is a 10-year-old girl with a brain tumor - astrocytoma, undergoing temporal craniotomy and partial removal
+of the tumor.
 Gross Description:
-The specimen is received in two parts, each labeled with the patient's name and medical record number.
-Part A, labeled 'tumor FS', consists of three irregular, unoriented, tan-pink soft tissue fragments measuring 0.9 x 0.7 x 0.3 cm in aggregate. The entire specimen is submitted in cassette A1.
-Part B, labeled 'permanent tumor', consists of multiple fragments of tan-white soft tissue measuring 1.5 x 1.0 x 0.5 cm in aggregate. The entire specimen is submitted in cassettes B1-B4.
+The specimen is received fresh in one part, labeled with the patient's name,
+medical record number, and 'left temporal mass,' and
+consists of multiple, irregular, unoriented, grayish-white, soft tissue fragments
+(2.0 x 1.8 x 0.3 cm in aggregate; largest 1.2 x 0.8
+x 0.3 cm). The largest fragment is bisected, wrapped with the remaining soft
+tissue fragments, and entirely submitted in
+cassette B1. (js)
+The immunoperoxidase stain(s) reported above were developed and their
+performance characteristics determined by the Mayo Clinic
+Department of Pathology. They have not been cleared or approved by the
+U. S. Food and Drug Administration. The FDA has
+determined that such clearance or approval is not necessary. These tests are
+used for clinical purposes. They should not be
+regarded as investigational or for research. This laboratory is certified
+under the Clinical Laboratory Improvement Amendments
+of 1988 ('CLIA') as qualified to perform high-complexity clinical testing.
 Diagnosis Comments:
-Histological examination reveals increased cellularity, nuclear atypia, and scattered mitotic figures. Immunohistochemical staining for GFAP and Ki-67 was performed, showing diffuse positivity in neoplastic cells. Features are consistent with progression to an anaplastic astrocytoma, WHO Grade III.
-Interoperative Diagnosis:
-A. Brain, right frontal lobe, biopsy: Favor anaplastic astrocytoma, WHO Grade III. (Dr. Emily Tan, 67845.)
+This diffuse astrocytoma shows low cellularity with scattered gemistocytic cells.
+A GFAP stain will be performed on block B1, and the results will be reported
+in an addendum.
 Final Diagnosis:
-A. Brain, right frontal lobe, tumor resection: Anaplastic astrocytoma, WHO Grade III.",Stable,Female,50,572834
-SURGICAL PATHOLOGY,"Anatomic Site: Left parietal lobe, tumor excision (FS)
-Brain, tumor excision
+Brain, left temporal, resection: Diffuse astrocytoma, WHO grade II; see
+comment.
+++++++++++Addendum++++++++++
+RESULTED BY 61234 Johnson, Emily
+Addendum Comment:
+Immunohistochemistry for GFAP was performed on block B1 and shows strong diffuse positivity.
+The immunoperoxidase stain(s) reported above were developed and their
+performance characteristics determined by the Mayo Clinic
+Department of Pathology. They have not been cleared or approved by the
+U. S. Food and Drug Administration. The FDA has
+determined that such clearance or approval is not necessary. These tests are
+used for clinical purposes. They should not be
+regarded as investigational or for research. This laboratory is certified
+under the Clinical Laboratory Improvement Amendments
+of 1988 ('CLIA') as qualified to perform high-complexity clinical testing.",Inpatient,SYN1000
+SURGICAL PATHOLOGY,"Anatomic Site:Parietal lobe biopsy (FS)
+Parietal Tumor (FS   perm)
 Clinical Diagnosis/History:
-The patient is a 39-year-old man with recurrent astrocytoma, previously treated with surgical resection and radiotherapy, presenting with a 2.7 cm lesion on follow-up MRI.
+The patient is a 58-year-old male with a right parietal lesion. Per review
+of the electronic medical record (MedTrack and
+PathNet), the patient has experienced intermittent headaches and visual disturbances. MRI scans
+revealed a 1.5 cm irregularly enhancing
+lesion in the right parietal lobe which was monitored with periodic imaging.
+Following notable enlargement over a 4 month period, he
+underwent a stereotactic biopsy revealing an astrocytoma most consistent with
+anaplastic astrocytoma, WHO Grade III (P12-3456). He
+now proceeds with surgical resection.
 Gross Description:
-The specimen is received fresh in one part, labeled with the patient's name and medical record number.
-Part A, labeled 'tumor excision, FS', consists of two fragments of tan-gray soft tissue, measuring 1.2 x 0.6 x 0.4 cm in aggregate. The specimen is entirely submitted for permanent sections in cassette A1.
+The specimen is received fresh in two parts, labeled with the patient's name
+and medical record number.
+Part A is additionally labeled 'parietal biopsy FS #1,' and consists of three
+fragments of unoriented, irregular, gray-white and
+pink-red soft tissue (0.6 x 0.6 x 0.3 cm in aggregate). A portion of the
+tissue is submitted for frozen section FS1(A) with the
+frozen section remnant submitted in cassette A1. The remaining unfrozen
+tissue is entirely submitted in cassette A2.
+Part B is additionally labeled 'parietal tumor (FS and perm)' and comprises
+multiple fragments of unoriented, irregular,
+white-pink and gray-red tissue (2.0 x 1.5 x 0.4 cm in aggregate). A portion
+of the tissue is submitted for frozen section
+FS2(B) with the frozen section remnant submitted in cassette B1. The
+remaining unfrozen tissue is entirely submitted in
+cassette B2. (abc)
+The immunoperoxidase stain(s) reported above were developed and their
+performance characteristics determined by the Stanford Medical
+Center Department of Pathology. They have not been cleared or approved by the
+U. S. Food and Drug Administration. The FDA has
+determined that such clearance or approval is not necessary. These tests are
+used for clinical purposes. They should not be
+regarded as investigational or for research. This laboratory is certified
+under the Clinical Laboratory Improvement Amendments
+of 1988 ('CLIA') as qualified to perform high-complexity clinical testing.
 Diagnosis Comments:
-Histopathologic examination shows hypercellularity, pleomorphic nuclei, and increased mitotic activity. Immunohistochemical analysis demonstrates GFAP positivity and elevated Ki-67 index. Findings are consistent with a WHO Grade III astrocytoma.
+Best demonstrated on section B2 is an astrocytic neoplasm characterized by
+alternating microcystic regions and compact areas
+with spindle-shaped tumor cells with fine fibrillary processes. Occasional Rosenthal
+fibers are observed. There are vessels with notable
+endothelial prominence, a feature associated with anaplastic astrocytoma.
+ While some pleomorphic nuclei are present,
+they are not predominant, and mitotic activity is limited.
+Immunohistochemical stains are conducted and assessed on block B2. A
+neurofilament stain is largely negative for
+background axons but at the margins, neuropil is well defined. GFAP
+is positive in a subset of tumor cells with
+elongated processes, p53 reveals sparse positive nuclei and a MIB-1
+labeling index is estimated at approximately 3%, supporting
+an anaplastic astrocytoma diagnosis. Additionally, a CD34 stain
+highlights surrounding blood vessels and CD68 shows
+peripheral clusters of microglia/macrophages.
+Immunohistochemistry for IDH-1 will be performed and an addendum will follow.
+Molecular studies for 1p19q status will be
+conducted by the Molecular Pathology Lab, and their report will follow. Drs.
+John Doe and Jane Smith have reviewed this case
+and concur with the diagnosis.
 Interoperative Diagnosis:
-A. Brain, left parietal lobe, tumor, FS: Recurrent astrocytoma, WHO Grade III. (Dr. Michael Lee, 71239.)
+FS1  (A) Brain, parietal lobe, biopsy:  Portion of parietal cortex, negative
+for neoplasm. Tissue section and cytologic
+preparation. Attending Dr. Michael Johnson, 60731.
+FS2  (B) Brain, parietal tumor, biopsy:  Infiltrating neoplastic astrocytes
+consistent with anaplastic astrocytoma, WHO
+Grade III -- no high-grade features identified. Attending Dr. Michael Johnson,
+60731.
 Final Diagnosis:
-A. Brain, left parietal lobe, excision: Recurrent astrocytoma, WHO Grade III.",Undergoing treatment,Male,39,605712
-SURGICAL PATHOLOGY,"Anatomic Site: Right occipital lobe, tumor biopsy (FS)
-Brain, tumor biopsy
-Clinical Diagnosis/History:
-The patient is a 42-year-old woman with a new diagnosis of low-grade astrocytoma after presenting with seizures. MRI showed a 3.6 cm lesion.
-Gross Description:
-The specimen is received in two parts, labeled with the patient's name and medical record number.
-Part A, labeled 'tumor biopsy FS', consists of four fragments of tan-pink soft tissue, measuring 0.7 x 0.5 x 0.2 cm in aggregate. The entire specimen is submitted in cassette A1.
-Part B, labeled 'tumor biopsy', consists of multiple small fragments of tan-gray tissue, measuring 0.8 x 0.6 x 0.3 cm in aggregate. The specimen is entirely submitted in cassettes B1-B2.
-Diagnosis Comments:
-Microscopic examination reveals moderate cellularity and mild atypia without significant mitotic activity. Immunohistochemical stains for GFAP and Olig2 confirm the diagnosis of astrocytoma, WHO Grade II.
-Interoperative Diagnosis:
-A. Brain, right occipital lobe, biopsy: Low-grade astrocytoma, WHO Grade II. (Dr. Sarah James, 78901.)
-Final Diagnosis:
-A. Brain, right occipital lobe, biopsy: Astrocytoma, WHO Grade II.",New diagnosis,Female,42,489321
+A.  Brain, right parietal lobe, craniotomy:  Portion of parietal cortex.
+B.  Brain, right parietal lobe, craniotomy:  Astrocytoma, most consistent with
+anaplastic astrocytoma, WHO Grade III; see comment.",Active,SYN1001
