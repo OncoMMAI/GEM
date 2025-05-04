@@ -2,8 +2,7 @@
 # Matches setup in notebooks/02_gatatron_inference.ipynb
 
 model:
-  # LLM API connection details
-  name: 'BioMistral-7B' # Alternative: 'medllama3-v20'
+  name: 'BioMistral-7B'
   base_url: 'http://localhost:8000/v1' # Local server URL for Gatortron
   api_key: 'token-abc123' # Local token that doesn't require authentication
 
@@ -16,7 +15,6 @@ inference:
   max_retries: 3 # Retry failed requests up to 3 times
 
 prompts:
-  # Prompt templates for different tasks
   tumor_type: >
     You are an expert neuro-radiologist. Based on the following clinical notes, 
     classify the brain tumor type into one of these categories: glioblastoma, 
@@ -52,16 +50,15 @@ prompts:
 
 data:
   # Paths to evaluation datasets
-  type_path: 'data/eval/tumor_type_eval.csv' # 'report' column used for text
-  mgmt_path: 'data/eval/mgmt_eval.csv' # 'report' column used for text
-  os_path: 'data/eval/os_eval.csv' # 'report' column used for text
-  text_column: 'report' # Default column name for text
+  type_path: 'data/eval/tumor_type_eval.csv'
+  mgmt_path: 'data/eval/mgmt_eval.csv'
+  os_path: 'data/eval/os_eval.csv'
+  text_column: 'report'
 
 evaluation:
-  # Evaluation parameters - based on notebook using 10-fold validation
-  n_splits: 10 # Perform 10-fold cross-validation
-  random_state: 42 # Ensure reproducibility
-  metrics: # Metrics to calculate
+  n_splits: 10 # K-fold
+  random_state: 42
+  metrics:
     - accuracy
     - precision
     - recall
@@ -69,6 +66,5 @@ evaluation:
     - aucroc
 
 output:
-  # Directory to save results - use model name as subdirectory
   results_dir: 'results/BioMistral-7B'
   save_predictions: true

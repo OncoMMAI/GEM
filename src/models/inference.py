@@ -472,9 +472,17 @@ def run_inference(config: Dict[str, Any]) -> None:
     if type_df is not None:
         tasks["tumor_type"] = {
             "df": type_df,
-            "label_col": "class_label",
+            "label_col": "tumor_type",
             "text_col": text_column,
         }
+        if isinstance(type_df["tumor_type"].iloc[0], str):
+            label_mapping = {
+                "glioblastoma": 0,
+                "astrocytoma": 1,
+                "oligodendroglioma": 2,
+                "oligoastrocytoma": 3,
+            }
+            type_df["tumor_type"] = type_df["tumor_type"].str.lower().map(label_mapping)
 
     if os_df is not None:
         tasks["survival"] = {
