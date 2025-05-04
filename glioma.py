@@ -138,8 +138,7 @@ Examples:
     )
     inference_parser.add_argument(
         "--model",
-        choices=["jina", "jina_finetuned", "nvidia", "gatortron"],
-        default="jina_finetuned",
+        choices=["biomistral", "medllama3", "custom"],
         help="Model to use for inference",
     )
     inference_parser.add_argument(
@@ -152,12 +151,6 @@ Examples:
         "--config",
         default="configs/visualize_config.yaml",
         help="Path to the configuration file",
-    )
-    visualize_parser.add_argument(
-        "--method",
-        choices=["umap", "tsne", "pca"],
-        default="umap",
-        help="Dimension reduction method",
     )
     visualize_parser.add_argument(
         "--embeddings_dir", help="Directory containing embeddings to visualize"
@@ -286,9 +279,6 @@ def main():
 
     elif args.command == "visualize":
         cmd.extend(["-m", "src.embeddings.visualize", "--config", args.config])
-
-        if args.method:
-            cmd.extend(["--method", args.method])
 
         if args.embeddings_dir:
             cmd.extend(["--embeddings_dir", args.embeddings_dir])
