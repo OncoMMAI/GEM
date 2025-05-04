@@ -138,7 +138,7 @@ def visualize_embeddings(
 
     # Plot each class
     for class_idx, class_name in enumerate(class_names):
-        mask = labels == class_idx
+        mask = labels == class_name
         if not np.any(mask):
             logger.warning(f"No samples found for class {class_name}")
             continue
@@ -272,7 +272,7 @@ def create_multi_model_visualization(config: Dict[str, Any]) -> None:
         logger.info(f"Loaded data with {len(df)} samples")
 
         # Extract labels
-        label_col = data_config.get("label_column", "class_label")
+        label_col = data_config.get("label_column", "tumor_type")
         if label_col not in df.columns:
             logger.error(f"Label column '{label_col}' not found in data")
             return
@@ -364,7 +364,7 @@ def create_multi_model_visualization(config: Dict[str, Any]) -> None:
         if i < len(axes):
             ax = axes[i]
             for class_idx, class_name in enumerate(class_names):
-                mask = labels == class_idx
+                mask = labels == class_name
                 if not np.any(mask):
                     continue
 
