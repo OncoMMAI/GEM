@@ -1,0 +1,29 @@
+# Configuration for model evaluation
+
+global:
+  seed: 7 # Random seed for reproducibility
+
+embedding:
+  # The Python script uses these parameters when calling model.encode()
+  # Note: batch_size reduced from 16 to 4 to avoid NaN issues with ~9% of samples
+  batch_size: 4
+  max_length: 2048
+
+data:
+  # Paths to your evaluation datasets
+  type_path: '/home/neob/ai/paper/data/eval/tumor_type_eval.csv'
+  mgmt_path: '/home/neob/ai/paper/data/eval/mgmt_eval.csv'
+  os_path: '/home/neob/ai/paper/data/eval/os_eval.csv'
+
+  # Column name containing the text to embed
+  text_column: 'report'
+
+evaluation:
+  # Parameters for the RandomForestClassifier and k-fold validation
+  n_splits: 10
+  random_state: 7 # Seed for StratifiedKFold
+  n_estimators: 1000 # Number of trees in RandomForest
+
+output:
+  # Directory where the final results tables (markdown and JSON) will be saved
+  results_dir: 'results'
