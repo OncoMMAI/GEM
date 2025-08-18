@@ -1,0 +1,30 @@
+# Standard evaluation configuration
+global:
+  seed: 7
+
+model:
+  base_model: 'jinaai/jina-embeddings-v3'
+  finetuned_model: 'models/results/{model_name}/final' # Will be replaced dynamically
+  trust_remote_code: true
+
+embedding:
+  directory: 'embeddings/experiments/{model_name}' # Will be replaced dynamically
+  batch_size: 32
+  max_length: 2048
+  task: 'text-matching'
+
+data:
+  type_path: '/home/neob/ai/paper/data/eval/tumor_type_eval.csv'
+  mgmt_path: '/home/neob/ai/paper/data/eval/mgmt_eval.csv'
+  os_path: '/home/neob/ai/paper/data/eval/os_eval.csv'
+  text_column: 'report'
+  id_column: 'mrn'
+
+evaluation:
+  n_splits: 5
+  random_state: 7
+  n_estimators: 1000
+  baseline_model: 'jina_base'
+
+output:
+  results_dir: 'results/experiments/{model_name}' # Will be replaced dynamically

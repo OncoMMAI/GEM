@@ -1,0 +1,27 @@
+# Dataset Size: 10k samples (~13% of full dataset)
+global:
+  seed: 42
+
+model:
+  name: 'jinaai/jina-embeddings-v3'
+  trust_remote_code: true
+  default_task: 'text-matching'
+  lora_main_params_trainable: true
+
+training:
+  num_epochs: 5
+  train_batch_size: 8
+  eval_batch_size: 16
+  gradient_accumulation_steps: 8
+  learning_rate: 0.00001
+  warmup_ratio: 0.15
+  max_grad_norm: 1.0
+  batch_sampler: 'NO_DUPLICATES'
+
+data:
+  train_path: '/home/neob/ai/paper/data/training/mnrl/splits/train_10k.csv'
+  eval_path: '/home/neob/ai/paper/data/training/mnrl/splits/eval_10k.csv'
+
+output:
+  results_dir: '/data/users/neob/finetuning/results'
+  model_dir: 'dataset_10k'
