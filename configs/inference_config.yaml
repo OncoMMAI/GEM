@@ -16,37 +16,41 @@ inference:
 
 prompts:
   tumor_type: >
-    You are an expert neuro-radiologist. Based on the following clinical notes, 
-    classify the brain tumor type into one of these categories: glioblastoma, 
-    astrocytoma, oligodendroglioma, or oligoastrocytoma.
+    You are an expert neuro-radiologist. Classify the brain tumor type.
 
     Clinical Notes:
     {text}
 
-    Provide your classification in the following format:
-    CLASSIFICATION: [tumor type]
+    Choose from:
+    A: glioblastoma
+    B: astrocytoma
+    C: oligodendroglioma
 
-    Only output one of the four specified categories.
+    Answer with a single letter.
 
   survival: >
-    You are an expert neuro-oncologist. Based on the following clinical notes, 
-    predict whether the patient will survive beyond 1 year from diagnosis.
+    You are an expert neuro-oncologist. Predict 1-year survival.
 
     Clinical Notes:
     {text}
 
-    Provide your prediction in the following format:
-    PREDICTION: [SURVIVE/NOT_SURVIVE]
+    Choose from:
+    A: NOT_SURVIVE
+    B: SURVIVE
+
+    Answer with a single letter.
 
   mgmt: >
-    You are an expert molecular pathologist. Based on the following clinical notes, 
-    predict whether the patient's tumor has MGMT promoter methylation (positive) or not (negative).
+    You are an expert molecular pathologist. Predict MGMT promoter methylation.
 
     Clinical Notes:
     {text}
 
-    Provide your prediction in the following format:
-    MGMT_STATUS: [POSITIVE/NEGATIVE]
+    Choose from:
+    A: NEGATIVE
+    B: POSITIVE
+
+    Answer with a single letter.
 
 data:
   # Paths to evaluation datasets
@@ -56,7 +60,7 @@ data:
   text_column: 'report'
 
 evaluation:
-  n_splits: 10 # K-fold
+  n_splits: 10 # K-fold (align with decoder inference script)
   random_state: 42
   metrics:
     - accuracy

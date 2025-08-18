@@ -9,17 +9,15 @@ models. It supports t-SNE dimensionality reduction and coloring by tumor type.
 
 import logging
 from pathlib import Path
-from typing import Dict, List, Optional, Union, Any, Tuple
+from typing import Dict, Optional, Any, Tuple
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
-from matplotlib.colors import to_rgba
 import seaborn as sns
 from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
-from tqdm import tqdm
 
 from src.utils.config import get_config
 from src.utils.logging import setup_logger, disable_external_loggers
@@ -279,17 +277,27 @@ def create_multi_model_visualization(config: Dict[str, Any]) -> None:
 
         labels = df[label_col].values
 
-        # Get label names (matching lowercase names in notebook)
+        # Get label names (3-class)
         class_names = [
             "glioblastoma",
             "astrocytoma",
             "oligodendroglioma",
-            "oligoastrocytoma",
         ]
+
+        # Filter to 3-class labels only to ensure consistency across plots
+        allowed_mask = np.isin(labels.astype(str).astype(str).str.lower(), class_names)
+        if not np.all(allowed_mask):
+            removed = int((~allowed_mask).sum())
+            logger.info(
+                f"Filtering labels not in {class_names}: removed {removed} rows"
+            )
+            labels = labels[allowed_mask]
 
         # Check if we have all labels
         unique_labels = np.unique(labels)
-        logger.info(f"Found {len(unique_labels)} unique labels: {unique_labels}")
+        logger.info(
+            f"Found {len(unique_labels)} unique labels after filtering: {unique_labels}"
+        )
 
     except Exception as e:
         logger.error(f"Failed to load data: {e}")
@@ -330,9 +338,16 @@ def create_multi_model_visualization(config: Dict[str, Any]) -> None:
             continue
 
         # Check if embeddings match data size
-        if len(embeddings) != len(df):
+        # Apply the same label filter to embeddings and enforce shape match
+        try:
+            # allowed_mask is defined above in this scope
+            embeddings = embeddings[allowed_mask]
+        except Exception as e:
+            logger.warning(f"Failed to apply label filter to embeddings: {e}")
+
+        if len(embeddings) != len(labels):
             logger.warning(
-                f"Embedding count ({len(embeddings)}) doesn't match data count ({len(df)}), "
+                f"Embedding count ({len(embeddings)}) doesn't match label count ({len(labels)}), "
                 f"skipping {model_name}"
             )
             continue

@@ -81,9 +81,30 @@ def jina_embed(
     ).to(device)
 
     if checkpoint_path:
-        logger.info(f"Loading checkpoint from {checkpoint_path}")
-        checkpoint = load_file(checkpoint_path)
-        model.load_state_dict(checkpoint, strict=False)
+        # Allow passing either a file path or a directory containing the underlying model weights
+        candidate_path = Path(checkpoint_path)
+        resolved_ckpt: Optional[Path] = None
+        if candidate_path.is_file():
+            resolved_ckpt = candidate_path
+        elif candidate_path.is_dir():
+            # Common SentenceTransformer save layout: <dir>/0_Transformer/model.safetensors
+            st_layout = candidate_path / "0_Transformer" / "model.safetensors"
+            if st_layout.exists():
+                resolved_ckpt = st_layout
+            else:
+                # Fallback: search up to a couple of levels for a model.safetensors
+                for p in candidate_path.rglob("model.safetensors"):
+                    resolved_ckpt = p
+                    break
+
+        if resolved_ckpt and resolved_ckpt.exists():
+            logger.info(f"Loading checkpoint from {resolved_ckpt}")
+            checkpoint = load_file(str(resolved_ckpt))
+            model.load_state_dict(checkpoint, strict=False)
+        else:
+            logger.warning(
+                f"Checkpoint not found at {checkpoint_path}. Proceeding with base model weights."
+            )
 
     model.eval()
     embeddings_list = []
@@ -386,6 +407,15 @@ def generate_embeddings(config: Dict) -> None:
 
             output_path = task_dir / f"jina_base.npy"
 
+            # Determine device from optional device_ids for convenience
+            device = None
+            if "device_ids" in jina_config:
+                device_ids_cfg = jina_config.get("device_ids")
+                if isinstance(device_ids_cfg, int):
+                    device = f"cuda:{device_ids_cfg}"
+                elif isinstance(device_ids_cfg, list) and len(device_ids_cfg) > 0:
+                    device = f"cuda:{device_ids_cfg[0]}"
+
             jina_embed(
                 df=df,
                 output_path=output_path,
@@ -395,7 +425,7 @@ def generate_embeddings(config: Dict) -> None:
                 checkpoint_path=jina_config.get("checkpoint_path"),
                 batch_size=jina_config.get("batch_size", 32),
                 max_length=jina_config.get("max_length", 2048),
-                device_ids=jina_config.get("device_ids", 0),
+                device=device,
                 trust_remote_code=jina_config.get("trust_remote_code", True),
                 cache_dir=cache_dir,
             )
@@ -409,6 +439,15 @@ def generate_embeddings(config: Dict) -> None:
             if jina_config.get("checkpoint_path"):
                 output_path = task_dir / f"jina_finetuned.npy"
 
+            # Determine device from optional device_ids for convenience
+            device = None
+            if "device_ids" in jina_config:
+                device_ids_cfg = jina_config.get("device_ids")
+                if isinstance(device_ids_cfg, int):
+                    device = f"cuda:{device_ids_cfg}"
+                elif isinstance(device_ids_cfg, list) and len(device_ids_cfg) > 0:
+                    device = f"cuda:{device_ids_cfg[0]}"
+
             jina_embed(
                 df=df,
                 output_path=output_path,
@@ -418,7 +457,7 @@ def generate_embeddings(config: Dict) -> None:
                 checkpoint_path=jina_config.get("checkpoint_path"),
                 batch_size=jina_config.get("batch_size", 32),
                 max_length=jina_config.get("max_length", 2048),
-                device_ids=jina_config.get("device_ids", 0),
+                device=device,
                 trust_remote_code=jina_config.get("trust_remote_code", True),
                 cache_dir=cache_dir,
             )

@@ -30,7 +30,7 @@ data:
 
 evaluation:
   # Random Forest classifier parameters
-  n_splits: 10 # Number of cross-validation folds
+  n_splits: 5 # Number of cross-validation folds (matching manuscript)
   random_state: 7 # Random seed for validation splits
   n_estimators: 1000 # Number of trees in random forest
 

@@ -1,0 +1,54 @@
+# Core dependencies - Updated for CUDA 12.5 compatibility
+# PyTorch 2.3.1 with CUDA 12.1 support (compatible with CUDA 12.5)
+torch==2.3.1+cu121
+torchvision==0.18.1+cu121
+torchaudio==2.3.1+cu121
+--index-url https://download.pytorch.org/whl/cu121
+
+# Transformers - Updated to match llm2vec requirements
+transformers==4.44.2
+sentence-transformers==3.1.0
+
+# Data management
+pandas>=2.0.0
+numpy>=1.24.0,<2.0.0
+datasets>=2.14.0
+
+# Scientific computing
+scikit-learn>=1.3.0
+scipy>=1.10.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+umap-learn>=0.5.3
+
+# API support (removed vllm as it has specific CUDA requirements)
+# vllm  # Install separately with: pip install vllm --extra-index-url https://pypi.nvidia.com
+openai>=1.0.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+pyarrow>=12.0.0
+einops>=0.7.0
+
+# Survival analysis
+lifelines>=0.27.0
+
+# Additional dependencies
+safetensors>=0.4.0
+accelerate>=0.25.0
+peft>=0.7.0
+# bitsandbytes requires separate installation for CUDA 12.5
+# Install with: pip install bitsandbytes --extra-index-url https://pypi.nvidia.com
+jupyter>=1.0.0
+ipykernel>=6.25.0
+notebook>=7.0.0
+
+# Flash Attention 2 - Must be installed separately after PyTorch
+# pip install flash-attn --no-build-isolation
+
+# For llm2vec compatibility
+evaluate>=0.4.0

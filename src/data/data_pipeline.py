@@ -269,6 +269,18 @@ def create_mnrl_pairs(
     """
     logger.info("Creating MNRL pairs...")
 
+    # Remove oligoastrocytoma pairs to align with current label set
+    if "cancer_type" in matches_df.columns:
+        before = len(matches_df)
+        matches_df = matches_df[
+            matches_df["cancer_type"].str.lower() != "oligoastrocytoma"
+        ]
+        after = len(matches_df)
+        if after < before:
+            logger.info(
+                f"Filtered oligoastrocytoma pairs: {before - after} removed (remaining: {after})"
+            )
+
     # Check if MNRL is enabled in config
     mnrl_enabled = True
     if config and "training" in config and "mnrl" in config["training"]:

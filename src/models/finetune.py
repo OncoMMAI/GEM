@@ -235,6 +235,14 @@ def create_training_args(
         train_batch_size * gradient_accumulation_steps * world_size
     )
 
+    # Get batch sampler from config or use default
+    batch_sampler_str = training_config.get("batch_sampler", "NO_DUPLICATES")
+    batch_sampler = (
+        BatchSamplers.BATCH_SAMPLER
+        if batch_sampler_str == "DEFAULT"
+        else BatchSamplers.NO_DUPLICATES
+    )
+
     # Create training arguments
     return SentenceTransformerTrainingArguments(
         output_dir=str(output_dir),
@@ -261,7 +269,7 @@ def create_training_args(
         gradient_checkpointing=True,
         dataloader_num_workers=2,
         dataloader_pin_memory=True,
-        batch_sampler=BatchSamplers.NO_DUPLICATES,
+        batch_sampler=batch_sampler,
         report_to="none",
     )
 

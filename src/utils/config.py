@@ -127,7 +127,9 @@ def update_config_with_args(
     if args.output_dir:
         if "output" not in updated_config:
             updated_config["output"] = {}
+        # Set both generic output_dir and results_dir to maximize compatibility across modules
         updated_config["output"]["output_dir"] = args.output_dir
+        updated_config["output"]["results_dir"] = args.output_dir
         logger.info(f"Using output directory: {args.output_dir}")
 
     # Override device if specified

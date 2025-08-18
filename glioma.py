@@ -193,8 +193,6 @@ def main():
     """Run the appropriate command based on arguments."""
     args = parse_args()
 
-    cmd = []
-
     # Always start with UV
     cmd = ["uv", "run", "python"]
 

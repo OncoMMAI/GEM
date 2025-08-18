@@ -23,34 +23,42 @@ from tqdm import tqdm
 
 from src.utils.config import get_config
 from src.utils.logging import setup_logger, disable_external_loggers
-from src.utils.metrics import calculate_metrics
+# calculate_metrics no longer used in letter-based path
 
 
-# Default prompt templates if not specified in config
+# Default prompt templates if not specified in config (letter-based, concise)
 DEFAULT_PROMPT_TEMPLATES = {
-    "tumor_type": """You are an expert neuro-radiologist. Based on the following clinical notes, classify the brain tumor type into one of these categories: glioblastoma, astrocytoma, oligodendroglioma, or oligoastrocytoma.
+    "tumor_type": """You are an expert neuro-radiologist. Classify the brain tumor type.
 
 Clinical Notes:
 {text}
 
-Provide your classification in the following format:
-CLASSIFICATION: [tumor type]
+Choose from:
+A: glioblastoma
+B: astrocytoma
+C: oligodendroglioma
 
-Only output one of the four specified categories.""",
-    "survival": """You are an expert neuro-oncologist. Based on the following clinical notes, predict whether the patient will survive beyond 1 year from diagnosis.
-
-Clinical Notes:
-{text}
-
-Provide your prediction in the following format:
-PREDICTION: [SURVIVE/NOT_SURVIVE]""",
-    "mgmt": """You are an expert molecular pathologist. Based on the following clinical notes, predict whether the patient's tumor has MGMT promoter methylation (positive) or not (negative).
+Answer with a single letter.""",
+    "survival": """You are an expert neuro-oncologist. Predict 1-year survival.
 
 Clinical Notes:
 {text}
 
-Provide your prediction in the following format:
-MGMT_STATUS: [POSITIVE/NEGATIVE]""",
+Choose from:
+A: NOT_SURVIVE
+B: SURVIVE
+
+Answer with a single letter.""",
+    "mgmt": """You are an expert molecular pathologist. Predict MGMT promoter methylation.
+
+Clinical Notes:
+{text}
+
+Choose from:
+A: NEGATIVE
+B: POSITIVE
+
+Answer with a single letter.""",
 }
 
 
@@ -152,8 +160,7 @@ class LLMInferenceClient:
                 return 1
             elif "oligodendroglioma" in prediction:
                 return 2
-            elif "oligoastrocytoma" in prediction:
-                return 3
+            # Removed oligoastrocytoma from the label set
 
         elif task == "survival":
             if "survive" in prediction:
@@ -187,6 +194,91 @@ class LLMInferenceClient:
             label = self.parse_prediction(raw_prediction, task)
             predictions.append(label)
         return predictions
+
+    # --- Letter-based prompting with logprobs for calibrated AUROC ---
+    def _get_task_labels(self, task: str) -> list:
+        if task == "tumor_type":
+            return ["glioblastoma", "astrocytoma", "oligodendroglioma"]
+        if task == "survival":
+            return ["NOT_SURVIVE", "SURVIVE"]
+        if task == "mgmt":
+            return ["NEGATIVE", "POSITIVE"]
+        raise ValueError(f"Unknown task: {task}")
+
+    def _build_letter_prompt(self, clinical_note: str, task: str) -> str:
+        labels = self._get_task_labels(task)
+        options = "\n".join(
+            [f"{chr(ord('A') + i)}: {lab}" for i, lab in enumerate(labels)]
+        )
+        if task == "tumor_type":
+            header = (
+                "You are an expert neuro-radiologist. Classify the brain tumor type."
+            )
+        elif task == "survival":
+            header = "You are an expert neuro-oncologist. Predict 1-year survival."
+        else:
+            header = "You are an expert molecular pathologist. Predict MGMT promoter methylation."
+        return f"""{header}
+
+Clinical Notes:
+{clinical_note}
+
+Choose from:
+{options}
+
+Answer with a single letter:"""
+
+    def predict_letter_with_probs(
+        self, clinical_note: str, task: str
+    ) -> tuple[int, "np.ndarray"]:
+        import numpy as np  # local import to avoid global dependency if not used
+
+        labels = self._get_task_labels(task)
+        prompt = self._build_letter_prompt(clinical_note, task)
+        letter_to_idx = {chr(ord("A") + i): i for i in range(len(labels))}
+
+        try:
+            completion = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.0,
+                max_tokens=5,
+                logprobs=True,
+                top_logprobs=10,
+            )
+
+            # Extract predicted letter
+            response_text = completion.choices[0].message.content or ""
+            response_text = response_text.strip().upper()
+            pred_idx = -1
+            for ch in response_text:
+                if ch in letter_to_idx:
+                    pred_idx = letter_to_idx[ch]
+                    break
+
+            # Default probabilities
+            probs = np.ones(len(labels), dtype=float) / len(labels)
+
+            # Extract logprobs if provided for the first output token
+            lp = getattr(completion.choices[0], "logprobs", None)
+            if lp and getattr(lp, "content", None):
+                top = lp.content[0].top_logprobs
+                logprob_map = {ltr: -100.0 for ltr in letter_to_idx}
+                for entry in top:
+                    tok = (entry.token or "").upper()
+                    # Keep only A/B/C letters from token
+                    if len(tok) == 1 and tok in letter_to_idx:
+                        logprob_map[tok] = entry.logprob
+                logvals = np.array(
+                    [logprob_map[ltr] for ltr in sorted(letter_to_idx.keys())]
+                )
+                expv = np.exp(logvals - np.max(logvals))
+                probs = expv / expv.sum()
+
+            return pred_idx, probs
+        except Exception as e:
+            self.logger.error(f"Letter prediction failed: {e}")
+            return -1, np.ones(len(labels), dtype=float) / len(labels)
 
     def get_predictions(
         self,
@@ -303,22 +395,10 @@ def run_inference_task(
     random_state: int = 42,
     batch_size: int = 10,
     num_workers: int = 4,
-) -> Dict[int, Dict[str, float]]:
-    """Run inference for a specific task.
+) -> Dict[str, Any]:
+    """Run inference for a specific task using letter prompts and logprob-based AUROC.
 
-    Args:
-        task_name: Name of the task (type, survival, mgmt)
-        df: DataFrame containing the data
-        label_col: Column name containing the labels
-        client: LLM inference client
-        text_col: Column name containing the text (if None, automatically detected)
-        n_splits: Number of folds for cross-validation
-        random_state: Random seed for reproducibility
-        batch_size: Number of examples to process in each batch
-        num_workers: Number of parallel workers
-
-    Returns:
-        Dictionary of fold results
+    Returns a dict of fold -> metrics.
     """
     logger = logging.getLogger("glioma.inference")
     logger.info(f"\nProcessing {task_name} task...")
@@ -328,61 +408,101 @@ def run_inference_task(
     valid_df = df[valid_mask]
 
     logger.info(f"Dataset has {len(valid_df)} valid samples (out of {len(df)} total)")
+    logger.info(f"Label distribution: {valid_df[label_col].value_counts().to_dict()}")
 
-    # Get label distribution
-    label_counts = valid_df[label_col].value_counts()
-    logger.info(f"Label distribution: {label_counts.to_dict()}")
+    # Determine text column
+    if text_col is None:
+        for c in ["report", "text", "Anon Report Text"]:
+            if c in valid_df.columns:
+                text_col = c
+                break
+    if text_col is None:
+        raise ValueError("No valid text column found in dataframe")
 
-    # Setup k-fold cross validation
+    # K-Fold CV
     kf = KFold(n_splits=n_splits, shuffle=True, random_state=random_state)
-    fold_results = {}
+    fold_results: Dict[int, Dict[str, float]] = {}
+    y_true_all: list[np.ndarray] = []
+    y_pred_all: list[np.ndarray] = []
 
-    # Run each fold
-    for fold_idx, (train_idx, test_idx) in enumerate(kf.split(valid_df), 1):
-        logger.info(f"\nProcessing fold {fold_idx}/{n_splits}...")
+    for fold_idx, (_, test_idx) in enumerate(kf.split(valid_df), 1):
+        logger.info(f"Processing fold {fold_idx}/{n_splits}...")
+        test_df = valid_df.iloc[test_idx]
 
-        # Get test data for this fold
-        test_df = valid_df.iloc[test_idx].copy()
+        # Collect predictions and probabilities
+        preds: list[int] = []
+        probs: list[np.ndarray] = []
+        notes = test_df[text_col].tolist()
 
-        # Get predictions for test set
-        predictions = client.get_predictions(
-            test_df,
-            task_name,
-            text_col=text_col,
-            batch_size=batch_size,
-            num_workers=num_workers,
+        for i in range(0, len(notes), batch_size):
+            batch = notes[i : i + batch_size]
+            for note in batch:
+                pred_idx, pvec = client.predict_letter_with_probs(note, task_name)
+                preds.append(pred_idx)
+                probs.append(pvec)
+
+        y_true = test_df[label_col].values.astype(int)
+        y_pred = np.array(preds)
+        y_prob = np.vstack(probs) if probs else np.zeros((0, 0))
+
+        # Compute metrics (filter invalid)
+        valid_pred = y_pred != -1
+        if not np.any(valid_pred):
+            fold_results[fold_idx] = {
+                "accuracy": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_macro": 0.0,
+                "aucroc": float("nan"),
+            }
+            continue
+
+        from sklearn.metrics import (
+            accuracy_score,
+            precision_recall_fscore_support,
+            roc_auc_score,
         )
 
-        # Get true labels
-        true_labels = test_df[label_col].values
+        yt = y_true[valid_pred]
+        yp = y_pred[valid_pred]
+        yp_prob = y_prob[valid_pred] if y_prob.size else None
 
-        # Filter out invalid predictions
-        valid_pred_mask = predictions != -1
-        if not np.all(valid_pred_mask):
-            logger.warning(
-                f"Filtered out {np.sum(~valid_pred_mask)} invalid predictions "
-                f"(out of {len(predictions)})"
-            )
-            predictions = predictions[valid_pred_mask]
-            true_labels = true_labels[valid_pred_mask]
+        acc = accuracy_score(yt, yp)
+        pr, rc, f1, _ = precision_recall_fscore_support(
+            yt, yp, average="macro", zero_division=0
+        )
+        # AUROC from probabilities when available
+        try:
+            uniq = np.unique(yt)
+            if yp_prob is not None and yp_prob.size:
+                if len(uniq) == 2:
+                    auc = roc_auc_score(yt, yp_prob[:, 1])
+                else:
+                    auc = roc_auc_score(yt, yp_prob, multi_class="ovr")
+            else:
+                auc = float("nan")
+        except Exception:
+            auc = float("nan")
 
-        # Calculate metrics for this fold
-        fold_results[fold_idx] = calculate_metrics(true_labels, predictions)
+        fold_results[fold_idx] = {
+            "accuracy": acc,
+            "precision": pr,
+            "recall": rc,
+            "f1_macro": f1,
+            "aucroc": auc,
+        }
 
-        # Log fold results
-        log_metrics = {k: f"{v:.4f}" for k, v in fold_results[fold_idx].items()}
-        logger.info(f"Fold {fold_idx} metrics: {log_metrics}")
+        y_true_all.append(yt)
+        y_pred_all.append(yp)
 
-    # Calculate and log average metrics
-    avg_metrics = {}
-    for metric in next(iter(fold_results.values())).keys():
-        values = [fold[metric] for fold in fold_results.values() if metric in fold]
-        avg = np.mean(values)
-        std = np.std(values)
-        avg_metrics[metric] = (avg, std)
-        logger.info(f"Average {metric}: {avg:.4f} ± {std:.4f}")
+    overall_true = np.concatenate(y_true_all) if y_true_all else np.array([])
+    overall_pred = np.concatenate(y_pred_all) if y_pred_all else np.array([])
 
-    return fold_results
+    return {
+        "fold_results": fold_results,
+        "overall_y_true": overall_true,
+        "overall_y_pred": overall_pred,
+    }
 
 
 def run_inference(config: Dict[str, Any]) -> None:
@@ -407,7 +527,7 @@ def run_inference(config: Dict[str, Any]) -> None:
     num_workers = inference_config.get("num_threads", 4)
     max_retries = inference_config.get("max_retries", 3)
 
-    # Evaluation configuration
+    # Evaluation configuration (align with provided decoder inference defaults)
     eval_config = config["evaluation"]
     n_splits = eval_config.get("n_splits", 10)
     random_state = eval_config.get("random_state", 42)
@@ -480,7 +600,6 @@ def run_inference(config: Dict[str, Any]) -> None:
                 "glioblastoma": 0,
                 "astrocytoma": 1,
                 "oligodendroglioma": 2,
-                "oligoastrocytoma": 3,
             }
             type_df["tumor_type"] = type_df["tumor_type"].str.lower().map(label_mapping)
 
@@ -502,7 +621,7 @@ def run_inference(config: Dict[str, Any]) -> None:
     all_results = []
 
     for task_name, task_config in tasks.items():
-        fold_results = run_inference_task(
+        task_out = run_inference_task(
             task_name=task_name,
             df=task_config["df"],
             label_col=task_config["label_col"],
@@ -513,18 +632,40 @@ def run_inference(config: Dict[str, Any]) -> None:
             batch_size=batch_size,
             num_workers=num_workers,
         )
-
+        fold_results = task_out["fold_results"]
         # Format results table
         results_table = format_results_table(fold_results, model_name)
-        all_results.append(f"# {task_name.title()} Task Results\n\n{results_table}\n")
+        all_results.append(f"# {task_name.title()}\n\n{results_table}\n")
 
-        # Save individual task results
+        # Save fold metrics
         task_file = output_dir / f"{task_name}_results.json"
         with open(task_file, "w") as f:
             json.dump(fold_results, f, indent=2)
 
-        logger.info(f"\nResults for {task_name} task:")
-        logger.info("\n" + results_table)
+        # Save classification report and confusion matrix
+        try:
+            from sklearn.metrics import classification_report, confusion_matrix
+
+            y_true = task_out["overall_y_true"]
+            y_pred = task_out["overall_y_pred"]
+            if y_true.size and y_pred.size:
+                unique_labels = np.unique(y_true)
+                target_names = [str(lbl) for lbl in sorted(unique_labels)]
+                report_txt = classification_report(
+                    y_true, y_pred, target_names=target_names, digits=3
+                )
+                cm = confusion_matrix(y_true, y_pred, labels=sorted(unique_labels))
+                import pandas as _pd
+
+                cm_df = _pd.DataFrame(cm, index=target_names, columns=target_names)
+                (output_dir / f"{task_name}_classification_report.txt").write_text(
+                    report_txt
+                )
+                cm_df.to_csv(output_dir / f"{task_name}_confusion_matrix.csv")
+        except Exception as e:
+            logger.warning(f"Failed detailed report for {task_name}: {e}")
+
+        logger.info(f"\nResults for {task_name} task:\n{results_table}")
 
     # Save all results to a single markdown file
     output_file = output_dir / "all_results.md"

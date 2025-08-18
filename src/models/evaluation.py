@@ -22,6 +22,8 @@ from sklearn.metrics import (
     accuracy_score,
     precision_recall_fscore_support,
     roc_auc_score,
+    classification_report,
+    confusion_matrix,
 )
 from tqdm import tqdm
 
@@ -107,7 +109,7 @@ def evaluate_fold(
         auc = roc_auc_score(y_test, y_pred_proba, multi_class="ovr")
     metrics["aucroc"] = auc
 
-    return metrics
+    return metrics, y_pred
 
 
 def run_kfold_evaluation(
@@ -135,6 +137,8 @@ def run_kfold_evaluation(
     # Setup stratified k-fold
     skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=random_state)
     fold_metrics = []
+    all_y_true: list = []
+    all_y_pred: list = []
 
     # Evaluate each fold
     for fold_idx, (train_idx, test_idx) in tqdm(
@@ -145,7 +149,7 @@ def run_kfold_evaluation(
         X_train, X_test = embeddings[train_idx], embeddings[test_idx]
         y_train, y_test = labels[train_idx], labels[test_idx]
 
-        metrics = evaluate_fold(
+        metrics, y_pred = evaluate_fold(
             X_train,
             X_test,
             y_train,
@@ -154,6 +158,8 @@ def run_kfold_evaluation(
             random_state=random_state,
         )
         fold_metrics.append(metrics)
+        all_y_true.append(y_test)
+        all_y_pred.append(y_pred)
 
         # Log metrics for this fold
         if fold_idx == 0:  # Only log detailed metrics for first fold
@@ -173,6 +179,10 @@ def run_kfold_evaluation(
         logger.info(
             f"Average {metric}: {avg_metrics[metric]:.4f} ± {avg_metrics[f'{metric}_std']:.4f}"
         )
+
+    # Store overall predictions for detailed analysis
+    avg_metrics["overall_y_true"] = np.concatenate(all_y_true)
+    avg_metrics["overall_y_pred"] = np.concatenate(all_y_pred)
 
     return avg_metrics
 
@@ -252,6 +262,41 @@ def evaluate_task(
         )
         results[model_name] = metrics
 
+        # Detailed reporting: class balance, classification report, confusion matrix
+        try:
+            # Class distribution
+            label_series = pd.Series(labels)
+            label_counts = label_series.value_counts()
+            logger.info(f"Class distribution (counts): {label_counts.to_dict()}")
+
+            # Retrieve aggregated predictions
+            y_true = metrics.pop("overall_y_true", None)
+            y_pred = metrics.pop("overall_y_pred", None)
+
+            if y_true is not None and y_pred is not None:
+                unique_labels = np.unique(y_true)
+                # Create human-readable target names if labels are strings; otherwise cast to str
+                target_names = [str(lab) for lab in sorted(unique_labels)]
+
+                report_text = classification_report(
+                    y_true, y_pred, target_names=target_names, digits=3
+                )
+                logger.info(f"\nClassification report for {model_name}:\n{report_text}")
+
+                cm = confusion_matrix(y_true, y_pred, labels=sorted(unique_labels))
+                cm_df = pd.DataFrame(cm, index=target_names, columns=target_names)
+                logger.info(f"\nConfusion matrix for {model_name}:\n{cm_df}\n")
+
+                # Persist reports alongside task results
+                report_file = (
+                    output_dir / f"{task_name}_{model_name}_classification_report.txt"
+                )
+                report_file.write_text(report_text)
+                cm_file = output_dir / f"{task_name}_{model_name}_confusion_matrix.csv"
+                cm_df.to_csv(cm_file)
+        except Exception as e:
+            logger.warning(f"Failed detailed reporting for {model_name}: {e}")
+
     if not results:
         logger.warning(f"No valid results for {task_name} task")
         return
@@ -285,6 +330,10 @@ def evaluate_models(config: Dict) -> None:
     data_config = config["data"]
     eval_config = config["evaluation"]
     output_config = config["output"]
+    embedding_base_dir = None
+    if "embedding" in config and isinstance(config["embedding"], dict):
+        # Allow experiments to override where embeddings are read from
+        embedding_base_dir = config["embedding"].get("directory")
 
     # Create results directory
     results_dir = Path(output_config["results_dir"])
@@ -328,24 +377,39 @@ def evaluate_models(config: Dict) -> None:
     tasks = {}
 
     if type_df is not None:
+        tumor_emb_dir = (
+            Path(embedding_base_dir) / "tumor_type"
+            if embedding_base_dir
+            else Path("embeddings/tumor_type")
+        )
         tasks["tumor_type"] = {
-            "embeddings_dir": Path("embeddings/tumor_type"),  # Updated path
+            "embeddings_dir": tumor_emb_dir,
             "df": type_df,
             "label_col": "tumor_type",
             "id_col": "MRN",
         }
 
     if os_df is not None:
+        survival_emb_dir = (
+            Path(embedding_base_dir) / "survival"
+            if embedding_base_dir
+            else Path("embeddings/survival")
+        )
         tasks["survival"] = {
-            "embeddings_dir": Path("embeddings/survival"),
+            "embeddings_dir": survival_emb_dir,
             "df": os_df,
             "label_col": "one_year_survival",  # Using column name from notebook
             "id_col": "Patient_mrn",  # Updated to match notebook
         }
 
     if mgmt_df is not None:
+        mgmt_emb_dir = (
+            Path(embedding_base_dir) / "mgmt"
+            if embedding_base_dir
+            else Path("embeddings/mgmt")
+        )
         tasks["mgmt"] = {
-            "embeddings_dir": Path("embeddings/mgmt"),
+            "embeddings_dir": mgmt_emb_dir,
             "df": mgmt_df,
             "label_col": "mgmt_label",
             "id_col": "mrn",
@@ -353,6 +417,20 @@ def evaluate_models(config: Dict) -> None:
 
     # Evaluate each task
     for task_name, task_config in tasks.items():
+        # Drop oligoastrocytoma class for tumor type to enforce 3-class setting
+        if task_name == "tumor_type":
+            df_tt = task_config["df"]
+            if "tumor_type" in df_tt.columns:
+                before = len(df_tt)
+                mask3 = (
+                    df_tt["tumor_type"].astype(str).str.lower() != "oligoastrocytoma"
+                )
+                task_config["df"] = df_tt[mask3]
+                after = len(task_config["df"])
+                logging.getLogger("glioma.evaluation").info(
+                    f"Filtered oligoastrocytoma: removed {before - after} samples; remaining {after}"
+                )
+
         evaluate_task(
             task_name=task_name,
             task_config=task_config,

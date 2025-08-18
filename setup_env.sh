@@ -27,13 +27,25 @@ echo "Creating virtual environment with UV..."
 uv venv
 
 # Install dependencies
-echo "Installing dependencies..."
+echo "Installing dependencies (ensure CUDA 12.5 drivers present on Linux servers)..."
+PLATFORM=$(uname -s)
+if [ "$PLATFORM" = "Linux" ]; then
+    echo "Linux detected: installing PyTorch CUDA 12.1 wheels (works with CUDA 12.5 drivers)"
+    uv pip install --index-url https://download.pytorch.org/whl/cu121 torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1
+else
+    echo "Non-Linux platform detected ($PLATFORM): installing CPU-only torch"
+    uv pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1
+fi
 uv pip install -e .
 
-echo "Installing build dependencies for flash-attn..."
+echo "Installing build dependencies for flash-attn (Linux only)..."
 uv pip install setuptools psutil
-echo "Installing flash-attn..."
-uv pip install flash-attn --no-build-isolation
+if [ "$PLATFORM" = "Linux" ]; then
+    echo "Installing flash-attn..."
+    UV_HTTP_TIMEOUT=1200 uv pip install 'flash-attn>=2.5.8' --no-build-isolation || echo "flash-attn install failed; continuing"
+else
+    echo "Skipping flash-attn on non-Linux platform"
+fi
 
 # Create necessary directories
 echo "Creating necessary directories..."

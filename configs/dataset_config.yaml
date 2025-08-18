@@ -3,24 +3,24 @@
 # Data sources
 data:
   # Directory containing raw data files
-  input_dir: "data/raw"
-  
+  input_dir: 'data/raw'
+
   # Subdirectories for different modalities
-  mri_dir: "data/raw/mri"
-  pathology_dir: "data/raw/pathology"
-  
+  mri_dir: 'data/raw/mri'
+  pathology_dir: 'data/raw/pathology'
+
   # Report columns
-  text_column: "Report Text"
-  mrn_column: "Patient MRN"
+  text_column: 'Report Text'
+  mrn_column: 'Patient MRN'
 
 # Training data creation
 training:
   # Train/validation split ratio
   train_split: 0.8
-  
+
   # Options for data balancing
   balance_classes: true
-  
+
   # MNRL training parameters
   mnrl:
     enable: true
@@ -28,19 +28,19 @@ training:
 # Output settings
 output:
   # Directory for processed datasets
-  output_dir: "data/training"
-  
+  output_dir: 'data/training'
+
   # Path for matched reports
-  matches_path: "data/training/matches.csv"
-  
+  matches_path: 'data/training/matches.csv'
+
   # MNRL training data paths
-  mnrl_train_path: "data/training/mnrl/train.csv"
-  mnrl_eval_path: "data/training/mnrl/eval.csv"
-  
+  mnrl_train_path: 'data/training/mnrl/train.csv'
+  mnrl_eval_path: 'data/training/mnrl/eval.csv'
+
   # Report processing
   clean_text: true
   lowercase: true
-  
+
 # Logging
 logging:
-  level: "INFO"
+  level: 'INFO'

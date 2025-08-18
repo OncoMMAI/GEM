@@ -42,7 +42,6 @@ visualization:
     - '#E64B35' # Red - glioblastoma
     - '#4DBBD5' # Blue - astrocytoma
     - '#00A087' # Green - oligodendroglioma
-    - '#3C5488' # Purple - oligoastrocytoma
 
 output:
   # Output configuration

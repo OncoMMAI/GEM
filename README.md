@@ -1,260 +1,316 @@
-# A Clinically Aligned Embedding Model for Glioma Prognostication via Radiology-Pathology Report Matching
+## A Clinically Aligned Embedding Model for Glioma Prognostication via Radiology–Pathology Report Matching
 
-This repository contains the implementation and evaluation framework for fine-tuning JINA embeddings for glioma prognostication tasks.
+This repository contains code for our clinically aligned embedding framework. We align radiology and pathology reports to produce robust clinical embeddings tailored for glioma prognostication, using Multiple Negatives Ranking Loss (MNRL) with LoRA-adapted fine‑tuning of `jinaai/jina-embeddings-v3`. We benchmark across tumor type classification, MGMT methylation prediction, and 1‑year survival prediction, and provide a separate LLM2Vec pipeline for decoder-to-encoder adaptation.
 
-## Abstract
+### Abstract
 
-Large Language Models (LLMs) demonstrate strong general text comprehension but remain limited in oncology due to insufficient contextual alignment. We pilot embedding alignment through radiology-pathology report matching to enhance oncology-specific representations. Using Multiple Negative Ranking Loss (MNRL) and Low-Rank Adaptation (LoRA)-adapted fine-tuning of jina-embeddings-v3, we aim to create a context-aware embedding model and evaluate its efficacy across glioma prognostication tasks, including tumor type classification, MGMT methylation prediction, and overall survival prediction. We also compare our fine-tuned embeddings against zero-shot predictions from BioMistral, a specialized biomedical language model.
+Large language models exhibit strong general text understanding yet lack oncology‑specific alignment needed for clinical prognostication. We propose a clinically aligned embedding model trained on matched radiology–pathology report pairs using MNRL with LoRA on `jina-embeddings-v3`. Across three neuro‑oncology tasks (tumor type, MGMT status, one‑year survival), the fine‑tuned encoder achieves strong, balanced performance with modest compute, and outperforms a multi‑stage LLM2Vec decoder‑to‑encoder pipeline. Code, scripts, and synthetic data are provided for full reproducibility; access to clinical data is available under institutional agreements.
+
+### Table of Contents
+
+- Overview and Contributions
+- Reproducibility Quickstart
+- Environment and System Requirements
+- Data and Preprocessing
+- Training and Ablations
+- Embedding Generation and Evaluation
+- Visualization
+- Optional: Decoder Models via LLM2Vec
+- Troubleshooting and Known Issues
+- Ethical, Privacy, and Compliance Notes
+- Citation and License
+
+### Overview and Contributions
+
+- Clinically aligned embeddings via report-pair training (radiology ↔ pathology) with MNRL.
+- Efficient LoRA + optional main-parameter updates on `jina-embeddings-v3` (1024‑d embeddings, long context).
+- Strong performance across 3 clinical tasks; robust ablative analyses (losses, dataset size, sampling, LoRA).
+- Full scripts for end‑to‑end reproducibility (data → train → embed → evaluate → visualize).
+- Separate `llm2vec/` subproject to adapt decoder LLMs into encoders (for comparison), with its own environment.
+
+---
+
+## Reproducibility Quickstart
+
+1. Clone and set up the base environment (uses uv; pip also works):
+
+```bash
+git clone https://github.com/benedictneo/glioma_embedding.git
+cd glioma_embedding
+bash setup_env.sh
+```
+
+2. Prepare data (uses included synthetic samples by default):
+
+```bash
+uv run python glioma.py prepare-data --config configs/dataset_config.yaml
+```
+
+3. Fine‑tune (single GPU):
+
+```bash
+uv run python glioma.py finetune --config configs/finetune_config.yaml
+```
+
+Multi‑GPU (DDP):
+
+```bash
+uv run python glioma.py finetune --config configs/finetune_config.yaml --ddp --num_gpus 4 --gpus 0,1,2,3
+```
+
+4. Generate embeddings:
+
+```bash
+uv run python glioma.py generate --config configs/generate_config.yaml
+```
+
+5. Evaluate:
+
+```bash
+uv run python glioma.py evaluate --config configs/evaluation_config.yaml
+```
+
+6. Visualize:
+
+```bash
+uv run python glioma.py visualize --config configs/visualize_config.yaml
+```
+
+To reproduce all ablations/sequential evaluation:
+
+```bash
+# Create dataset splits (10k, 40k) for ablations
+python scripts/experiments/create_dataset_splits.py \
+  --train-path data/training/mnrl/train.csv \
+  --eval-path data/training/mnrl/eval.csv \
+  --output-dir data/training/mnrl/splits
+
+# Launch training groups (two terminals)
+bash scripts/experiments/run_group_1.sh
+bash scripts/experiments/run_group_2.sh
+
+# After training completes, evaluate all experiments
+RESULTS_BASE_DIR=models/results \
+EMBEDDINGS_BASE_DIR=embeddings/experiments \
+bash scripts/experiments/run_evaluation_sequential.sh
+
+# Compare results
+python scripts/experiments/compare_results.py
+```
+
+---
+
+## Environment and System Requirements
+
+Hardware
+
+- NVIDIA GPU with ≥24GB VRAM recommended; multi‑GPU optional for faster training.
+- RTX 6000 Ada tested (CUDA 12.5 drivers).
+
+Software
+
+- Python ≥3.8 (we use 3.10+). uv is used for fast, reproducible envs.
+- PyTorch 2.3.1. On Linux GPU servers, install CUDA 12.1 wheels (compatible with 12.5 drivers).
+- Transformers 4.44.x, SentenceTransformers 3.1.x.
+- Optional: FlashAttention‑2 on Linux (`flash-attn>=2.5.8`).
+
+Install (Linux GPU server)
+
+```bash
+# Already done by setup_env.sh, but manual steps:
+uv venv
+uv pip install --index-url https://download.pytorch.org/whl/cu121 \
+  torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1
+uv pip install -r requirements.txt
+uv pip install 'flash-attn>=2.5.8' --no-build-isolation  # Linux only, optional
+uv pip install -e .
+```
+
+Notes
+
+- macOS/CPU: setup skips FlashAttention and installs CPU Torch automatically.
+- Hugging Face trust_remote_code is used for `jina-embeddings-v3` to enable encode/task adapters.
+- bitsandbytes is optional; it’s pinned Linux‑only in requirements and not required for this pipeline.
+
+Reproducibility notes
+
+- We fix random seeds (default 42) across Python/NumPy/PyTorch; some CUDA ops may remain nondeterministic per PyTorch guidance.
+- Results can vary slightly by GPU/driver; folds and metrics are reported with mean ± SD.
+
+### Recommended environments (uv)
+
+To avoid dependency conflicts, we recommend three separate uv environments:
+
+- Jina fine‑tune + embeddings (this repo): `uv venv .venv-jina; source .venv-jina/bin/activate`
+
+  - Install Torch CUDA wheels on Linux: `uv pip install --index-url https://download.pytorch.org/whl/cu121 torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1`
+  - `uv pip install -r requirements.txt`
+  - Optional speedup (Linux): `uv pip install 'flash-attn>=2.5.8' --no-build-isolation`
+  - `uv pip install -e .`
+
+- vLLM server (decoder inference): `uv venv .venv-vllm; source .venv-vllm/bin/activate`
+
+  - `uv pip install vllm==0.5.4.post1`
+  - Do not install flash-attn here; keep this env isolated from SentenceTransformers.
+
+- LLM2Vec (decoder‑to‑encoder pipeline): `cd llm2vec; uv venv .venv-llm2vec; source .venv-llm2vec/bin/activate`
+  - Install Torch CUDA wheels as above; then `uv pip install -e .`
+  - Optional speedup (Linux): `uv pip install 'flash-attn>=2.5.8' --no-build-isolation`
+
+Tip: share a model cache across envs to avoid re‑downloading (`export HF_HOME=/path/to/shared_cache`).
+
+---
+
+## Data and Preprocessing
+
+- Synthetic data is provided under `data/raw/*` and `data/eval/*` to exercise the full pipeline.
+- Real clinical data is not included; see Data Availability under Ethics/Compliance for MTA process.
+- Data prep uses `configs/dataset_config.yaml` and `src/data/data_pipeline.py`:
+  - Lowercases, basic PHI scrubbing (synthetic), standardizes whitespace and formats
+  - Matches radiology ↔ pathology reports by patient and cancer type
+  - Creates MNRL anchor–positive pairs; splits by patient to avoid leakage
+
+Run:
+
+```bash
+uv run python glioma.py prepare-data --config configs/dataset_config.yaml
+```
+
+---
+
+## Training and Ablations
+
+Fine‑tuning uses `src/models/finetune.py` with MNRL and SentenceTransformers trainer over `jinaai/jina-embeddings-v3`.
+
+- LoRA adapters are enabled; `lora_main_params_trainable: true` also fine‑tunes base params (per ablations).
+- Batch sampler defaults to `NO_DUPLICATES` for in‑batch negatives.
+- Mixed precision (bf16) where supported; gradient checkpointing enabled.
+
+Single‑GPU:
+
+```bash
+uv run python glioma.py finetune --config configs/finetune_config.yaml
+```
+
+Multi‑GPU (DDP):
+
+```bash
+uv run python glioma.py finetune --config configs/finetune_config.yaml --ddp --num_gpus 4 --gpus 0,1,2,3
+```
+
+Reproducing ablations (`scripts/experiments/configs/*.yaml`):
+
+```bash
+python scripts/experiments/create_dataset_splits.py \
+  --train-path data/training/mnrl/train.csv \
+  --eval-path data/training/mnrl/eval.csv \
+  --output-dir data/training/mnrl/splits
+bash scripts/experiments/run_group_1.sh
+bash scripts/experiments/run_group_2.sh
+```
+
+---
+
+## Embedding Generation and Evaluation
+
+Generate embeddings from base or fine‑tuned Jina (or NV‑Embed / Gatortron):
+
+```bash
+uv run python glioma.py generate --config configs/generate_config.yaml
+```
+
+Notes
+
+- For fine‑tuned Jina, set `model.jina.checkpoint_path` to your checkpoint. We accept either a direct file (model.safetensors) or a directory containing the SentenceTransformers layout (we auto‑resolve).
+- You can override the output dir by `--output_dir`.
+
+Evaluate embeddings (5‑fold CV with Random Forest):
+
+```bash
+uv run python glioma.py evaluate --config configs/evaluation_config.yaml
+```
+
+Notes
+
+- Evaluation now honors `embedding.directory` in the config, so you can point to a per‑experiment embeddings root (we’ll look under `tumor_type/`, `mgmt/`, `survival`).
+- Results are saved in `results/` by default.
+
+Sequential experiment evaluation:
+
+```bash
+RESULTS_BASE_DIR=models/results \
+EMBEDDINGS_BASE_DIR=embeddings/experiments \
+bash scripts/experiments/run_evaluation_sequential.sh
+python scripts/experiments/compare_results.py
+```
+
+---
+
+## Visualization
+
+```bash
+uv run python glioma.py visualize --config configs/visualize_config.yaml
+```
+
+Produces t‑SNE projections with class overlays and confidence ellipses; outputs to `figures/`.
+
+---
+
+## Optional: Decoder Models via LLM2Vec
+
+The `llm2vec/` subproject adapts decoder LLMs (e.g., Llama‑3.1) into encoders through:
+
+1. Bidirectional attention + Masked Next Token Prediction (MNTP)
+2. SimCSE unsupervised contrastive learning
+3. Supervised contrastive fine‑tuning
+
+LLM2Vec uses separate requirements/pins (Transformers ≥4.43) and its own environment:
+
+```bash
+cd llm2vec
+bash setup_env.sh
+# Stage 1 MNTP (single or multi‑GPU)
+uv run torchrun --nproc_per_node=8 experiments/run_mntp.py train_configs/mntp/MetaLlama3.1.json
+# Stage 2 SimCSE
+uv run torchrun --nproc_per_node=8 experiments/run_simcse.py train_configs/simcse/MetaLlama3.1.json
+# Stage 3 Supervised
+uv run torchrun --nproc_per_node=8 experiments/run_supervised.py train_configs/supervised/MetaLlama3.1.json
+```
+
+We report this pipeline primarily for comparison; the encoder‑based Jina fine‑tune was more compute‑efficient and higher performing in our tasks.
+
+---
+
+## Ethical, Privacy, and Compliance Notes
+
+- No clinical data is included in this repository. Synthetic samples are provided to demonstrate structure and pipeline functionality.
+- Access to real clinical data requires a HIPAA‑compliant Data Use Agreement or MTA with UCSF. Contact the corresponding author.
+- All methods are for research use only and not intended for clinical decision‑making without appropriate validation and regulatory review.
+
+---
 
 ## Repository Structure
 
 ```
 glioma_embedding/
-├── LICENSE                      # Apache 2.0 license file
-├── README.md                    # This documentation file
-├── requirements.txt             # Python dependencies
-├── setup.py                     # Package installation script
-├── setup_env.sh                 # Environment setup script
-├── glioma.py                    # Command-line interface
-│
-├── configs/                     # Configuration files
-│   ├── dataset_config.yaml      # Dataset configuration
-│   ├── evaluation_config.yaml   # Evaluation configuration
-│   ├── finetune_config.yaml     # Fine-tuning configuration
-│   ├── generate_config.yaml     # Embedding generation configuration
-│   ├── inference_config.yaml    # Inference configuration
-│   └── visualize_config.yaml    # Visualization configuration
-│
-├── data/                        # Data directory
-│   ├── eval/                    # Evaluation datasets
-│   │   ├── mgmt_eval.csv        # MGMT methylation data
-│   │   ├── os_eval.csv          # Overall survival data
-│   │   └── tumor_type_eval.csv  # Tumor type classification data
-│   ├── raw/                     # Raw synthetic data
-│   │   ├── mri/                 # Synthetic MRI reports by tumor type
-│   │   ├── pathology/           # Synthetic pathology reports by tumor type
-│   │   └── report.csv           # Raw report file
-│   └── training/                # Training datasets
-│       ├── matches.csv          # Matched MRI-pathology reports
-│       └── mnrl/                # MNRL training data
-│           ├── train.csv        # Training data
-│           └── eval.csv         # Validation data
-│
-├── embeddings/                  # Generated embeddings
-│   ├── mgmt/                    # MGMT prediction embeddings
-│   ├── os/                      # Overall survival embeddings
-│   └── tumor_type/              # Tumor type classification embeddings
-│
-├── figures/                     # Generated figures and visualizations
-├── models/                      # Trained model checkpoints
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── setup.py
+├── setup_env.sh
+├── glioma.py
+├── configs/
+├── data/
+├── embeddings/
+├── figures/
+├── models/
 ├── notebooks/
-│   ├── 00_synthetic_data.ipynb          # Synthetic data generation
-│   ├── 01_create_dataset.ipynb          # Dataset creation
-│   ├── 02_biomistral_inference.ipynb    # BioMistral inference
-│   ├── 02_finetune.ipynb                # Fine-tuning notebook
-│   ├── 03_get_embeddings.ipynb          # Embedding generation
-│   ├── 03_visualize_embeddings.ipynb    # Embedding visualization
-│   ├── 04_eval.ipynb                    # Evaluation notebook
-│   └── 05_kaplan_meier.ipynb            # Survival analysis
-│
-├── results/                     # Evaluation results
-│
-├── src/                         # Source code
-│   ├── __init__.py
-│   ├── data/                    # Data processing modules
-│   │   ├── __init__.py
-│   │   └── data_pipeline.py     # Data processing pipeline
-│   ├── embeddings/              # Embedding generation modules
-│   │   ├── __init__.py
-│   │   ├── generate.py          # Generate embeddings
-│   │   └── visualize.py         # Visualize embeddings
-│   ├── models/                  # Model training and evaluation
-│   │   ├── __init__.py
-│   │   ├── evaluation.py        # Evaluation metrics and procedures
-│   │   ├── finetune.py          # Fine-tuning implementation
-│   │   └── inference.py         # Inference implementation with BioMistral
-│   └── utils/                   # Utility functions
-│       ├── __init__.py
-│       ├── config.py            # Configuration utilities
-│       ├── exceptions.py        # Custom exceptions
-│       ├── logging.py           # Logging utilities
-│       ├── metrics.py           # Evaluation metrics
-│       └── seed.py              # Random seed management
+├── results/
+├── scripts/
+└── src/
 ```
 
-## Installation
-
-The codebase requires Python 3.8 or higher and uses the UV package manager. To set up the environment:
-
-```bash
-# Clone the repository
-git clone https://github.com/benedictneo/glioma_embedding.git
-cd glioma_embedding
-
-# Run setup script (creates environment and installs dependencies)
-bash setup_env.sh
-```
-
-The setup script will install UV, create all necessary directories, and install required dependencies.
-
-## Workflow
-
-The workflow consists of six main steps, each controlled by a corresponding configuration file. Each configuration file corresponds to specific modules in the codebase and enables reproducible experiments.
-
-- **dataset_config.yaml**: Configuration for data processing pipeline
-- **finetune_config.yaml**: Settings for MNRL and LoRA fine-tuning
-- **generate_config.yaml**: Configuration for embedding generation
-- **inference_config.yaml**: BioMistral model parameters for inference
-- **evaluation_config.yaml**: Parameters for model evaluation
-- **visualize_config.yaml**: Settings for embedding visualization
-
-Below is an overview of each step and the commands to execute them.
-
-### 1. Data Preparation (`dataset_config.yaml`)
-
-The data preparation phase includes cleaning clinical reports, matching radiology and pathology reports, and creating training datasets.
-
-```bash
-# Process raw clinical data
-uv run python glioma.py prepare-data --config configs/dataset_config.yaml
-
-# With custom parameters
-uv run python glioma.py prepare-data --input path/to/data --output data/processed --train_split 0.8
-```
-
-The data pipeline performs the following steps:
-
-1. Loads and cleans raw MRI and pathology reports
-2. Extracts cancer type information from report metadata
-3. Matches reports based on patient identifiers and cancer type
-4. Creates anchor-positive pairs for Multiple Negative Ranking Loss (MNRL)
-5. Splits the data by patient to ensure no data leakage between train/test sets
-
-### 2. Fine-tuning (`finetune_config.yaml`)
-
-Fine-tune the JINA embeddings model using Multiple Negative Ranking Loss (MNRL) and Low-Rank Adaptation (LoRA):
-
-```bash
-# Standard fine-tuning on single GPU
-uv run torchrun --nproc_per_node=1 glioma.py finetune --config configs/finetune_config.yaml
-
-# Multi-GPU training with Distributed Data Parallel
-CUDA_VISIBLE_DEVICES=0,1,2,3 uv run torchrun --nproc_per_node=4 glioma.py finetune --config configs/finetune_config.yaml
-```
-
-### 3. Embedding Generation (`generate_config.yaml`)
-
-Generate embeddings from clinical texts using various models (JINA, NVIDIA NV-Embed, Gatortron):
-
-```bash
-# Generate embeddings with default configuration (all models)
-uv run python glioma.py generate --config configs/generate_config.yaml
-
-# Generate embeddings for specific model and task
-uv run python glioma.py generate --model jina --task tumor_type --gpus 0
-
-# Generate embeddings with multiple GPUs
-uv run python glioma.py generate --model nvidia --gpus 0,1,2,3
-```
-
-### 4. BioMistral Inference (`inference_config.yaml`)
-
-Run zero-shot inference using the BioMistral language model for glioma classification tasks:
-
-```bash
-# start the server
-CUDA_VISIBLE_DEVICES=4,5,6,7 vllm serve \
-    BioMistral-7B \
-    --gpu-memory-utilization=0.95 \
-    --tensor-parallel-size=4 \
-    --trust-remote-code
-
-# On a new terminal, run inference on all tasks
-uv run python glioma.py inference --config configs/inference_config.yaml
-
-# sample call
-curl -X POST "http://localhost:8000/v1/chat/completions" \
-    -H "Content-Type: application/json" \
-    --data '{
-        "model": "BioMistral-7B",
-        "messages": [
-            {
-                "role": "user",
-                "content": "Classify this brain tumor into exactly one of these categories: glioblastoma, astrocytoma, oligodendroglioma, or oligoastrocytoma.\n\nReport:\nThere is a large, irregular mass in the right temporal lobe measuring approximately 4.8 x 3.9 x 4.2 cm. The lesion demonstrates heterogeneous enhancement with central necrosis on post-contrast images. Significant surrounding vasogenic edema is present, causing mass effect and midline shift of approximately 7mm to the left. The mass shows restricted diffusion and demonstrates thick, irregular ring enhancement. Multiple areas of hemorrhage are noted within the tumor on susceptibility-weighted imaging.\n\nOutput format:\nCLASSIFICATION: [tumor type]"
-            }
-        ],
-        "temperature": 0.0,
-        "max_tokens": 50
-    }'
-```
-
-### 5. Evaluation (`evaluation_config.yaml`)
-
-Evaluate embedding model performance on glioma prognostication tasks:
-
-```bash
-# Run evaluation on all tasks
-uv run python glioma.py evaluate --config configs/evaluation_config.yaml
-
-# Run evaluation on specific task
-uv run python glioma.py evaluate --task tumor_type
-```
-
-### 6. Visualization (`visualize_config.yaml`)
-
-Visualize embeddings using dimension reduction techniques:
-
-```bash
-uv run python glioma.py visualize --config configs/visualize_config.yaml
-
-uv run python glioma.py visualize --method tsne --task tumor_type
-
-# Create visualizations for specific embedding type
-uv run python glioma.py visualize --embeddings_dir embeddings/tumor_type --output_dir figures/tumor_type
-```
-
-## Models
-
-### Embedding Models
-
-The codebase supports multiple embedding models for generating text representations:
-
-1. **JINA Embeddings (v3)**: Primary model used for fine-tuning with MNRL
-2. **NVIDIA NV-Embed (v2)**: Medical domain embedding model
-3. **Gatortron-large**: Specialized medical language model
-
-### Inference Model
-
-For zero-shot inference on glioma classification tasks:
-
-- **BioMistral-7B**: Specialized biomedical large language model used for zero-shot classification of tumor type, MGMT methylation status, and survival prediction
-
-## Data Availability
-
-The datasets used in this research contain sensitive clinical information and are not publicly available in this repository. However, researchers interested in accessing the data for academic purposes can do so through a Material Transfer Agreement (MTA) with the University of California San Francisco (UCSF).
-
-To request access to the data:
-
-1. Contact the corresponding author with a brief description of your research purpose
-2. Complete the UCSF MTA application process
-3. Upon approval, you will receive instructions for secure data transfer
-
-All data usage must comply with HIPAA regulations and the terms specified in the MTA.
-
-The code in this repository can be adapted to work with similar clinical text datasets following the same structure as described in the documentation.
-
-## Citation
-
-If you use this code in your research, please cite our paper:
-
-```bibtex
-@article{neo2025clinically,
-  title={A Clinically Aligned Embedding Model for Glioma Prognostication via Radiology-Pathology Report Matching},
-  author={Neo, Benedict and Liu, Bo and Interian, Yannet and Braunstein, Steve and Lupo, Janine and Morin, Olivier and Lin, Hui},
-  journal={},
-  year={2025}
-}
-```
+---
 
 ## Contributors
 
