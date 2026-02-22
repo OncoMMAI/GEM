@@ -1,53 +1,111 @@
 # Configuration for embedding generation
+#
+# Models are organized into sections:
+#   - Base embedding models (jina_base, nvidia, gatortron, HuggingFace models)
+#   - Finetuned Jina variants for loss function comparison
+#
+# Set skip_existing: true to avoid regenerating existing embeddings.
 
-# Global settings
 global:
-  cache_dir: 'YOUR_CACHE_DIR'  # Cache directory for HuggingFace models
+  cache_dir: null  # Set to a local path to cache downloaded model weights
 
 model:
+  # ── Base embedding models ──────────────────────────────────────────────
+  # Uncomment to regenerate; skipped if output already exists.
+
   jina_base:
     name: 'jinaai/jina-embeddings-v3'
     checkpoint_path: null
     trust_remote_code: true
     batch_size: 32
     max_length: 2048
-    task: 'text-matching' # Task type influences the embedding properties
-    device_ids: 7
+    task: 'text-matching'
+    device_ids: 0
 
-  jina:
-    name: 'jinaai/jina-embeddings-v3'
-    checkpoint_path: 'outputs/finetune/checkpoint-best/model.safetensors' # Path to fine-tuned model
-    trust_remote_code: true
-    batch_size: 32
-    max_length: 2048
-    task: 'text-matching' # Task type influences the embedding properties
-    device_ids: 7
-
-  nvidia:
-    name: 'nvidia/NV-Embed-v2'
-    trust_remote_code: true
-    batch_size: 16
-    max_length: 32768
-    instruction: 'none' # Can be 'none' or 'medical'
-    device_ids: [0, 1, 2, 3] # GPU device IDs for multi-GPU support
+  #nvidia:
+  #  name: 'nvidia/NV-Embed-v2'
+  #  trust_remote_code: true
+  #  batch_size: 16
+  #  max_length: 32768
+  #  instruction: 'none'
+  #  device_ids: [0, 1, 2, 3]
 
   gatortron:
     name: 'UFNLP/gatortron-large'
-    checkpoint_path: null # Set to the path if using a fine-tuned version
+    checkpoint_path: null
     trust_remote_code: true
     batch_size: 32
     max_length: 512
+
+  medembed:
+    name: 'abhinand/MedEmbed-small-v0.1'
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 512
+    pooling: 'mean'
+    normalize: true
+
+  bioclinicalbert:
+    name: 'emilyalsentzer/Bio_ClinicalBERT'
+    trust_remote_code: false
+    batch_size: 32
+    max_length: 512
+    pooling: 'cls'
+    normalize: false
+
+  pubmedbert:
+    name: 'neuml/pubmedbert-base-embeddings'
+    trust_remote_code: false
+    batch_size: 32
+    max_length: 512
+    pooling: 'mean'
+    normalize: true
+
+  modernbert:
+    name: 'nomic-ai/modernbert-embed-base'
+    trust_remote_code: true
+    batch_size: 16
+    max_length: 8192
+    pooling: 'mean'
+    normalize: true
+
+  # ── Finetuned Jina variants (loss function comparison) ─────────────────
+  # Shared defaults for all finetuned variants
+  jina_finetuned_defaults:
+    model_name: 'jinaai/jina-embeddings-v3'
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 2048
+    task: 'text-matching'
+    device_ids: 0
+
+  # Each variant loads the base Jina model then applies a different
+  # finetuned checkpoint trained with a specific loss function.
+  jina_finetuned_variants:
+    - name: 'MNRL'
+      checkpoint_path: 'models/mnrl/final'
+      output_filename: 'mnrl.npy'
+
+    - name: 'Contrastive'
+      checkpoint_path: 'models/contrastive/final'
+      output_filename: 'contrastive.npy'
+
+    - name: 'Triplet'
+      checkpoint_path: 'models/triplet/final'
+      output_filename: 'triplet.npy'
+
+    # Softmax checkpoint not available; uncomment when retrained.
+    #- name: 'Softmax'
+    #  checkpoint_path: 'models/softmax/final'
+    #  output_filename: 'softmax.npy'
 
 data:
   tumor_type_path: 'data/eval/tumor_type_eval.csv'
   mgmt_path: 'data/eval/mgmt_eval.csv'
   survival_path: 'data/eval/os_eval.csv'
-
-  # Column name containing the text to embed
   text_column: 'report'
 
 output:
-  # Directory for saving embeddings
   output_dir: 'embeddings'
-  # Create cache directory if it doesn't exist
   create_cache_dir: true
+  skip_existing: true

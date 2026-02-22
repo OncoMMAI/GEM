@@ -1,0 +1,53 @@
+# Cross-modal retrieval evaluation for radiology–pathology report alignment.
+#
+# Measures how well finetuned models can match a radiology report to its
+# corresponding pathology report from the same patient, using Recall@K,
+# MRR, and MAP over the held-out eval set.
+#
+# Usage:
+#   python -m src.models.alignment --config configs/alignment_config.yaml
+
+global:
+  cache_dir: null  # Set to a local path to cache downloaded model weights
+
+data:
+  eval_pairs_path: 'data/training/mnrl/eval.csv'
+
+models:
+  - name: 'Jina-Base (no finetuning)'
+    model_name: 'jinaai/jina-embeddings-v3'
+    checkpoint_path: null
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 2048
+    task: 'text-matching'
+
+  - name: 'G-LLM (MNRL)'
+    model_name: 'jinaai/jina-embeddings-v3'
+    checkpoint_path: 'models/mnrl/final'
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 2048
+    task: 'text-matching'
+
+  - name: 'G-LLM (Contrastive)'
+    model_name: 'jinaai/jina-embeddings-v3'
+    checkpoint_path: 'models/contrastive/final'
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 2048
+    task: 'text-matching'
+
+  - name: 'G-LLM (Triplet)'
+    model_name: 'jinaai/jina-embeddings-v3'
+    checkpoint_path: 'models/triplet/final'
+    trust_remote_code: true
+    batch_size: 32
+    max_length: 2048
+    task: 'text-matching'
+
+evaluation:
+  k_values: [1, 5, 10, 20]
+
+output:
+  results_dir: 'results'

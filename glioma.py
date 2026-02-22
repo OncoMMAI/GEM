@@ -165,6 +165,19 @@ Examples:
         help="Specific task to visualize",
     )
 
+    # Alignment evaluation command
+    align_parser = subparsers.add_parser(
+        "align", help="Evaluate report alignment via cross-modal retrieval"
+    )
+    align_parser.add_argument(
+        "--config",
+        default="configs/alignment_config.yaml",
+        help="Path to the configuration file",
+    )
+    align_parser.add_argument(
+        "--output_dir", help="Override the output directory for results"
+    )
+
     # Data preparation command
     data_parser = subparsers.add_parser(
         "prepare-data", help="Prepare data for training and evaluation"
@@ -286,6 +299,12 @@ def main():
 
         if args.task != "all":
             cmd.extend(["--task", args.task])
+
+    elif args.command == "align":
+        cmd.extend(["-m", "src.models.alignment", "--config", args.config])
+
+        if args.output_dir:
+            cmd.extend(["--output_dir", args.output_dir])
 
     elif args.command == "prepare-data":
         cmd.extend(["-m", "src.data.data_pipeline", "--config", args.config])

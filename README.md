@@ -14,8 +14,8 @@ Large language models exhibit strong general text understanding yet lack oncolog
 - Data and Preprocessing
 - Training and Ablations
 - Embedding Generation and Evaluation
+- Report Alignment Evaluation
 - Visualization
-- Troubleshooting and Known Issues
 - Ethical, Privacy, and Compliance Notes
 - Citation and License
 
@@ -24,6 +24,7 @@ Large language models exhibit strong general text understanding yet lack oncolog
 - Clinically aligned embeddings via report-pair training (radiology ↔ pathology) with MNRL.
 - Efficient LoRA + optional main-parameter updates on `jina-embeddings-v3` (1024‑d embeddings, long context).
 - Strong performance across 3 clinical tasks; robust ablative analyses (losses, dataset size, sampling, LoRA).
+- Cross-modal retrieval evaluation quantifying alignment quality (Recall@K, MRR, MAP).
 - Full scripts for end‑to‑end reproducibility (data → train → embed → evaluate → visualize).
 
 ---
@@ -62,13 +63,19 @@ uv run python glioma.py finetune --config configs/finetune_config.yaml --ddp --n
 uv run python glioma.py generate --config configs/generate_config.yaml
 ```
 
-5. Evaluate:
+5. Evaluate downstream classification:
 
 ```bash
 uv run python glioma.py evaluate --config configs/evaluation_config.yaml
 ```
 
-6. Visualize:
+6. Evaluate report alignment quality:
+
+```bash
+uv run python glioma.py align --config configs/alignment_config.yaml
+```
+
+7. Visualize:
 
 ```bash
 uv run python glioma.py visualize --config configs/visualize_config.yaml
@@ -107,9 +114,9 @@ Hardware
 
 Software
 
-- Python ≥3.8 (we use 3.10+). uv is used for fast, reproducible envs.
+- Python ≥3.10. uv is used for fast, reproducible envs.
 - PyTorch 2.3.1. On Linux GPU servers, install CUDA 12.1 wheels (compatible with 12.5 drivers).
-- Transformers 4.44.x, SentenceTransformers 3.1.x.
+- Transformers 4.45+, SentenceTransformers 5.x.
 - Optional: FlashAttention‑2 on Linux (`flash-attn>=2.5.8`).
 
 Install (Linux GPU server)
@@ -128,11 +135,11 @@ Notes
 
 - macOS/CPU: setup skips FlashAttention and installs CPU Torch automatically.
 - Hugging Face trust_remote_code is used for `jina-embeddings-v3` to enable encode/task adapters.
-- bitsandbytes is optional; it’s pinned Linux‑only in requirements and not required for this pipeline.
+- bitsandbytes is optional; it's pinned Linux‑only in requirements and not required for this pipeline.
 
 Reproducibility notes
 
-- We fix random seeds (default 42) across Python/NumPy/PyTorch; some CUDA ops may remain nondeterministic per PyTorch guidance.
+- We fix random seeds (default 7) across Python/NumPy/PyTorch; some CUDA ops may remain nondeterministic per PyTorch guidance.
 - Results can vary slightly by GPU/driver; folds and metrics are reported with mean ± SD.
 
 ### Recommended environments (uv)
@@ -200,18 +207,32 @@ bash scripts/experiments/run_group_2.sh
 
 ## Embedding Generation and Evaluation
 
-Generate embeddings from base or fine‑tuned Jina (or NV‑Embed / Gatortron):
+Generate embeddings from base or fine‑tuned models:
 
 ```bash
 uv run python glioma.py generate --config configs/generate_config.yaml
 ```
 
+Supported models (configured in `configs/generate_config.yaml`):
+
+| Model | Key | Dimensionality |
+|---|---|---|
+| Jina Embeddings v3 (base) | `jina_base` | 1024 |
+| NV-Embed-v2 | `nvidia` | 4096 |
+| GatorTron | `gatortron` | 3584 |
+| MedEmbed | `medembed` | 384 |
+| BioClinicalBERT | `bioclinicalbert` | 768 |
+| PubMedBERT | `pubmedbert` | 768 |
+| ModernBERT | `modernbert` | 768 |
+| Jina finetuned variants (MNRL, Contrastive, Triplet) | `jina_finetuned_variants` | 1024 |
+
 Notes
 
-- For fine‑tuned Jina, set `model.jina.checkpoint_path` to your checkpoint. We accept either a direct file (model.safetensors) or a directory containing the SentenceTransformers layout (we auto‑resolve).
-- You can override the output dir by `--output_dir`.
+- For fine‑tuned Jina, set `checkpoint_path` to your checkpoint. We accept either a direct file (`model.safetensors`) or a directory containing the SentenceTransformers layout (auto‑resolved).
+- Set `output.skip_existing: true` to avoid regenerating existing embeddings.
+- Embeddings are saved under `embeddings/{tumor_type,os,mgmt}/` as `.npy` files.
 
-Evaluate embeddings (5‑fold CV with Random Forest):
+Evaluate embeddings (10‑fold stratified CV with Random Forest):
 
 ```bash
 uv run python glioma.py evaluate --config configs/evaluation_config.yaml
@@ -219,8 +240,10 @@ uv run python glioma.py evaluate --config configs/evaluation_config.yaml
 
 Notes
 
-- Evaluation now honors `embedding.directory` in the config, so you can point to a per‑experiment embeddings root (we’ll look under `tumor_type/`, `mgmt/`, `survival`).
-- Results are saved in `results/` by default.
+- Evaluation reads `embedding.directory` from the config and looks under `tumor_type/`, `os/`, `mgmt/` subdirectories for `.npy` files.
+- To evaluate only specific models, set `evaluation.models` in the config to a list of filenames (without `.npy`). Omit to evaluate all.
+- Results include per-model accuracy, precision, recall, F1-macro, AUCROC, and statistical significance testing (paired t-test, Cohen's d) against a configurable baseline model.
+- Results are saved as markdown tables and JSON to `results/`.
 
 Sequential experiment evaluation:
 
@@ -233,13 +256,39 @@ python scripts/experiments/compare_results.py
 
 ---
 
+## Report Alignment Evaluation
+
+To quantify the quality of the learned radiology–pathology alignment, we provide a cross-modal retrieval evaluation (`src/models/alignment.py`).
+
+Given a held-out set of paired radiology and pathology reports, the evaluation:
+
+1. Embeds all unique radiology reports (queries) and pathology reports (gallery) using each model variant
+2. Computes cosine similarity between every query–gallery pair
+3. For each radiology report, ranks all pathology reports and checks whether the correct match (same patient) appears in the top K
+
+Reported metrics:
+
+- **Recall@K** (R@1, R@5, R@10, R@20): proportion of queries where a correct pathology report appears in the top K results
+- **MRR** (Mean Reciprocal Rank): average of 1/rank of the first correct match
+- **MAP** (Mean Average Precision): average precision across all relevant rank positions
+
+Run:
+
+```bash
+uv run python glioma.py align --config configs/alignment_config.yaml
+```
+
+The config (`configs/alignment_config.yaml`) specifies which model variants to compare (e.g., base vs. MNRL vs. Contrastive vs. Triplet). Results are saved as a markdown table and JSON to `results/`.
+
+---
+
 ## Visualization
 
 ```bash
 uv run python glioma.py visualize --config configs/visualize_config.yaml
 ```
 
-Produces t‑SNE projections with class overlays and confidence ellipses; outputs to `figures/`.
+Produces t‑SNE projections with class overlays and confidence ellipses for all three tasks (tumor type, MGMT, survival); outputs to `figures/`.
 
 ---
 
@@ -260,16 +309,35 @@ glioma_embedding/
 ├── requirements.txt
 ├── setup.py
 ├── setup_env.sh
-├── glioma.py
+├── glioma.py                        # CLI entry point
 ├── configs/
+│   ├── finetune_config.yaml          # Fine-tuning configuration
+│   ├── generate_config.yaml          # Embedding generation (base + finetuned models)
+│   ├── evaluation_config.yaml        # Downstream classification evaluation
+│   ├── alignment_config.yaml         # Cross-modal retrieval alignment evaluation
+│   ├── visualize_config.yaml         # t-SNE visualization
+│   ├── dataset_config.yaml           # Data preparation
+│   └── inference_config.yaml         # LLM inference
 ├── data/
-├── embeddings/
-├── figures/
-├── models/
-├── notebooks/
-├── results/
-├── scripts/
-└── src/
+│   ├── eval/                         # Evaluation CSVs (tumor_type, mgmt, os)
+│   ├── training/                     # Training pairs (MNRL anchor–positive)
+│   └── raw/                          # Raw synthetic reports
+├── src/
+│   ├── data/data_pipeline.py         # Data preparation and pair generation
+│   ├── models/
+│   │   ├── finetune.py               # MNRL fine-tuning with SentenceTransformers
+│   │   ├── evaluation.py             # k-fold classification evaluation
+│   │   ├── alignment.py              # Cross-modal retrieval evaluation
+│   │   └── inference.py              # LLM inference
+│   ├── embeddings/
+│   │   ├── generate.py               # Embedding generation (Jina, NV-Embed, etc.)
+│   │   └── visualize.py              # t-SNE visualization
+│   └── utils/                        # Config, logging, metrics, seeding
+├── embeddings/                       # Generated embeddings (.npy)
+├── figures/                          # Visualization outputs
+├── models/                           # Model checkpoints
+├── results/                          # Evaluation results
+└── scripts/experiments/              # Ablation experiment scripts
 ```
 
 ---

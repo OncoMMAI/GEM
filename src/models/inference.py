@@ -160,7 +160,6 @@ class LLMInferenceClient:
                 return 1
             elif "oligodendroglioma" in prediction:
                 return 2
-            # Removed oligoastrocytoma from the label set
 
         elif task == "survival":
             if "survive" in prediction:

@@ -14,9 +14,9 @@ embedding:
   task: 'text-matching'
 
 data:
-  type_path: '/home/neob/ai/paper/data/eval/tumor_type_eval.csv'
-  mgmt_path: '/home/neob/ai/paper/data/eval/mgmt_eval.csv'
-  os_path: '/home/neob/ai/paper/data/eval/os_eval.csv'
+  type_path: 'data/eval/tumor_type_eval.csv'
+  mgmt_path: 'data/eval/mgmt_eval.csv'
+  os_path: 'data/eval/os_eval.csv'
   text_column: 'report'
   id_column: 'mrn'
 

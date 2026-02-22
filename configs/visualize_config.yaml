@@ -1,50 +1,124 @@
 # Configuration for embedding visualization
+#
+# Generates t-SNE scatter plots for each task, comparing embeddings from
+# multiple models side by side.
+#
+# Usage:
+#   python -m src.embeddings.visualize --config configs/visualize_config.yaml
 
-embedding:
-  models:
-    #- name: 'jina_base'
-    #  path: 'embeddings/tumor_type/jina_base.npy'
-    #  label: 'JINA Base'
+tasks:
+  tumor_type:
+    data_path: 'data/eval/tumor_type_eval.csv'
+    label_column: 'tumor_type'
+    class_names: ['glioblastoma', 'astrocytoma', 'oligodendroglioma']
+    legend_title: 'Brain Tumor Subtypes'
+    colors:
+      - '#E64B35'  # Red - glioblastoma
+      - '#4DBBD5'  # Blue - astrocytoma
+      - '#00A087'  # Green - oligodendroglioma
+    models:
+      - name: 'jina_base'
+        path: 'embeddings/tumor_type/jina_base_text_match.npy'
+        label: 'JINA Base'
+      - name: 'jina_finetuned'
+        path: 'embeddings/tumor_type/mnrl.npy'
+        label: 'JINA Finetuned (MNRL)'
+      - name: 'gatortron_large'
+        path: 'embeddings/tumor_type/gatortron_large.npy'
+        label: 'GatorTron'
+      - name: 'nv_embed'
+        path: 'embeddings/tumor_type/nv_embed.npy'
+        label: 'NV-Embed-v2'
+      - name: 'medembed_small'
+        path: 'embeddings/tumor_type/medembed_small.npy'
+        label: 'MedEmbed'
+      - name: 'bio_clinicalbert'
+        path: 'embeddings/tumor_type/bio_clinicalbert.npy'
+        label: 'BioClinicalBERT'
+      - name: 'pubmedbert'
+        path: 'embeddings/tumor_type/pubmedbert_embeddings.npy'
+        label: 'PubMedBERT'
+      - name: 'modernbert'
+        path: 'embeddings/tumor_type/modernbert_embed.npy'
+        label: 'ModernBERT'
 
-    - name: 'jina_text_match'
-      path: 'embeddings/tumor_type/jina_base.npy'
-      label: 'JINA Base (w text match)'
+  mgmt:
+    data_path: 'data/eval/mgmt_eval.csv'
+    label_column: 'mgmt'
+    class_names: ['negative', 'positive']
+    legend_title: 'MGMT Methylation Status'
+    colors:
+      - '#E64B35'  # Red - negative
+      - '#4DBBD5'  # Blue - positive
+    models:
+      - name: 'jina_base'
+        path: 'embeddings/mgmt/jina_base_text_match.npy'
+        label: 'JINA Base'
+      - name: 'jina_finetuned'
+        path: 'embeddings/mgmt/mnrl.npy'
+        label: 'JINA Finetuned (MNRL)'
+      - name: 'gatortron_large'
+        path: 'embeddings/mgmt/gatortron_large.npy'
+        label: 'GatorTron'
+      - name: 'nv_embed'
+        path: 'embeddings/mgmt/nv_embed.npy'
+        label: 'NV-Embed-v2'
+      - name: 'medembed_small'
+        path: 'embeddings/mgmt/medembed_small.npy'
+        label: 'MedEmbed'
+      - name: 'bio_clinicalbert'
+        path: 'embeddings/mgmt/bio_clinicalbert.npy'
+        label: 'BioClinicalBERT'
+      - name: 'pubmedbert'
+        path: 'embeddings/mgmt/pubmedbert_embeddings.npy'
+        label: 'PubMedBERT'
+      - name: 'modernbert'
+        path: 'embeddings/mgmt/modernbert_embed.npy'
+        label: 'ModernBERT'
 
-    - name: 'jina_finetuned'
-      path: 'embeddings/tumor_type/jina_finetuned.npy'
-      label: 'JINA finetuned'
-
-    - name: 'gatortron_large'
-      path: 'embeddings/tumor_type/gatortron_large.npy'
-      label: 'Gatortron Large'
-
-    - name: 'nv_embed'
-      path: 'embeddings/tumor_type/nv_embed_none.npy'
-      label: 'NV Embed v2'
-
-data:
-  # Path to data with labels
-  type_path: 'data/eval/tumor_type_eval.csv'
-  label_column: 'tumor_type'
+  survival:
+    data_path: 'data/eval/os_eval.csv'
+    label_column: 'one_year_survival'
+    class_names: ['< 1 Year', '>= 1 Year']
+    class_values: [0, 1]
+    legend_title: 'Overall Survival (1 Year)'
+    colors:
+      - '#E64B35'  # Red - < 1 Year
+      - '#4DBBD5'  # Blue - >= 1 Year
+    models:
+      - name: 'jina_base'
+        path: 'embeddings/os/jina_base_text_match.npy'
+        label: 'JINA Base'
+      - name: 'jina_finetuned'
+        path: 'embeddings/os/mnrl.npy'
+        label: 'JINA Finetuned (MNRL)'
+      - name: 'gatortron_large'
+        path: 'embeddings/os/gatortron_large.npy'
+        label: 'GatorTron'
+      - name: 'nv_embed'
+        path: 'embeddings/os/nv_embed.npy'
+        label: 'NV-Embed-v2'
+      - name: 'medembed_small'
+        path: 'embeddings/os/medembed_small.npy'
+        label: 'MedEmbed'
+      - name: 'bio_clinicalbert'
+        path: 'embeddings/os/bio_clinicalbert.npy'
+        label: 'BioClinicalBERT'
+      - name: 'pubmedbert'
+        path: 'embeddings/os/pubmedbert_embeddings.npy'
+        label: 'PubMedBERT'
+      - name: 'modernbert'
+        path: 'embeddings/os/modernbert_embed.npy'
+        label: 'ModernBERT'
 
 visualization:
-  # t-SNE parameters (matching notebook)
   tsne:
-    # perplexity is dynamically adjusted based on sample size in both code and notebook
-    # but we'll set this as a default that matches the notebook approach
-    perplexity: 50 # min(n_samples // 3, 50)
+    perplexity: 50
     n_iter: 2500
     random_state: 42
     metric: 'cosine'
 
-  # Colors for different tumor types
-  colors:
-    - '#E64B35' # Red - glioblastoma
-    - '#4DBBD5' # Blue - astrocytoma
-    - '#00A087' # Green - oligodendroglioma
-
 output:
-  # Output configuration
   output_dir: 'figures'
   dpi: 600
   format: 'png'
