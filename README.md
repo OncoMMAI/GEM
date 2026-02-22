@@ -1,10 +1,10 @@
 ## A Clinically Aligned Embedding Model for Glioma Prognostication via Radiology–Pathology Report Matching
 
-This repository contains code for our clinically aligned embedding framework. We align radiology and pathology reports to produce robust clinical embeddings tailored for glioma prognostication, using Multiple Negatives Ranking Loss (MNRL) with LoRA-adapted fine‑tuning of `jinaai/jina-embeddings-v3`. We benchmark across tumor type classification, MGMT methylation prediction, and 1‑year survival prediction, and provide a separate LLM2Vec pipeline for decoder-to-encoder adaptation.
+This repository contains code for our clinically aligned embedding framework. We align radiology and pathology reports to produce robust clinical embeddings tailored for glioma prognostication, using Multiple Negatives Ranking Loss (MNRL) with LoRA-adapted fine‑tuning of `jinaai/jina-embeddings-v3`. We benchmark across tumor type classification, MGMT methylation prediction, and 1‑year survival prediction.
 
 ### Abstract
 
-Large language models exhibit strong general text understanding yet lack oncology‑specific alignment needed for clinical prognostication. We propose a clinically aligned embedding model trained on matched radiology–pathology report pairs using MNRL with LoRA on `jina-embeddings-v3`. Across three neuro‑oncology tasks (tumor type, MGMT status, one‑year survival), the fine‑tuned encoder achieves strong, balanced performance with modest compute, and outperforms a multi‑stage LLM2Vec decoder‑to‑encoder pipeline. Code, scripts, and synthetic data are provided for full reproducibility; access to clinical data is available under institutional agreements.
+Large language models exhibit strong general text understanding yet lack oncology‑specific alignment needed for clinical prognostication. We propose a clinically aligned embedding model trained on matched radiology–pathology report pairs using MNRL with LoRA on `jina-embeddings-v3`. Across three neuro‑oncology tasks (tumor type, MGMT status, one‑year survival), the fine‑tuned encoder achieves strong, balanced performance with modest compute.
 
 ### Table of Contents
 
@@ -15,7 +15,6 @@ Large language models exhibit strong general text understanding yet lack oncolog
 - Training and Ablations
 - Embedding Generation and Evaluation
 - Visualization
-- Optional: Decoder Models via LLM2Vec
 - Troubleshooting and Known Issues
 - Ethical, Privacy, and Compliance Notes
 - Citation and License
@@ -26,7 +25,6 @@ Large language models exhibit strong general text understanding yet lack oncolog
 - Efficient LoRA + optional main-parameter updates on `jina-embeddings-v3` (1024‑d embeddings, long context).
 - Strong performance across 3 clinical tasks; robust ablative analyses (losses, dataset size, sampling, LoRA).
 - Full scripts for end‑to‑end reproducibility (data → train → embed → evaluate → visualize).
-- Separate `llm2vec/` subproject to adapt decoder LLMs into encoders (for comparison), with its own environment.
 
 ---
 
@@ -148,17 +146,6 @@ To avoid dependency conflicts, we recommend three separate uv environments:
   - Optional speedup (Linux): `uv pip install 'flash-attn>=2.5.8' --no-build-isolation`
   - `uv pip install -e .`
 
-- vLLM server (decoder inference): `uv venv .venv-vllm; source .venv-vllm/bin/activate`
-
-  - `uv pip install vllm==0.5.4.post1`
-  - Do not install flash-attn here; keep this env isolated from SentenceTransformers.
-
-- LLM2Vec (decoder‑to‑encoder pipeline): `cd llm2vec; uv venv .venv-llm2vec; source .venv-llm2vec/bin/activate`
-  - Install Torch CUDA wheels as above; then `uv pip install -e .`
-  - Optional speedup (Linux): `uv pip install 'flash-attn>=2.5.8' --no-build-isolation`
-
-Tip: share a model cache across envs to avoid re‑downloading (`export HF_HOME=/path/to/shared_cache`).
-
 ---
 
 ## Data and Preprocessing
@@ -253,31 +240,6 @@ uv run python glioma.py visualize --config configs/visualize_config.yaml
 ```
 
 Produces t‑SNE projections with class overlays and confidence ellipses; outputs to `figures/`.
-
----
-
-## Optional: Decoder Models via LLM2Vec
-
-The `llm2vec/` subproject adapts decoder LLMs (e.g., Llama‑3.1) into encoders through:
-
-1. Bidirectional attention + Masked Next Token Prediction (MNTP)
-2. SimCSE unsupervised contrastive learning
-3. Supervised contrastive fine‑tuning
-
-LLM2Vec uses separate requirements/pins (Transformers ≥4.43) and its own environment:
-
-```bash
-cd llm2vec
-bash setup_env.sh
-# Stage 1 MNTP (single or multi‑GPU)
-uv run torchrun --nproc_per_node=8 experiments/run_mntp.py train_configs/mntp/MetaLlama3.1.json
-# Stage 2 SimCSE
-uv run torchrun --nproc_per_node=8 experiments/run_simcse.py train_configs/simcse/MetaLlama3.1.json
-# Stage 3 Supervised
-uv run torchrun --nproc_per_node=8 experiments/run_supervised.py train_configs/supervised/MetaLlama3.1.json
-```
-
-We report this pipeline primarily for comparison; the encoder‑based Jina fine‑tune was more compute‑efficient and higher performing in our tasks.
 
 ---
 
