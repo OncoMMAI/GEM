@@ -227,9 +227,36 @@ Choose from:
 
 Answer with a single letter:"""
 
+    @staticmethod
+    def _token_letter(token: Optional[str], letter_to_idx: dict) -> Optional[str]:
+        """Normalise a raw API token to the option letter it votes for.
+
+        Providers return the answer letter with assorted decoration: leading
+        whitespace (" B"), markdown ("**B"), or a trailing separator ("B:").
+        Matching on the raw token drops those variants, which silently reduced
+        the option to its -100 floor and decoupled the probability vector from
+        the parsed answer.
+        """
+        if not token:
+            return None
+        stripped = token.strip().upper().lstrip("*_`\"'( ")
+        if not stripped:
+            return None
+        head = stripped[0]
+        return head if head in letter_to_idx else None
+
     def predict_letter_with_probs(
         self, clinical_note: str, task: str
-    ) -> tuple[int, "np.ndarray"]:
+    ) -> tuple[int, Optional["np.ndarray"]]:
+        """Return (predicted option index, probability vector over options).
+
+        The probability vector is read from the *same* token position that
+        produced the predicted letter, so argmax(probs) == pred_idx by
+        construction. Returns probs=None when the option letters cannot be
+        recovered from that position; callers must exclude those samples from
+        ranking metrics rather than substituting a uniform vector, which would
+        inject artificial ties into AUROC.
+        """
         import numpy as np  # local import to avoid global dependency if not used
 
         labels = self._get_task_labels(task)
@@ -243,41 +270,66 @@ Answer with a single letter:"""
                 temperature=0.0,
                 max_tokens=5,
                 logprobs=True,
-                top_logprobs=10,
+                top_logprobs=20,
             )
 
-            # Extract predicted letter
-            response_text = completion.choices[0].message.content or ""
-            response_text = response_text.strip().upper()
+            choice = completion.choices[0]
+            lp = getattr(choice, "logprobs", None)
+            content = list(getattr(lp, "content", None) or [])
+
+            # Locate the generated token that carries the answer letter. The
+            # model may emit a preamble ("Answer:", "**") before it, so the
+            # first token is not reliably the decision point.
+            answer_pos = -1
             pred_idx = -1
-            for ch in response_text:
-                if ch in letter_to_idx:
-                    pred_idx = letter_to_idx[ch]
+            for pos, tok_info in enumerate(content):
+                letter = self._token_letter(getattr(tok_info, "token", None), letter_to_idx)
+                if letter is not None:
+                    answer_pos = pos
+                    pred_idx = letter_to_idx[letter]
                     break
 
-            # Default probabilities
-            probs = np.ones(len(labels), dtype=float) / len(labels)
+            # Fall back to the message text only to recover a hard prediction.
+            if pred_idx == -1:
+                response_text = (choice.message.content or "").strip().upper()
+                for ch in response_text:
+                    if ch in letter_to_idx:
+                        pred_idx = letter_to_idx[ch]
+                        break
 
-            # Extract logprobs if provided for the first output token
-            lp = getattr(completion.choices[0], "logprobs", None)
-            if lp and getattr(lp, "content", None):
-                top = lp.content[0].top_logprobs
-                logprob_map = {ltr: -100.0 for ltr in letter_to_idx}
-                for entry in top:
-                    tok = (entry.token or "").upper()
-                    # Keep only A/B/C letters from token
-                    if len(tok) == 1 and tok in letter_to_idx:
-                        logprob_map[tok] = entry.logprob
-                logvals = np.array(
-                    [logprob_map[ltr] for ltr in sorted(letter_to_idx.keys())]
+            if answer_pos == -1:
+                return pred_idx, None
+
+            logprob_map: dict = {}
+            for entry in content[answer_pos].top_logprobs:
+                letter = self._token_letter(getattr(entry, "token", None), letter_to_idx)
+                # Multiple surface forms can map to one letter; keep the largest.
+                if letter is not None and entry.logprob > logprob_map.get(letter, -np.inf):
+                    logprob_map[letter] = entry.logprob
+
+            # Need at least two options scored for a meaningful ranking.
+            if len(logprob_map) < 2:
+                return pred_idx, None
+
+            floor = min(logprob_map.values()) - 10.0
+            logvals = np.array(
+                [logprob_map.get(chr(ord("A") + i), floor) for i in range(len(labels))],
+                dtype=float,
+            )
+            expv = np.exp(logvals - np.max(logvals))
+            probs = expv / expv.sum()
+
+            if int(np.argmax(probs)) != pred_idx:
+                self.logger.warning(
+                    f"argmax(probs)={int(np.argmax(probs))} disagrees with parsed "
+                    f"letter {pred_idx} for task {task}; dropping from ranking metrics"
                 )
-                expv = np.exp(logvals - np.max(logvals))
-                probs = expv / expv.sum()
+                return pred_idx, None
 
             return pred_idx, probs
         except Exception as e:
             self.logger.error(f"Letter prediction failed: {e}")
-            return -1, np.ones(len(labels), dtype=float) / len(labels)
+            return -1, None
 
     def get_predictions(
         self,
@@ -430,7 +482,7 @@ def run_inference_task(
 
         # Collect predictions and probabilities
         preds: list[int] = []
-        probs: list[np.ndarray] = []
+        probs: list[Optional[np.ndarray]] = []
         notes = test_df[text_col].tolist()
 
         for i in range(0, len(notes), batch_size):
@@ -442,7 +494,17 @@ def run_inference_task(
 
         y_true = test_df[label_col].values.astype(int)
         y_pred = np.array(preds)
-        y_prob = np.vstack(probs) if probs else np.zeros((0, 0))
+        n_options = len(client._get_task_labels(task_name))
+        has_prob = np.array([p is not None for p in probs])
+        y_prob = np.full((len(probs), n_options), np.nan)
+        for i, p in enumerate(probs):
+            if p is not None:
+                y_prob[i] = p
+        if not has_prob.all():
+            logger.warning(
+                f"fold {fold_idx}: {int((~has_prob).sum())}/{len(has_prob)} samples "
+                f"had unusable option logprobs and are excluded from AUROC"
+            )
 
         # Compute metrics (filter invalid)
         valid_pred = y_pred != -1
@@ -458,37 +520,51 @@ def run_inference_task(
 
         from sklearn.metrics import (
             accuracy_score,
+            balanced_accuracy_score,
             precision_recall_fscore_support,
             roc_auc_score,
         )
 
         yt = y_true[valid_pred]
         yp = y_pred[valid_pred]
-        yp_prob = y_prob[valid_pred] if y_prob.size else None
 
         acc = accuracy_score(yt, yp)
         pr, rc, f1, _ = precision_recall_fscore_support(
             yt, yp, average="macro", zero_division=0
         )
-        # AUROC from probabilities when available
+
+        # AUROC is scored only on samples with a usable option-probability
+        # vector, and the score columns are indexed by the option order used to
+        # build the prompt, which matches the integer label encoding.
+        rank_mask = valid_pred & has_prob
+        auc = float("nan")
         try:
-            uniq = np.unique(yt)
-            if yp_prob is not None and yp_prob.size:
+            if rank_mask.any():
+                yt_r = y_true[rank_mask]
+                yp_prob = y_prob[rank_mask]
+                uniq = np.unique(yt_r)
+                if len(uniq) < 2:
+                    raise ValueError("single class present in fold")
                 if len(uniq) == 2:
-                    auc = roc_auc_score(yt, yp_prob[:, 1])
+                    # Column 1 is the positive class (SURVIVE / POSITIVE), which
+                    # is the class encoded as 1 in the label column.
+                    auc = roc_auc_score(yt_r, yp_prob[:, 1])
                 else:
-                    auc = roc_auc_score(yt, yp_prob, multi_class="ovr")
-            else:
-                auc = float("nan")
-        except Exception:
-            auc = float("nan")
+                    auc = roc_auc_score(
+                        yt_r, yp_prob, multi_class="ovr", labels=list(range(n_options))
+                    )
+        except Exception as e:
+            logger.warning(f"fold {fold_idx}: AUROC unavailable ({e})")
 
         fold_results[fold_idx] = {
             "accuracy": acc,
+            "balanced_accuracy": balanced_accuracy_score(yt, yp),
             "precision": pr,
             "recall": rc,
             "f1_macro": f1,
             "aucroc": auc,
+            "n_scored_for_auroc": int(rank_mask.sum()),
+            "n_total": int(len(y_pred)),
         }
 
         y_true_all.append(yt)

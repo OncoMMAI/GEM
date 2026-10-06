@@ -33,6 +33,9 @@ evaluation:
   random_state: 7
   n_estimators: 1000
   baseline_model: 'jina_base_text_match'
+  # Patient-disjoint folds (StratifiedGroupKFold on the id column). The published
+  # results used report-level folds (false); set true for the leakage-controlled variant.
+  patient_grouped_cv: false
   # Optional: evaluate only specific models (by filename without .npy).
   # Omit or set to null to evaluate all .npy files in each task directory.
   # models:

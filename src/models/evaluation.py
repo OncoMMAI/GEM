@@ -17,9 +17,11 @@ from typing import Dict, Tuple, Optional
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold, StratifiedGroupKFold
 from sklearn.metrics import (
     accuracy_score,
+    average_precision_score,
+    balanced_accuracy_score,
     precision_recall_fscore_support,
     roc_auc_score,
     classification_report,
@@ -93,19 +95,37 @@ def evaluate_fold(
 
     metrics = {
         "accuracy": accuracy,
+        # Reported alongside accuracy because the MGMT cohort is imbalanced
+        # enough that accuracy can sit below the majority-class rate.
+        "balanced_accuracy": balanced_accuracy_score(y_test, y_pred),
+        "no_information_rate": float(
+            np.bincount(y_test.astype(int)).max() / len(y_test)
+        ),
         "precision": precision,
         "recall": recall,
         "f1_macro": f1_macro,
     }
 
-    unique_classes = np.unique(y_test)
-    if len(unique_classes) == 2:
-        auc = roc_auc_score(y_test, y_pred_proba[:, 1])
+    # clf.classes_ gives the column order of predict_proba; relying on it (and
+    # passing labels= explicitly) keeps the score columns aligned with y_test
+    # even when a fold is missing a class.
+    classes = clf.classes_
+    if len(classes) == 2:
+        pos_col = int(np.where(classes == classes.max())[0][0])
+        metrics["aucroc"] = roc_auc_score(y_test, y_pred_proba[:, pos_col])
+        metrics["pr_auc"] = average_precision_score(
+            (y_test == classes.max()).astype(int), y_pred_proba[:, pos_col]
+        )
     else:
-        auc = roc_auc_score(y_test, y_pred_proba, multi_class="ovr")
-    metrics["aucroc"] = auc
+        metrics["aucroc"] = roc_auc_score(
+            y_test, y_pred_proba, multi_class="ovr", labels=classes
+        )
+        onehot = np.stack([(y_test == c).astype(int) for c in classes], axis=1)
+        metrics["pr_auc"] = average_precision_score(
+            onehot, y_pred_proba, average="macro"
+        )
 
-    return metrics, y_pred
+    return metrics, y_pred, y_pred_proba, classes
 
 
 def run_kfold_evaluation(
@@ -114,6 +134,7 @@ def run_kfold_evaluation(
     n_splits: int = 5,
     n_estimators: int = 1000,
     random_state: int = 7,
+    groups: Optional[np.ndarray] = None,
 ) -> Dict:
     """Run k-fold cross validation.
 
@@ -123,27 +144,61 @@ def run_kfold_evaluation(
         n_splits: Number of folds
         n_estimators: Number of trees in random forest
         random_state: Random seed for reproducibility
+        groups: Patient identifier per sample. When supplied, splits are made
+            with StratifiedGroupKFold so that all reports from one patient stay
+            on the same side of the split. Without it, patients with multiple
+            reports appear in both train and test and the scores are optimistic.
 
     Returns:
-        Dictionary containing averaged metrics and values for each fold
+        Dictionary containing averaged metrics, per-fold values, and pooled
+        out-of-fold predictions/probabilities for patient-level inference.
     """
     logger = logging.getLogger("glioma.evaluation")
     logger.info(f"Running {n_splits}-fold evaluation on {len(embeddings)} samples")
 
-    skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=random_state)
+    if groups is None:
+        logger.warning(
+            "No patient groups supplied: folds are report-level, so reports from "
+            "the same patient can appear in both train and test. Scores from this "
+            "run are not leakage-controlled."
+        )
+        splitter = StratifiedKFold(
+            n_splits=n_splits, shuffle=True, random_state=random_state
+        )
+        split_iter = splitter.split(embeddings, labels)
+    else:
+        groups = np.asarray(groups)
+        logger.info(
+            f"Patient-grouped CV over {len(np.unique(groups))} patients "
+            f"({len(embeddings)} reports)"
+        )
+        splitter = StratifiedGroupKFold(
+            n_splits=n_splits, shuffle=True, random_state=random_state
+        )
+        split_iter = splitter.split(embeddings, labels, groups=groups)
+
     fold_metrics = []
     all_y_true: list = []
     all_y_pred: list = []
+    oof_proba = None
+    oof_groups: list = []
 
     for fold_idx, (train_idx, test_idx) in tqdm(
-        enumerate(skf.split(embeddings, labels)),
+        enumerate(split_iter),
         total=n_splits,
         desc="Running k-fold evaluation",
     ):
         X_train, X_test = embeddings[train_idx], embeddings[test_idx]
         y_train, y_test = labels[train_idx], labels[test_idx]
 
-        metrics, y_pred = evaluate_fold(
+        if groups is not None:
+            overlap = np.intersect1d(groups[train_idx], groups[test_idx])
+            if overlap.size:
+                raise AssertionError(
+                    f"fold {fold_idx + 1}: {overlap.size} patients in both splits"
+                )
+
+        metrics, y_pred, y_proba, classes = evaluate_fold(
             X_train,
             X_test,
             y_train,
@@ -154,6 +209,18 @@ def run_kfold_evaluation(
         fold_metrics.append(metrics)
         all_y_true.append(y_test)
         all_y_pred.append(y_pred)
+
+        # Pool out-of-fold probabilities in original sample order so that
+        # McNemar/DeLong can be run on identical cases across models.
+        all_classes = np.unique(labels)
+        if oof_proba is None:
+            oof_proba = np.full((len(embeddings), len(all_classes)), np.nan)
+        col_of = {c: i for i, c in enumerate(all_classes)}
+        for j, c in enumerate(classes):
+            oof_proba[test_idx, col_of[c]] = y_proba[:, j]
+
+        if groups is not None:
+            oof_groups.append(groups[test_idx])
 
         # Log metrics for this fold
         if fold_idx == 0:  # Only log detailed metrics for first fold
@@ -172,6 +239,10 @@ def run_kfold_evaluation(
 
     avg_metrics["overall_y_true"] = np.concatenate(all_y_true)
     avg_metrics["overall_y_pred"] = np.concatenate(all_y_pred)
+    avg_metrics["oof_proba"] = oof_proba
+    avg_metrics["oof_labels"] = labels
+    avg_metrics["oof_groups"] = groups
+    avg_metrics["patient_grouped"] = groups is not None
 
     return avg_metrics
 
@@ -244,10 +315,28 @@ def evaluate_task(
         labels = valid_df[label_col].values
         filtered_embeddings = embeddings[valid_mask]
 
+        # Patient identifier, so folds can be made patient-disjoint. The column
+        # is named inconsistently across the three eval files.
+        patient_col = next(
+            (c for c in ("mrn", "MRN", "patient_id") if c in valid_df.columns), None
+        )
+        # Patient-grouped CV is opt-in. The published results used report-level
+        # stratified folds; set `patient_grouped_cv: true` under `evaluation` in
+        # the config for the leakage-controlled variant.
+        use_groups = task_config.get("patient_grouped_cv", False)
+        groups = valid_df[patient_col].values if (patient_col and use_groups) else None
+        if use_groups and patient_col is None:
+            logger.error(
+                f"{task_name}: no patient identifier column found in "
+                f"{list(valid_df.columns)}; cannot run patient-grouped CV"
+            )
+
         if exclude_labels:
             keep = ~np.isin(labels, exclude_labels)
             labels = labels[keep]
             filtered_embeddings = filtered_embeddings[keep]
+            if groups is not None:
+                groups = groups[keep]
 
         logger.info(
             f"Evaluating {model_name} ({filtered_embeddings.shape[0]} samples, "
@@ -259,8 +348,24 @@ def evaluate_task(
             n_splits=n_splits,
             n_estimators=n_estimators,
             random_state=random_state,
+            groups=groups,
         )
         results[model_name] = metrics
+
+        # Persist pooled out-of-fold predictions so McNemar/DeLong can be run
+        # across models on identical cases (see src/utils/stats.py). These are
+        # arrays, so they must not reach the JSON summary.
+        oof = {
+            "proba": metrics.pop("oof_proba", None),
+            "labels": metrics.pop("oof_labels", None),
+            "groups": metrics.pop("oof_groups", None),
+        }
+        metrics["patient_grouped"] = bool(metrics.pop("patient_grouped", False))
+        if oof["proba"] is not None:
+            np.savez(
+                output_dir / f"{task_name}_{model_name}_oof.npz",
+                **{k: v for k, v in oof.items() if v is not None},
+            )
 
         try:
             y_true = metrics.pop("overall_y_true", None)
@@ -413,6 +518,12 @@ def evaluate_models(config: Dict) -> None:
         if include_models:
             task_cfg["include_models"] = include_models
         tasks["mgmt"] = task_cfg
+
+    # Report-level folds by default (matches the published results);
+    # set evaluation.patient_grouped_cv: true for patient-disjoint folds.
+    patient_grouped_cv = eval_config.get("patient_grouped_cv", False)
+    for _cfg in tasks.values():
+        _cfg["patient_grouped_cv"] = patient_grouped_cv
 
     # Evaluate each task
     for task_name, task_config in tasks.items():
