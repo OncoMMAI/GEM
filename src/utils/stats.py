@@ -240,3 +240,46 @@ def compare_models(
         out["delong"] = delong_test(y, pa[:, 1], pb[:, 1])
 
     return out
+
+
+def cluster_bootstrap_ci(
+    y_true: Sequence,
+    prob_a: np.ndarray,
+    groups: Sequence,
+    metric: str = "auroc",
+    prob_b: Optional[np.ndarray] = None,
+    n_boot: int = 2000,
+    alpha: float = 0.05,
+    random_state: int = 7,
+) -> Dict[str, float]:
+    """Report-level metric with a patient-cluster bootstrap CI.
+
+    Resamples patients (all of a patient's reports together), so CIs account for
+    several reports per patient. If `prob_b` is given, returns the paired
+    difference metric(a) - metric(b) on identical resamples.
+    """
+    rng = np.random.default_rng(random_state)
+    y = np.asarray(y_true)
+    pa = np.asarray(prob_a, dtype=float)
+    pb = None if prob_b is None else np.asarray(prob_b, dtype=float)
+    g = np.asarray(groups)
+    patients = np.unique(g)
+    rows = {p: np.flatnonzero(g == p) for p in patients}
+
+    def stat(idx):
+        a = _score(metric, y[idx], pa[idx])
+        return a if pb is None else a - _score(metric, y[idx], pb[idx])
+
+    point = stat(np.arange(len(y)))
+    boots: List[float] = []
+    for _ in range(n_boot):
+        idx = np.concatenate([rows[p] for p in rng.choice(patients, len(patients))])
+        if len(np.unique(y[idx])) < len(np.unique(y)):
+            continue
+        try:
+            boots.append(stat(idx))
+        except ValueError:
+            continue
+    lo, hi = np.percentile(boots, [100 * alpha / 2, 100 * (1 - alpha / 2)])
+    return {"metric": metric, "estimate": float(point), "ci_low": float(lo), "ci_high": float(hi),
+            "n_patients": int(len(patients)), "n_boot_effective": len(boots)}

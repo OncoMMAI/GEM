@@ -4,7 +4,13 @@ This repository contains the code for GEM (glioma embedding model). We fine-tune
 
 ### Abstract
 
-Integrating radiology with histopathology is central to neuro-oncology, yet general-purpose language models do not align these report types. We fine-tuned jina-embeddings-v3 on 97,398 naturally paired radiology-pathology reports from 4,250 glioma patients using Multiple-Negatives Ranking Loss, producing the glioma embedding model (GEM). This label-free, institution-specific alignment raised held-out cross-modal retrieval Recall@1 5.7-fold (6.3% to 35.6%). With the encoder frozen, lightweight classifiers on radiology-report embeddings alone reached 87.2 ± 1.3% accuracy (AUROC 96.5 ± 0.8%) for three-class tumor type, exceeding strong encoder baselines and zero-shot decoder LLMs, and matched the best baselines on the smaller MGMT methylation and one-year survival cohorts. A decoder-to-encoder (LLM2Vec) pipeline reached comparable accuracy only at 13.5-fold higher compute. Cross-modal alignment of institutional reports thus offers an efficient route to neuro-oncology representations; external and prospective validation is required before clinical use.
+Background: Integrating radiology with histopathology is central to neuro-oncology, yet general-purpose language models do not align these report types. We tested whether label-free alignment of naturally paired radiology-pathology reports yields transferable neuro-oncology representations.
+
+Methods: We assembled 97,398 naturally paired radiology-pathology report pairs from 4,250 glioma patients and fine-tuned jina-embeddings-v3 on 80% of patients (850 held out) using Multiple-Negatives Ranking Loss, producing the glioma embedding model (GEM). With the encoder frozen, lightweight classifiers on radiology-report embeddings alone were evaluated for three-class tumor type, O6-methylguanine-DNA methyltransferase (MGMT) promoter methylation, and one-year survival against strong encoder baselines and zero-shot decoder large language models (LLMs).
+
+Results: This label-free, institution-specific alignment raised held-out cross-modal retrieval Recall@1 5.7-fold (6.3% to 35.6%). GEM reached 86.9 ± 1.6% accuracy (area under the receiver operating characteristic curve [AUROC] 96.3 ± 0.8%) for three-class tumor type, versus 85.2 ± 1.6% (AUROC 94.6 ± 0.9%) for the untuned base encoder, and exceeded the other encoder baselines and zero-shot decoder LLMs, with similar results under patient-grouped cross-validation. On the smaller MGMT methylation and one-year survival cohorts, it was comparable to the best baselines (AUROC 78.6 ± 12.8% and 75.4 ± 6.7%); these smaller-cohort estimates remain exploratory. A decoder-to-encoder (LLM2Vec) pipeline reached comparable accuracy only at 19-fold higher compute.
+
+Conclusions: Cross-modal alignment of institutional reports offers an efficient route to neuro-oncology representations; external and prospective validation is required before clinical use.
 
 ### Table of Contents
 
@@ -104,6 +110,23 @@ python scripts/experiments/compare_results.py
 ```
 
 ---
+
+## Reproducing the paper
+
+All encoder results use the configs in `configs/` with the evaluation defaults (10-fold report-level CV, seed 7, random forest with 1,000 trees, MGMT reports without a recorded status dropped, unknown one-year outcomes dropped).
+
+| Paper item | How to reproduce |
+|---|---|
+| Table 1 (retrieval) | `python -m src.models.alignment --config configs/alignment_config.yaml` |
+| Table 2, Supp. S5-S7, S14 (encoders) | `python -m src.models.evaluation --config configs/evaluation_config.yaml` (3-class tumor type: `data.type_exclude_labels: [3]`) |
+| Paired 95% CIs vs untuned JINAv3 | `python scripts/paper/table2_ci.py --results results` (uses the `*_oof.npz` files from the step above) |
+| Supp. S13, patient-grouped | same as Table 2 with `evaluation.patient_grouped_cv: true` |
+| Supp. S13, unseen patients | also set `evaluation.exclude_patients_from: data/training/mnrl/train.csv` |
+| Retrieval robustness (same-histology, BM25, CIs) | `python scripts/paper/retrieval_robustness.py` |
+| Table 2 decoders (GPT-4o, BioMistral-7B) | `python scripts/paper/decoder_inference.py --model gpt-4o` (needs `AZURE_OPENAI_API_KEY`) or `--model biomistral` (local vLLM) |
+| Survival labels | `notebooks/01_create_dataset.ipynb` (time zero = diagnosis date; unknown outcomes left empty) |
+
+The clinical data cannot be shared (see Ethical, Privacy, and Compliance Notes); the files in `data/` are small synthetic stand-ins that show the expected columns (the real tumor-type file also has an integer `class_label` column: 0 glioblastoma, 1 astrocytoma, 2 oligodendroglioma, 3 oligoastrocytoma).
 
 ## Environment and System Requirements
 
