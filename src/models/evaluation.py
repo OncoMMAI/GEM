@@ -168,6 +168,17 @@ def run_kfold_evaluation(
         split_iter = splitter.split(embeddings, labels)
     else:
         groups = np.asarray(groups)
+        # Each fold needs at least one patient from every class; small cohorts
+        # (MGMT) cannot support 10 patient-disjoint folds.
+        min_class_groups = min(
+            len(np.unique(groups[labels == c])) for c in np.unique(labels)
+        )
+        if min_class_groups < n_splits:
+            logger.warning(
+                f"Reducing n_splits {n_splits} -> {min_class_groups} "
+                f"(fewest patients in a class = {min_class_groups})"
+            )
+            n_splits = min_class_groups
         logger.info(
             f"Patient-grouped CV over {len(np.unique(groups))} patients "
             f"({len(embeddings)} reports)"
@@ -446,9 +457,14 @@ def evaluate_models(config: Dict) -> None:
 
     try:
         mgmt_df = pd.read_csv(data_config["mgmt_path"])
-        mgmt_df["mgmt_label"] = (
-            mgmt_df["mgmt"].notna() & (mgmt_df["mgmt"] == "positive")
-        ).astype(int)
+        is_positive = (mgmt_df["mgmt"].astype(str).str.lower() == "positive").astype(int)
+        if eval_config.get("mgmt_missing_as_negative", False):
+            # Legacy behavior: reports with no MGMT status count as unmethylated.
+            # The published MGMT results were produced this way (201 reports).
+            mgmt_df["mgmt_label"] = is_positive
+        else:
+            # Missing status stays NaN and is dropped by the valid-label mask.
+            mgmt_df["mgmt_label"] = is_positive.where(mgmt_df["mgmt"].notna())
         logger.info(f"Loaded MGMT data: {len(mgmt_df)} samples")
     except Exception as e:
         logger.error(f"Failed to load MGMT data: {e}")

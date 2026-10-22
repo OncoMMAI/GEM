@@ -36,6 +36,9 @@ evaluation:
   # Patient-disjoint folds (StratifiedGroupKFold on the id column). The published
   # results used report-level folds (false); set true for the leakage-controlled variant.
   patient_grouped_cv: false
+  # MGMT reports with no recorded status are dropped (false). The published MGMT
+  # results counted them as unmethylated (true: 201 reports instead of 192).
+  mgmt_missing_as_negative: false
   # Optional: evaluate only specific models (by filename without .npy).
   # Omit or set to null to evaluate all .npy files in each task directory.
   # models:

@@ -7,7 +7,7 @@ model:
   name: 'jinaai/jina-embeddings-v3'
   trust_remote_code: true
   default_task: 'text-matching'
-  lora_main_params_trainable: true # True = LoRA adaptation, False = full fine-tuning
+  lora_main_params_trainable: true # True = full fine-tuning (LoRA adapters + backbone), False = LoRA adapters only
 
 training:
   num_epochs: 5

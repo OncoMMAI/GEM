@@ -243,7 +243,9 @@ Notes
 - Evaluation reads `embedding.directory` from the config and looks under `tumor_type/`, `os/`, `mgmt/` subdirectories for `.npy` files.
 - To evaluate only specific models, set `evaluation.models` in the config to a list of filenames (without `.npy`). Omit to evaluate all.
 - Results include per-model accuracy, balanced accuracy, no-information rate, precision, recall, F1-macro, AUROC, and PR-AUC. Fold-level markers against the baseline model are descriptive only, because CV folds share training data.
-- Folds are report-level by default, matching the published results. Set `evaluation.patient_grouped_cv: true` to use patient-disjoint folds (`StratifiedGroupKFold` on the patient ID column).
+- Folds are report-level by default, matching the published results. Set `evaluation.patient_grouped_cv: true` to use patient-disjoint folds (`StratifiedGroupKFold` on the patient ID column). With grouped folds, `n_splits` is reduced automatically when a class has fewer patients than folds (MGMT).
+- MGMT reports with no recorded status are dropped by default. The published MGMT results counted them as unmethylated; set `evaluation.mgmt_missing_as_negative: true` to reproduce that.
+- `notebooks/01_create_dataset.ipynb` leaves the one-year survival label empty for patients with no survival time or with less than a year of follow-up while alive; evaluation drops these. The published survival results coded them as non-survivors.
 - For inference on paired comparisons, `src/utils/stats.py` provides patient-level aggregation, bootstrap 95% CIs, exact McNemar, and DeLong tests on pooled out-of-fold predictions.
 - Results are saved as markdown tables and JSON to `results/`.
 
