@@ -1,4 +1,4 @@
-# LoRA: False (Full fine-tuning without LoRA)
+# LoRA only: backbone frozen, only the LoRA adapters are trained (reported as "LoRA only")
 global:
   seed: 42
 
@@ -6,7 +6,7 @@ model:
   name: 'jinaai/jina-embeddings-v3'
   trust_remote_code: true
   default_task: 'text-matching'
-  lora_main_params_trainable: false # Full fine-tuning without LoRA
+  lora_main_params_trainable: false # LoRA adapters only; backbone frozen
 
 training:
   num_epochs: 5

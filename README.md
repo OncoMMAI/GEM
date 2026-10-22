@@ -1,10 +1,10 @@
-## A Clinically Aligned Embedding Model for Glioma Prognostication via Radiology–Pathology Report Matching
+## A Clinically Aligned Embedding Model for Glioma Diagnostic and Prognostic Tasks via Radiology-Pathology Report Matching
 
-This repository contains code for our clinically aligned embedding framework. We align radiology and pathology reports to produce robust clinical embeddings tailored for glioma prognostication, using Multiple Negatives Ranking Loss (MNRL) with LoRA-adapted fine‑tuning of `jinaai/jina-embeddings-v3`. We benchmark across tumor type classification, MGMT methylation prediction, and 1‑year survival prediction.
+This repository contains the code for GEM (glioma embedding model). We fine-tune `jinaai/jina-embeddings-v3` on naturally paired radiology-pathology reports with Multiple-Negatives Ranking Loss (MNRL), evaluate cross-modal report retrieval, and probe the frozen embeddings on tumor type, MGMT promoter methylation, and one-year survival.
 
 ### Abstract
 
-Large language models exhibit strong general text understanding yet lack oncology‑specific alignment needed for clinical prognostication. We propose a clinically aligned embedding model trained on matched radiology–pathology report pairs using MNRL with LoRA on `jina-embeddings-v3`. Across three neuro‑oncology tasks (tumor type, MGMT status, one‑year survival), the fine‑tuned encoder achieves strong, balanced performance with modest compute.
+Integrating radiology with histopathology is central to neuro-oncology, yet general-purpose language models do not align these report types. We fine-tuned jina-embeddings-v3 on 97,398 naturally paired radiology-pathology reports from 4,250 glioma patients using Multiple-Negatives Ranking Loss, producing the glioma embedding model (GEM). This label-free, institution-specific alignment raised held-out cross-modal retrieval Recall@1 5.7-fold (6.3% to 35.6%). With the encoder frozen, lightweight classifiers on radiology-report embeddings alone reached 87.2 ± 1.3% accuracy (AUROC 96.5 ± 0.8%) for three-class tumor type, exceeding strong encoder baselines and zero-shot decoder LLMs, and matched the best baselines on the smaller MGMT methylation and one-year survival cohorts. A decoder-to-encoder (LLM2Vec) pipeline reached comparable accuracy only at 13.5-fold higher compute. Cross-modal alignment of institutional reports thus offers an efficient route to neuro-oncology representations; external and prospective validation is required before clinical use.
 
 ### Table of Contents
 
@@ -22,7 +22,7 @@ Large language models exhibit strong general text understanding yet lack oncolog
 ### Overview and Contributions
 
 - Clinically aligned embeddings via report-pair training (radiology ↔ pathology) with MNRL.
-- Efficient LoRA + optional main-parameter updates on `jina-embeddings-v3` (1024‑d embeddings, long context).
+- Full fine-tuning of `jina-embeddings-v3` (1024-d embeddings, 8,192-token context); LoRA-only adaptation is included as an ablation.
 - Strong performance across 3 clinical tasks; robust ablative analyses (losses, dataset size, sampling, LoRA).
 - Cross-modal retrieval evaluation quantifying alignment quality (Recall@K, MRR, MAP).
 - Full scripts for end‑to‑end reproducibility (data → train → embed → evaluate → visualize).
@@ -34,8 +34,8 @@ Large language models exhibit strong general text understanding yet lack oncolog
 1. Clone and set up the base environment (uses uv; pip also works):
 
 ```bash
-git clone https://github.com/benedictneo/glioma_embedding.git
-cd glioma_embedding
+git clone https://github.com/OncoMMAI/GEM.git
+cd GEM
 bash setup_env.sh
 ```
 
@@ -176,7 +176,7 @@ uv run python glioma.py prepare-data --config configs/dataset_config.yaml
 
 Fine‑tuning uses `src/models/finetune.py` with MNRL and SentenceTransformers trainer over `jinaai/jina-embeddings-v3`.
 
-- LoRA adapters are enabled; `lora_main_params_trainable: true` also fine‑tunes base params (per ablations).
+- `lora_main_params_trainable: true` (default) updates all backbone parameters, which is the configuration used for GEM; set it to `false` for the LoRA-only ablation.
 - Batch sampler defaults to `NO_DUPLICATES` for in‑batch negatives.
 - Mixed precision (bf16) where supported; gradient checkpointing enabled.
 
@@ -232,7 +232,7 @@ Notes
 - Set `output.skip_existing: true` to avoid regenerating existing embeddings.
 - Embeddings are saved under `embeddings/{tumor_type,os,mgmt}/` as `.npy` files.
 
-Evaluate embeddings (10‑fold stratified CV with Random Forest):
+Evaluate embeddings (stratified k-fold CV with a random forest probe; `n_splits` is set in the config):
 
 ```bash
 uv run python glioma.py evaluate --config configs/evaluation_config.yaml
@@ -242,7 +242,11 @@ Notes
 
 - Evaluation reads `embedding.directory` from the config and looks under `tumor_type/`, `os/`, `mgmt/` subdirectories for `.npy` files.
 - To evaluate only specific models, set `evaluation.models` in the config to a list of filenames (without `.npy`). Omit to evaluate all.
-- Results include per-model accuracy, precision, recall, F1-macro, AUCROC, and statistical significance testing (paired t-test, Cohen's d) against a configurable baseline model.
+- Results include per-model accuracy, balanced accuracy, no-information rate, precision, recall, F1-macro, AUROC, and PR-AUC. Fold-level markers against the baseline model are descriptive only, because CV folds share training data.
+- Folds are report-level by default, matching the published results. Set `evaluation.patient_grouped_cv: true` to use patient-disjoint folds (`StratifiedGroupKFold` on the patient ID column). With grouped folds, `n_splits` is reduced automatically when a class has fewer patients than folds (MGMT).
+- MGMT reports with no recorded status are dropped by default. The published MGMT results counted them as unmethylated; set `evaluation.mgmt_missing_as_negative: true` to reproduce that.
+- `notebooks/01_create_dataset.ipynb` leaves the one-year survival label empty for patients with no survival time or with less than a year of follow-up while alive; evaluation drops these. The published survival results coded them as non-survivors.
+- For inference on paired comparisons, `src/utils/stats.py` provides patient-level aggregation, bootstrap 95% CIs, exact McNemar, and DeLong tests on pooled out-of-fold predictions.
 - Results are saved as markdown tables and JSON to `results/`.
 
 Sequential experiment evaluation:
@@ -303,7 +307,7 @@ Produces t‑SNE projections with class overlays and confidence ellipses for all
 ## Repository Structure
 
 ```
-glioma_embedding/
+GEM/
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
@@ -332,7 +336,7 @@ glioma_embedding/
 │   ├── embeddings/
 │   │   ├── generate.py               # Embedding generation (Jina, NV-Embed, etc.)
 │   │   └── visualize.py              # t-SNE visualization
-│   └── utils/                        # Config, logging, metrics, seeding
+│   └── utils/                        # Config, logging, metrics, statistics (stats.py), seeding
 ├── embeddings/                       # Generated embeddings (.npy)
 ├── figures/                          # Visualization outputs
 ├── models/                           # Model checkpoints
@@ -351,6 +355,12 @@ glioma_embedding/
 - Janine Lupo, University of California San Francisco
 - Olivier Morin, University of California San Francisco
 - Hui Lin, University of California San Francisco, UCSF-UC Berkeley Joint Program in Computational Precision Health
+
+## Citation
+
+If you use this code, please cite:
+
+> Neo B, Liu B, Interian Y, Braunstein SE, Morin O, Lupo J, Lin H. A clinically aligned embedding model for glioma diagnostic and prognostic tasks via radiology-pathology report matching. *Manuscript under review.*
 
 ## License
 

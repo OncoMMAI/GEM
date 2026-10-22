@@ -124,14 +124,29 @@ def format_results_table(
     Returns:
         Markdown formatted table as a string
     """
-    metric_order = ["accuracy", "precision", "recall", "f1_macro", "aucroc"]
+    metric_order = [
+        "accuracy",
+        "balanced_accuracy",
+        "no_information_rate",
+        "precision",
+        "recall",
+        "f1_macro",
+        "aucroc",
+        "pr_auc",
+    ]
     metric_display = {
         "accuracy": "Accuracy",
+        "balanced_accuracy": "Balanced acc.",
+        "no_information_rate": "NIR",
         "precision": "Precision",
         "recall": "Recall",
         "f1_macro": "F1-macro",
         "aucroc": "AUCROC",
+        "pr_auc": "PR-AUC",
     }
+    # The no-information rate is a property of the cohort, not the model, so it
+    # is displayed for reference but never significance-tested.
+    no_test = {"no_information_rate"}
     
     metrics = [m for m in metric_order if m in next(iter(results.values()))]
     headers = ["Model"] + [f"{metric_display[m]} (%)" for m in metrics]
@@ -156,7 +171,7 @@ def format_results_table(
             value = model_results[metric] * 100  # Convert to percentage
             std = model_results.get(f"{metric}_std", 0) * 100
             
-            if model != baseline_model:
+            if model != baseline_model and metric not in no_test:
                 _, sig = calculate_significance(
                     baseline_results[f"{metric}_values"],
                     model_results[f"{metric}_values"],
@@ -179,5 +194,14 @@ def format_results_table(
         + "|".join([""] * (len(headers) - 1))
         + "|"
     )
-    
+    table.append(
+        "|"
+        + "Fold-level markers are DESCRIPTIVE ONLY: CV folds share ~60% of their "
+        + "training data, so fold means are not independent. For inference, use "
+        + "McNemar / DeLong on patient-level out-of-fold predictions "
+        + "(src/utils/stats.py)."
+        + "|".join([""] * (len(headers) - 1))
+        + "|"
+    )
+
     return "\n".join(table)
