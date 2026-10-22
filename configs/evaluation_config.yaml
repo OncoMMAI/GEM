@@ -39,6 +39,9 @@ evaluation:
   # MGMT reports with no recorded status are dropped (false). The published MGMT
   # results counted them as unmethylated (true: 201 reports instead of 192).
   mgmt_missing_as_negative: false
+  # Optional: restrict evaluation to patients not in this training-pairs CSV
+  # (patients the encoder never saw), e.g. 'data/training/mnrl/train.csv'.
+  exclude_patients_from: null
   # Optional: evaluate only specific models (by filename without .npy).
   # Omit or set to null to evaluate all .npy files in each task directory.
   # models:

@@ -240,8 +240,10 @@ def run_kfold_evaluation(
     avg_metrics = {}
     for metric in fold_metrics[0].keys():
         values = [fold[metric] for fold in fold_metrics]
-        avg_metrics[metric] = np.mean(values)
-        avg_metrics[f"{metric}_std"] = np.std(values)
+        # AUROC is undefined (NaN) for a fold whose test set has one class, which
+        # can happen with patient-grouped folds on small cohorts; average the rest.
+        avg_metrics[metric] = np.nanmean(values)
+        avg_metrics[f"{metric}_std"] = np.nanstd(values)
 
         avg_metrics[f"{metric}_values"] = values
         logger.info(
@@ -342,8 +344,15 @@ def evaluate_task(
                 f"{list(valid_df.columns)}; cannot run patient-grouped CV"
             )
 
+        keep = np.ones(len(labels), dtype=bool)
         if exclude_labels:
-            keep = ~np.isin(labels, exclude_labels)
+            keep &= ~np.isin(labels, exclude_labels)
+        # Optional: drop patients the encoder saw during alignment (e.g. the MNRL
+        # train split), to evaluate only on patients unseen by fine-tuning.
+        exclude_patients = task_config.get("exclude_patients")
+        if exclude_patients is not None and patient_col:
+            keep &= ~np.isin(valid_df[patient_col].astype(str).values, list(exclude_patients))
+        if not keep.all():
             labels = labels[keep]
             filtered_embeddings = filtered_embeddings[keep]
             if groups is not None:
@@ -538,8 +547,16 @@ def evaluate_models(config: Dict) -> None:
     # Report-level folds by default (matches the published results);
     # set evaluation.patient_grouped_cv: true for patient-disjoint folds.
     patient_grouped_cv = eval_config.get("patient_grouped_cv", False)
+    # Optional: evaluate only patients absent from a training-pairs CSV
+    # (e.g. data/training/mnrl/train.csv) to remove encoder-level overlap.
+    exclude_csv = eval_config.get("exclude_patients_from")
+    exclude_patients = None
+    if exclude_csv:
+        exclude_patients = set(pd.read_csv(exclude_csv, usecols=["mrn"])["mrn"].astype(str))
+        logger.info(f"Excluding {len(exclude_patients)} patients listed in {exclude_csv}")
     for _cfg in tasks.values():
         _cfg["patient_grouped_cv"] = patient_grouped_cv
+        _cfg["exclude_patients"] = exclude_patients
 
     # Evaluate each task
     for task_name, task_config in tasks.items():
